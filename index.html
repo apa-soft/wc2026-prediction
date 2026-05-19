@@ -5,282 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIFA WC 2026 Prediction</title>
   <style>
-    /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0a0a2e;
-      color: #ffffff;
-      min-height: 100vh;
-    }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a2e; color: #fff; min-height: 100vh; }
 
-    /* ===== HEADER ===== */
     header {
       background: linear-gradient(135deg, #1a1a4e, #2d2d7e);
-      padding: 20px;
-      text-align: center;
-      border-bottom: 3px solid #gold;
+      padding: 20px; text-align: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
-
-    header h1 {
-      font-size: 1.8rem;
-      color: #FFD700;
-      text-shadow: 0 0 20px rgba(255,215,0,0.5);
-    }
-
+    header h1 { font-size: 1.8rem; color: #FFD700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
     header p { color: #aaa; margin-top: 5px; }
 
-    /* ===== NAV ===== */
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px;
-      background: #111133;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 10px;
+      padding: 15px; background: #111133; flex-wrap: wrap;
     }
-
     nav button {
-      padding: 10px 20px;
-      border: 2px solid #333366;
-      background: transparent;
-      color: #fff;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 0.9rem;
+      padding: 10px 20px; border: 2px solid #333366;
+      background: transparent; color: #fff; border-radius: 25px;
+      cursor: pointer; transition: all 0.3s; font-size: 0.9rem;
     }
-
     nav button:hover, nav button.active {
-      background: #FFD700;
-      color: #000;
-      border-color: #FFD700;
-      font-weight: bold;
+      background: #FFD700; color: #000; border-color: #FFD700; font-weight: bold;
     }
 
-    /* ===== MAIN CONTENT ===== */
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
+    .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ===== CARDS ===== */
     .card {
-      background: #111133;
-      border: 1px solid #333366;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 15px;
-      transition: transform 0.2s;
+      background: #111133; border: 1px solid #333366;
+      border-radius: 15px; padding: 20px; margin-bottom: 15px; transition: transform 0.2s;
     }
-
     .card:hover { transform: translateY(-3px); }
 
-    /* ===== MATCH CARD ===== */
-    .match-card {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 15px;
-      text-align: center;
-    }
-
+    .match-card { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; text-align: center; }
     .team-name { font-size: 1.1rem; font-weight: bold; }
     .vs { color: #FFD700; font-size: 1.3rem; font-weight: bold; }
-    .match-info { color: #888; font-size: 0.85rem; margin-top: 10px; }
     .match-date { text-align: center; color: #aaa; font-size: 0.85rem; }
 
-    .status-badge {
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: bold;
-    }
-
+    .status-badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
     .status-upcoming { background: #1a3a1a; color: #4CAF50; border: 1px solid #4CAF50; }
     .status-finished { background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
 
-    /* ===== FORM ===== */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      color: #FFD700;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; color: #FFD700; margin-bottom: 8px; font-weight: bold; }
 
     select, input[type="number"], input[type="text"], input[type="email"] {
-      width: 100%;
-      padding: 12px 15px;
-      background: #0a0a2e;
-      border: 2px solid #333366;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 1rem;
-      transition: border-color 0.3s;
+      width: 100%; padding: 12px 15px; background: #0a0a2e;
+      border: 2px solid #333366; border-radius: 10px; color: #fff; font-size: 1rem; transition: border-color 0.3s;
     }
+    select:focus, input:focus { outline: none; border-color: #FFD700; }
 
-    select:focus, input:focus {
-      outline: none;
-      border-color: #FFD700;
-    }
-
-    .score-inputs {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 15px;
-      align-items: center;
-      text-align: center;
-    }
-
-    .score-inputs .vs-text {
-      color: #FFD700;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+    .score-inputs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center; text-align: center; }
+    .score-inputs .vs-text { color: #FFD700; font-size: 1.5rem; font-weight: bold; }
 
     .btn {
-      width: 100%;
-      padding: 15px;
+      width: 100%; padding: 15px;
       background: linear-gradient(135deg, #FFD700, #FFA500);
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: opacity 0.3s;
+      color: #000; border: none; border-radius: 10px;
+      font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: opacity 0.3s;
     }
-
     .btn:hover { opacity: 0.85; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* ===== LEADERBOARD ===== */
-    .leaderboard-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px 20px;
-    }
-
-    .rank {
-      font-size: 1.5rem;
-      font-weight: bold;
-      min-width: 40px;
-      text-align: center;
-    }
-
-    .rank-1 { color: #FFD700; }
-    .rank-2 { color: #C0C0C0; }
-    .rank-3 { color: #CD7F32; }
-
+    .leaderboard-item { display: flex; align-items: center; gap: 15px; padding: 15px 20px; }
+    .rank { font-size: 1.5rem; font-weight: bold; min-width: 40px; text-align: center; }
+    .rank-1 { color: #FFD700; } .rank-2 { color: #C0C0C0; } .rank-3 { color: #CD7F32; }
     .player-info { flex: 1; }
     .player-name { font-weight: bold; font-size: 1rem; }
     .player-stats { color: #888; font-size: 0.85rem; }
+    .score-display { font-size: 1.5rem; font-weight: bold; color: #FFD700; }
 
-    .score-display {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #FFD700;
-    }
-
-    /* ===== ALERT ===== */
-    .alert {
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      text-align: center;
-      display: none;
-    }
-
-    .alert-success { background: #1a3a1a; border: 1px solid #4CAF50; color: #4CAF50; }
-    .alert-error { background: #3a1a1a; border: 1px solid #f44336; color: #f44336; }
-
-    /* ===== LOADING ===== */
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #888;
-    }
-
+    .loading { text-align: center; padding: 40px; color: #888; }
     .spinner {
-      width: 40px; height: 40px;
-      border: 4px solid #333;
-      border-top: 4px solid #FFD700;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
+      width: 40px; height: 40px; border: 4px solid #333;
+      border-top: 4px solid #FFD700; border-radius: 50%;
+      animation: spin 1s linear infinite; margin: 0 auto 15px;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ===== LOGIN ===== */
-    .login-box {
-      max-width: 400px;
-      margin: 50px auto;
-    }
-
-    h2 {
-      color: #FFD700;
-      margin-bottom: 20px;
-      font-size: 1.4rem;
-    }
-
-    .section-title {
-      color: #FFD700;
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #333366;
-    }
+    .login-box { max-width: 400px; margin: 50px auto; }
+    h2 { color: #FFD700; margin-bottom: 20px; font-size: 1.4rem; }
+    .section-title { color: #FFD700; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #333366; }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <h1>⚽ FIFA World Cup 2026</h1>
   <p>Prediction League — ทายผลชิงแชมป์!</p>
 </header>
 
-<!-- NAV -->
 <nav>
-  <button class="active" onclick="showPage('matches')">⚽ ตารางแข่ง</button>
-  <button onclick="showPage('predict')">📝 ทายผล</button>
-  <button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
-  <button onclick="showPage('login')" id="loginBtn">👤 Login</button>
+  <!-- ✅ แก้ — ส่ง this เข้าไปด้วย -->
+  <button class="active" onclick="showPage('matches', this)">⚽ ตารางแข่ง</button>
+  <button onclick="showPage('predict', this)">📝 ทายผล</button>
+  <button onclick="showPage('leaderboard', this)">🏆 Leaderboard</button>
+  <button onclick="showPage('login', this)" id="loginBtn">👤 Login</button>
 </nav>
 
-<!-- MAIN -->
 <div class="container">
 
-  <!-- PAGE: MATCHES -->
   <div id="page-matches" class="page active">
     <h2 class="section-title">⚽ ตารางการแข่งขัน</h2>
     <div id="matches-list">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p>กำลังโหลดข้อมูล...</p>
-      </div>
+      <div class="loading"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
     </div>
   </div>
 
-  <!-- PAGE: PREDICT -->
   <div id="page-predict" class="page">
     <h2 class="section-title">📝 ทายผลการแข่งขัน</h2>
-    
-    <div id="predict-alert" class="alert"></div>
-
     <div class="card">
       <div class="form-group">
         <label>เลือกนัดการแข่งขัน</label>
@@ -291,13 +126,9 @@
 
       <div id="match-preview" style="display:none; margin-bottom:20px;">
         <div class="match-card">
-          <div>
-            <div class="team-name" id="home-team-name">-</div>
-          </div>
+          <div><div class="team-name" id="home-team-name">-</div></div>
           <div class="vs">VS</div>
-          <div>
-            <div class="team-name" id="away-team-name">-</div>
-          </div>
+          <div><div class="team-name" id="away-team-name">-</div></div>
         </div>
       </div>
 
@@ -306,44 +137,37 @@
         <div class="score-inputs">
           <div>
             <div id="home-label" style="color:#aaa; margin-bottom:8px;">เจ้าบ้าน</div>
-            <input type="number" id="home-pred" min="0" max="20" value="0" placeholder="0">
+            <input type="number" id="home-pred" min="0" max="20" value="0">
           </div>
           <div class="vs-text">:</div>
           <div>
             <div id="away-label" style="color:#aaa; margin-bottom:8px;">ทีมเยือน</div>
-            <input type="number" id="away-pred" min="0" max="20" value="0" placeholder="0">
+            <input type="number" id="away-pred" min="0" max="20" value="0">
           </div>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>ชื่อของคุณ</label>
-        <input type="text" id="player-name" placeholder="กรอกชื่อ">
+      <!-- ✅ ลบ input ชื่อ/email ออก เพราะใช้จาก currentUser แทน -->
+      <div id="current-user-info" style="text-align:center; color:#aaa; margin-bottom:15px; display:none;">
+        👤 ทายในนาม: <strong id="user-display" style="color:#FFD700;"></strong>
       </div>
 
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="player-email" placeholder="example@gmail.com">
+      <div id="login-warning" style="text-align:center; color:#f44336; margin-bottom:15px; display:none;">
+        ⚠️ กรุณา <a href="#" onclick="showPage('login', document.querySelector('#loginBtn'))" style="color:#FFD700;">Login</a> ก่อนทายผล
       </div>
 
-      <button class="btn" onclick="submitPrediction()">
-        ✅ ส่งผลทาย
-      </button>
+      <!-- ✅ onclick ไม่ต้องส่ง parameter แล้ว -->
+      <button class="btn" id="submit-btn" onclick="submitPrediction()">✅ ส่งผลทาย</button>
     </div>
   </div>
 
-  <!-- PAGE: LEADERBOARD -->
   <div id="page-leaderboard" class="page">
     <h2 class="section-title">🏆 Leaderboard</h2>
     <div id="leaderboard-list">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p>กำลังโหลด...</p>
-      </div>
+      <div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
     </div>
   </div>
 
-  <!-- PAGE: LOGIN -->
   <div id="page-login" class="page">
     <div class="login-box">
       <h2>👤 เข้าสู่ระบบ</h2>
@@ -365,30 +189,43 @@
 
 <script>
   // ===== CONFIG =====
-  const SHEET_ID = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU"; // ← ใส่ Sheet ID ตรงนี้!
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwITEBBCcLz3GDEUVqaCA1kc6FiIfpxITo5EJozof_Vnrx6H3HJWtUKFBTNwjskX2dR/exec"; // ← ใส่ Apps Script URL ตรงนี้!
-  const API_KEY = "AIzaSyC9ryHUiSV77BcyU0MsvI-1108e8UbykmI"; // ← ใส่ API Key ตรงนี้!
+  const SHEET_ID = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
+  // ✅ แก้ชื่อตัวแปรให้ตรงกัน
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwITEBBCcLz3GDEUVqaCA1kc6FiIfpxITo5EJozof_Vnrx6H3HJWtUKFBTNwjskX2dR/exec";
+  const API_KEY = "AIzaSyC9ryHUiSV77BcyU0MsvI-1108e8UbykmI";
 
   // ===== STATE =====
   let matchesData = [];
   let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
   // ===== NAVIGATION =====
-  function showPage(page) {
+  // ✅ แก้ — รับ el แทน event global
+  function showPage(page, el) {
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
     document.getElementById("page-" + page).classList.add("active");
-    event.target.classList.add("active");
+    if (el) el.classList.add("active");
 
     if (page === "matches") loadMatches();
-    if (page === "predict") loadMatchesForForm();
+    if (page === "predict") { loadMatchesForForm(); updateUserInfo(); }
     if (page === "leaderboard") loadLeaderboard();
+  }
+
+  // ===== UPDATE USER INFO =====
+  function updateUserInfo() {
+    if (currentUser) {
+      document.getElementById("current-user-info").style.display = "block";
+      document.getElementById("login-warning").style.display = "none";
+      document.getElementById("user-display").textContent = currentUser.name;
+    } else {
+      document.getElementById("current-user-info").style.display = "none";
+      document.getElementById("login-warning").style.display = "block";
+    }
   }
 
   // ===== LOAD MATCHES =====
   async function loadMatches() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Matches!A2:I100?key=${API_KEY}`;
-    
     try {
       const res = await fetch(url);
       const data = await res.json();
@@ -398,46 +235,38 @@
       const html = rows.map(row => {
         const [id, round, home, away, date, homeScore, awayScore, dp, status] = row;
         const isFinished = status === "Finished";
-        const scoreText = isFinished 
-          ? `<strong>${homeScore} - ${awayScore}</strong>` 
-          : "vs";
-        
+        const scoreText = isFinished ? `<strong>${homeScore} - ${awayScore}</strong>` : "vs";
+
         return `
           <div class="card">
             <div class="match-card">
-              <div>
-                <div class="team-name">🏳️ ${home || "-"}</div>
-              </div>
+              <div><div class="team-name">🏳️ ${home || "-"}</div></div>
               <div>
                 <div class="vs">${scoreText}</div>
                 <div class="match-date">${date || ""}</div>
               </div>
-              <div>
-                <div class="team-name">🏳️ ${away || "-"}</div>
-              </div>
+              <div><div class="team-name">🏳️ ${away || "-"}</div></div>
             </div>
             <div style="text-align:center; margin-top:10px;">
               <span class="status-badge ${isFinished ? "status-finished" : "status-upcoming"}">
                 ${isFinished ? "✅ จบแล้ว" : "🕐 Upcoming"}
               </span>
               <span style="color:#888; font-size:0.8rem; margin-left:10px;">
-                Round: ${round || "-"} ${dp === "TRUE" ? "⭐ Double Point" : ""}
+                Round: ${round || "-"} ${dp === "Yes" ? "⭐ Double Point" : ""}
               </span>
             </div>
-          </div>
-        `;
+          </div>`;
       }).join("");
 
-      document.getElementById("matches-list").innerHTML = html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูลการแข่งขัน</p>";
+      document.getElementById("matches-list").innerHTML = html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล</p>";
     } catch (err) {
-      document.getElementById("matches-list").innerHTML = "<p style='text-align:center;color:#f44336'>โหลดข้อมูลไม่ได้ กรุณาลองใหม่</p>";
+      document.getElementById("matches-list").innerHTML = "<p style='text-align:center;color:#f44336'>โหลดข้อมูลไม่ได้</p>";
     }
   }
 
   // ===== LOAD MATCHES FOR FORM =====
   async function loadMatchesForForm() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Matches!A2:I100?key=${API_KEY}`;
-    
     try {
       const res = await fetch(url);
       const data = await res.json();
@@ -446,7 +275,7 @@
 
       const select = document.getElementById("match-select");
       select.innerHTML = '<option value="">-- เลือกนัด --</option>';
-      
+
       rows.forEach(row => {
         const [id, round, home, away, date, , , , status] = row;
         if (status !== "Finished") {
@@ -456,16 +285,13 @@
           select.appendChild(opt);
         }
       });
-    } catch (err) {
-      console.error(err);
-    }
+    } catch (err) { console.error(err); }
   }
 
   // ===== UPDATE MATCH INFO =====
   function updateMatchInfo() {
     const matchId = document.getElementById("match-select").value;
     const match = matchesData.find(r => r[0] === matchId);
-    
     if (match) {
       document.getElementById("home-team-name").textContent = "🏳️ " + match[2];
       document.getElementById("away-team-name").textContent = "🏳️ " + match[3];
@@ -478,146 +304,144 @@
   }
 
   // ===== SUBMIT PREDICTION =====
-async function submitPrediction(matchId, homeScore, awayScore) {
-  const user = firebase.auth().currentUser;
-  if (!user) return;
-
-  const payload = {
-    playerName: user.displayName,
-    email: user.email,
-    matchId: matchId,
-    homeScore: homeScore,
-    awayScore: awayScore
-  };
-
-  try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
-
-    const result = await res.json();
-
-    if (result.status === "success") {
-      // ✅ ทายสำเร็จ
-      showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
-      markMatchAsPredicted(matchId); // ซ่อนปุ่ม Submit
-
-    } else if (result.status === "duplicate") {
-      // ❌ ทายซ้ำ
-      showAlert("warning", "⚠️ คุณเคยทายแมตช์นี้แล้ว!");
-
-    } else {
-      showAlert("error", "❌ เกิดข้อผิดพลาด กรุณาลองใหม่");
+  // ✅ แก้ทั้งหมด — ไม่ใช้ Firebase, อ่านค่าจาก Input เอง
+  async function submitPrediction() {
+    if (!currentUser) {
+      showAlert("error", "❌ กรุณา Login ก่อนทายผล!");
+      return;
     }
 
-  } catch (err) {
-    showAlert("error", "❌ ไม่สามารถเชื่อมต่อได้: " + err.message);
+    // ✅ อ่านค่าจาก Input
+    const matchId   = document.getElementById("match-select").value;
+    const homeScore = document.getElementById("home-pred").value;
+    const awayScore = document.getElementById("away-pred").value;
+
+    if (!matchId) {
+      showAlert("error", "❌ กรุณาเลือกนัดการแข่งขัน!");
+      return;
+    }
+
+    const payload = {
+      playerName: currentUser.name,
+      email: currentUser.email,
+      matchId: matchId,
+      homeScore: homeScore,
+      awayScore: awayScore
+    };
+
+    // ✅ Disable ปุ่มระหว่าง Submit
+    const btn = document.getElementById("submit-btn");
+    btn.disabled = true;
+    btn.textContent = "⏳ กำลังส่ง...";
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+
+      const result = await res.json();
+
+      if (result.status === "success") {
+        showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
+        markMatchAsPredicted(); // ✅ ซ่อนปุ่ม Submit
+
+      } else if (result.status === "duplicate") {
+        showAlert("warning", "⚠️ คุณเคยทายแมตช์นี้แล้ว!");
+        markMatchAsPredicted();
+
+      } else {
+        showAlert("error", "❌ เกิดข้อผิดพลาด กรุณาลองใหม่");
+        btn.disabled = false;
+        btn.textContent = "✅ ส่งผลทาย";
+      }
+
+    } catch (err) {
+      showAlert("error", "❌ ไม่สามารถเชื่อมต่อได้: " + err.message);
+      btn.disabled = false;
+      btn.textContent = "✅ ส่งผลทาย";
+    }
   }
-}
 
   // ===== LOAD LEADERBOARD =====
   async function loadLeaderboard() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Leaderboard!A2:E100?key=${API_KEY}`;
-    
     try {
       const res = await fetch(url);
       const data = await res.json();
       const rows = data.values || [];
-
       const medals = ["🥇", "🥈", "🥉"];
-      
+
       const html = rows
         .sort((a, b) => parseInt(b[2]) - parseInt(a[2]))
         .map((row, i) => {
           const [playerId, name, totalScore, exactScore, resultScore] = row;
           const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
-          
           return `
             <div class="card">
               <div class="leaderboard-item">
                 <div class="rank rank-${i + 1}">${rankDisplay}</div>
                 <div class="player-info">
                   <div class="player-name">${name || playerId}</div>
-                  <div class="player-stats">
-                    🎯 ทายแม่น: ${exactScore || 0} | 
-                    ✅ ทายผลถูก: ${resultScore || 0}
-                  </div>
+                  <div class="player-stats">🎯 ทายแม่น: ${exactScore || 0} | ✅ ทายผลถูก: ${resultScore || 0}</div>
                 </div>
                 <div class="score-display">${totalScore || 0} pts</div>
               </div>
-            </div>
-          `;
+            </div>`;
         }).join("");
 
-      document.getElementById("leaderboard-list").innerHTML = html || 
+      document.getElementById("leaderboard-list").innerHTML = html ||
         "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล Leaderboard</p>";
     } catch (err) {
-      document.getElementById("leaderboard-list").innerHTML = 
+      document.getElementById("leaderboard-list").innerHTML =
         "<p style='text-align:center;color:#f44336'>โหลดข้อมูลไม่ได้</p>";
     }
   }
 
   // ===== LOGIN =====
   function login() {
-    const email = document.getElementById("login-email").value;
-    const name = document.getElementById("login-name").value;
-    
-    if (!email || !name) { alert("กรุณากรอกข้อมูลให้ครบ!"); return; }
-    
+    const email = document.getElementById("login-email").value.trim();
+    const name  = document.getElementById("login-name").value.trim();
+    if (!email || !name) { showAlert("error", "❌ กรุณากรอกข้อมูลให้ครบ!"); return; }
+
     currentUser = { email, name };
     localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
     document.getElementById("loginBtn").textContent = "👤 " + name;
-    alert("เข้าสู่ระบบสำเร็จ! ยินดีต้อนรับ " + name);
-    showPage("matches");
+    showAlert("success", "✅ ยินดีต้อนรับ " + name + "!");
+    showPage("matches", document.querySelector("nav button"));
   }
 
   // ===== SHOW ALERT =====
-// แสดง Alert สวยงาม
-function showAlert(type, message) {
-  const colors = {
-    success: "#2ecc71",
-    warning: "#f39c12",
-    error:   "#e74c3c"
-  };
-
-  const alert = document.createElement("div");
-  alert.style.cssText = `
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: ${colors[type]};
-    color: white;
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: opacity 0.5s;
-  `;
-  alert.textContent = message;
-  document.body.appendChild(alert);
-
-  // หายไปอัตโนมัติใน 3 วินาที
-  setTimeout(() => {
-    alert.style.opacity = "0";
-    setTimeout(() => alert.remove(), 500);
-  }, 3000);
-}
-
-// ซ่อนปุ่ม Submit หลังทายแล้ว
-function markMatchAsPredicted(matchId) {
-  const btn = document.querySelector(`[data-match-id="${matchId}"] .submit-btn`);
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = "✅ ทายแล้ว";
-    btn.style.background = "#2ecc71";
+  function showAlert(type, message) {
+    const colors = { success: "#2ecc71", warning: "#f39c12", error: "#e74c3c" };
+    const alertEl = document.createElement("div");
+    alertEl.style.cssText = `
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: ${colors[type] || "#333"}; color: white;
+      padding: 14px 28px; border-radius: 12px; font-size: 16px;
+      font-weight: bold; z-index: 9999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: opacity 0.5s;
+    `;
+    alertEl.textContent = message;
+    document.body.appendChild(alertEl);
+    setTimeout(() => { alertEl.style.opacity = "0"; setTimeout(() => alertEl.remove(), 500); }, 3000);
   }
-}
+
+  // ===== MARK AS PREDICTED =====
+  // ✅ แก้ — ใช้ id ตรงๆ แทน querySelector ที่หาไม่เจอ
+  function markMatchAsPredicted() {
+    const btn = document.getElementById("submit-btn");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "✅ ส่งผลทายแล้ว!";
+      btn.style.background = "#2ecc71";
+    }
+  }
 
   // ===== INIT =====
+  if (currentUser) {
+    document.getElementById("loginBtn").textContent = "👤 " + currentUser.name;
+  }
   loadMatches();
 </script>
 </body>
