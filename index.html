@@ -409,6 +409,44 @@
       vertical-align: middle;
       margin-right: 4px;
     }
+
+    /* ===== RULES PAGE ===== */
+    .rules-step {
+      display: flex; gap: 15px; align-items: flex-start;
+      padding: 15px; background: #0a0a2e;
+      border-radius: 12px; margin-bottom: 10px;
+    }
+    .rules-step-num {
+      background: #FFD700; color: #000;
+      border-radius: 50%; width: 34px; height: 34px; min-width: 34px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 0.95rem;
+    }
+    .rules-score-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;
+    }
+    .rules-score-card {
+      border-radius: 15px; padding: 20px; text-align: center;
+    }
+    .rules-table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem;
+    }
+    .rules-table th {
+      padding: 12px 15px; text-align: left;
+      color: #FFD700; border-bottom: 2px solid #333366; background: #0a0a2e;
+    }
+    .rules-table td {
+      padding: 12px 15px; border-bottom: 1px solid #1a1a3e;
+    }
+    .rules-table tr:last-child td { border-bottom: none; }
+    .rules-example-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
+    }
+    .rules-example-row:last-child { border-bottom: none; }
+    .rules-rule-item {
+      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
@@ -424,6 +462,7 @@
   <button onclick="showPage('special', this)">⭐ ทายพิเศษ</button>
   <button onclick="showPage('history', this)">📋 ประวัติทาย</button>
   <button onclick="showPage('leaderboard', this)">🏆 Leaderboard</button>
+  <button onclick="showPage('rules', this)">📖 กติกา</button>
   <button onclick="showPage('login', this)" id="loginBtn">👤 Login</button>
   <button onclick="showPage('admin', this)" class="admin-nav-btn">🔐 Admin</button>
 </nav>
@@ -703,6 +742,315 @@
       <div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
     </div>
   </div>
+
+  <!-- ===== RULES PAGE ===== -->
+  <div id="page-rules" class="page">
+    <h2 class="section-title">📖 กติกาการเล่น</h2>
+
+    <!-- HERO BANNER -->
+    <div style="
+      background: linear-gradient(135deg, #1a1a4e, #2d2d7e);
+      border: 1px solid #FFD700; border-radius: 20px;
+      padding: 30px; text-align: center; margin-bottom: 25px;
+      box-shadow: 0 0 30px rgba(255,215,0,0.15);
+    ">
+      <div style="font-size: 3rem; margin-bottom: 10px;">⚽🏆</div>
+      <div style="font-size: 1.5rem; font-weight: bold; color: #FFD700; margin-bottom: 8px;">
+        FIFA World Cup 2026 — Prediction League
+      </div>
+      <div style="color: #aaa; font-size: 0.95rem; line-height: 1.7;">
+        ทายผลการแข่งขัน สะสมคะแนน และพิสูจน์ว่าคุณคือผู้เชี่ยวชาญฟุตบอลตัวจริง!
+      </div>
+    </div>
+
+    <!-- SECTION 1: วิธีเล่น -->
+    <div class="card" style="margin-bottom: 20px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">🎮</div>
+        <h3 style="color:#FFD700; font-size:1.2rem;">วิธีการเล่น</h3>
+      </div>
+
+      <div class="rules-step">
+        <div class="rules-step-num">1</div>
+        <div>
+          <div style="font-weight:bold; color:#fff; margin-bottom:4px;">สมัครสมาชิก / Login</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            สมัครสมาชิกด้วย Email และตั้งชื่อที่ใช้แสดงใน Leaderboard
+            (ชื่อเปลี่ยนไม่ได้ในภายหลัง)
+          </div>
+        </div>
+      </div>
+
+      <div class="rules-step">
+        <div class="rules-step-num">2</div>
+        <div>
+          <div style="font-weight:bold; color:#fff; margin-bottom:4px;">เลือกนัดและทายสกอร์</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            ไปที่หน้า <strong style="color:#FFD700;">📝 ทายผล</strong>
+            เลือกนัดการแข่งขันที่ต้องการ แล้วกรอกสกอร์ที่คาดว่าจะเป็น
+          </div>
+        </div>
+      </div>
+
+      <div class="rules-step">
+        <div class="rules-step-num">3</div>
+        <div>
+          <div style="font-weight:bold; color:#fff; margin-bottom:4px;">ส่งก่อนแมตช์เริ่ม</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            ต้องส่งผลทายก่อนเวลาแมตช์เริ่ม ระบบจะปิดรับทายอัตโนมัติเมื่อถึงเวลา
+          </div>
+        </div>
+      </div>
+
+      <div class="rules-step" style="margin-bottom:0;">
+        <div class="rules-step-num">4</div>
+        <div>
+          <div style="font-weight:bold; color:#fff; margin-bottom:4px;">รับคะแนนและดู Leaderboard</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            หลังแมตช์จบ Admin จะอัปเดตผล ระบบคำนวณคะแนนให้อัตโนมัติ
+            ดูอันดับได้ที่หน้า <strong style="color:#FFD700;">🏆 Leaderboard</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: การให้คะแนน -->
+    <div class="card" style="margin-bottom: 20px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">🎯</div>
+        <h3 style="color:#FFD700; font-size:1.2rem;">การให้คะแนน</h3>
+      </div>
+
+      <div class="rules-score-grid">
+        <div class="rules-score-card" style="
+          background: linear-gradient(135deg, #2a2000, #1a1400);
+          border: 2px solid #FFD700;">
+          <div style="font-size:2rem; margin-bottom:8px;">🎯</div>
+          <div style="font-size:2rem; font-weight:bold; color:#FFD700;">3 pts</div>
+          <div style="color:#fff; font-weight:bold; margin:8px 0 6px;">ทายสกอร์แม่น</div>
+          <div style="color:#aaa; font-size:0.82rem; line-height:1.5;">
+            ทายสกอร์ถูกต้องทั้งสองฝั่ง เช่น ทาย 2-1 ผลจริง 2-1
+          </div>
+        </div>
+
+        <div class="rules-score-card" style="
+          background: linear-gradient(135deg, #0a2a0a, #051505);
+          border: 2px solid #2ecc71;">
+          <div style="font-size:2rem; margin-bottom:8px;">✅</div>
+          <div style="font-size:2rem; font-weight:bold; color:#2ecc71;">1 pt</div>
+          <div style="color:#fff; font-weight:bold; margin:8px 0 6px;">ทายผลถูก</div>
+          <div style="color:#aaa; font-size:0.82rem; line-height:1.5;">
+            ทายผลแพ้/ชนะ/เสมอถูก แต่สกอร์ไม่ตรง เช่น ทาย 1-0 ผลจริง 3-0
+          </div>
+        </div>
+      </div>
+
+      <div class="rules-score-card" style="
+        background: linear-gradient(135deg, #1a0a00, #0a0500);
+        border: 2px solid #e74c3c; text-align:center; margin-bottom:15px;">
+        <div style="font-size:1.8rem; margin-bottom:6px;">❌</div>
+        <div style="font-size:1.5rem; font-weight:bold; color:#e74c3c;">0 pt</div>
+        <div style="color:#fff; font-weight:bold; margin:6px 0 4px;">ทายผิด</div>
+        <div style="color:#aaa; font-size:0.82rem;">
+          ทายผลผิด เช่น ทายว่าชนะ แต่จริงๆ แพ้หรือเสมอ
+        </div>
+      </div>
+
+      <!-- ตัวอย่าง -->
+      <div style="
+        background: #0a0a2e; border: 1px solid #333366;
+        border-radius: 12px; padding: 18px;">
+        <div style="color:#FFD700; font-weight:bold; margin-bottom:12px;">📌 ตัวอย่างการให้คะแนน</div>
+        <div class="rules-example-row" style="padding-bottom:10px; margin-bottom:4px;">
+          <span style="color:#aaa;">ผลจริง: <strong style="color:#fff;">บราซิล 2 - 1 ฝรั่งเศส</strong></span>
+        </div>
+        <div class="rules-example-row">
+          <span style="color:#aaa;">ทาย 2-1 (แม่นสกอร์)</span>
+          <span style="color:#FFD700; font-weight:bold;">🎯 +3 pts</span>
+        </div>
+        <div class="rules-example-row">
+          <span style="color:#aaa;">ทาย 3-0 (บราซิลชนะ ถูก แต่สกอร์ผิด)</span>
+          <span style="color:#2ecc71; font-weight:bold;">✅ +1 pt</span>
+        </div>
+        <div class="rules-example-row">
+          <span style="color:#aaa;">ทาย 1-2 (ฝรั่งเศสชนะ ผิด)</span>
+          <span style="color:#e74c3c; font-weight:bold;">❌ 0 pt</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Double Point -->
+    <div class="card" style="margin-bottom: 20px; border-color: #FFD700; box-shadow: 0 0 20px rgba(255,215,0,0.1);">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">⭐</div>
+        <h3 style="color:#FFD700; font-size:1.2rem;">Double Point Match</h3>
+      </div>
+
+      <div style="
+        background: linear-gradient(135deg, #2a1a00, #1a0f00);
+        border-radius: 12px; padding: 18px; margin-bottom:15px; text-align:center;">
+        <div style="color:#FFD700; font-size:1.1rem; font-weight:bold; margin-bottom:12px;">
+          ⭐ นัดพิเศษ = คะแนนคูณ 2!
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:#0a0a2e; border-radius:10px; padding:12px;">
+            <div style="color:#aaa; font-size:0.82rem;">🎯 ทายสกอร์แม่น</div>
+            <div style="color:#FFD700; font-size:1.5rem; font-weight:bold;">6 pts</div>
+          </div>
+          <div style="background:#0a0a2e; border-radius:10px; padding:12px;">
+            <div style="color:#aaa; font-size:0.82rem;">✅ ทายผลถูก</div>
+            <div style="color:#2ecc71; font-size:1.5rem; font-weight:bold;">2 pts</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="color:#aaa; font-size:0.88rem; line-height:1.7;">
+        นัด <strong style="color:#FFD700;">⭐ Double Point</strong>
+        จะแสดงสัญลักษณ์ดาวในตารางแข่งขัน
+        โดยปกติจะเป็นนัดสำคัญ เช่น รอบชิงชนะเลิศ หรือนัดที่ Admin กำหนดพิเศษ
+      </div>
+    </div>
+
+    <!-- SECTION 4: การทายพิเศษ -->
+    <div class="card" style="margin-bottom: 20px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">⭐</div>
+        <h3 style="color:#FFD700; font-size:1.2rem;">การทายพิเศษ (Bonus)</h3>
+      </div>
+
+      <div style="
+        background: #111133; border: 1px solid #FFD700;
+        border-radius: 12px; padding: 18px; margin-bottom:12px;
+        display:flex; gap:15px; align-items:flex-start;">
+        <div style="font-size:2rem; flex-shrink:0;">🏆</div>
+        <div>
+          <div style="color:#FFD700; font-weight:bold; font-size:1rem; margin-bottom:6px;">
+            ทายทีมแชมป์
+          </div>
+          <div style="color:#aaa; font-size:0.88rem; line-height:1.6;">
+            ทายว่าทีมใดจะคว้าแชมป์ FIFA World Cup 2026
+            ต้องทายก่อนกำหนด (Admin ตั้ง Deadline)
+            หากทายถูกจะได้รับ <strong style="color:#FFD700;">คะแนนพิเศษ</strong> ตามที่ระบบกำหนด
+          </div>
+        </div>
+      </div>
+
+      <div style="
+        background: #111133; border: 1px solid #2ecc71;
+        border-radius: 12px; padding: 18px;
+        display:flex; gap:15px; align-items:flex-start;">
+        <div style="font-size:2rem; flex-shrink:0;">⚽</div>
+        <div>
+          <div style="color:#2ecc71; font-weight:bold; font-size:1rem; margin-bottom:6px;">
+            ทาย Top Scorer
+          </div>
+          <div style="color:#aaa; font-size:0.88rem; line-height:1.6;">
+            ทายว่านักเตะคนใดจะเป็นดาวซัลโวสูงสุดของทัวร์นาเมนต์
+            เลือกทีมก่อน แล้วเลือกผู้เล่นจากทีมนั้น
+            หากทายถูกจะได้รับ <strong style="color:#2ecc71;">คะแนนพิเศษ</strong> ตามที่ระบบกำหนด
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: กฎสำคัญ -->
+    <div class="card" style="margin-bottom: 20px; border-color: #e74c3c;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">⚠️</div>
+        <h3 style="color:#e74c3c; font-size:1.2rem;">กฎสำคัญที่ต้องรู้</h3>
+      </div>
+
+      <div class="rules-rule-item">
+        <span style="color:#e74c3c; font-size:1.2rem; flex-shrink:0; margin-top:2px;">🔒</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">ปิดรับทายอัตโนมัติ</strong> —
+          เมื่อถึงเวลาแมตช์เริ่ม ระบบจะปิดรับทายทันที ไม่สามารถส่งหรือแก้ไขได้
+        </div>
+      </div>
+      <div class="rules-rule-item">
+        <span style="color:#f39c12; font-size:1.2rem; flex-shrink:0; margin-top:2px;">✏️</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">แก้ไขได้ก่อนปิดรับ</strong> —
+          สามารถเปลี่ยนผลทายได้กี่ครั้งก็ได้ ตราบใดที่แมตช์ยังไม่เริ่ม
+        </div>
+      </div>
+      <div class="rules-rule-item">
+        <span style="color:#3498db; font-size:1.2rem; flex-shrink:0; margin-top:2px;">👤</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">1 บัญชีต่อ 1 คน</strong> —
+          ห้ามสร้างหลายบัญชีเพื่อเพิ่มโอกาสทาย ผู้ฝ่าฝืนจะถูกตัดสิทธิ์
+        </div>
+      </div>
+      <div class="rules-rule-item">
+        <span style="color:#2ecc71; font-size:1.2rem; flex-shrink:0; margin-top:2px;">📊</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">คะแนนคำนวณหลังแมตช์จบ</strong> —
+          Admin จะอัปเดตผลและคำนวณคะแนนให้ทุกคนหลังแมตช์สิ้นสุด
+        </div>
+      </div>
+      <div class="rules-rule-item" style="margin-bottom:0;">
+        <span style="color:#9b59b6; font-size:1.2rem; flex-shrink:0; margin-top:2px;">🏆</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">การตัดสินของ Admin ถือเป็นที่สิ้นสุด</strong> —
+          ในกรณีที่มีข้อพิพาทหรือปัญหาทางเทคนิค
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: ตารางสรุปคะแนน -->
+    <div class="card" style="margin-bottom: 20px; border-color: #3498db;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">📊</div>
+        <h3 style="color:#3498db; font-size:1.2rem;">สรุปตารางคะแนน</h3>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="rules-table">
+          <thead>
+            <tr>
+              <th>ประเภท</th>
+              <th style="text-align:center;">ปกติ</th>
+              <th style="text-align:center;">⭐ Double</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:#aaa;">🎯 ทายสกอร์แม่นทั้งคู่</td>
+              <td style="text-align:center; color:#FFD700; font-weight:bold; font-size:1.1rem;">3 pts</td>
+              <td style="text-align:center; color:#FFD700; font-weight:bold; font-size:1.1rem;">6 pts</td>
+            </tr>
+            <tr>
+              <td style="color:#aaa;">✅ ทายผลแพ้/ชนะ/เสมอถูก</td>
+              <td style="text-align:center; color:#2ecc71; font-weight:bold; font-size:1.1rem;">1 pt</td>
+              <td style="text-align:center; color:#2ecc71; font-weight:bold; font-size:1.1rem;">2 pts</td>
+            </tr>
+            <tr>
+              <td style="color:#aaa;">❌ ทายผิด</td>
+              <td style="text-align:center; color:#e74c3c; font-weight:bold; font-size:1.1rem;">0 pt</td>
+              <td style="text-align:center; color:#e74c3c; font-weight:bold; font-size:1.1rem;">0 pt</td>
+            </tr>
+            <tr>
+              <td style="color:#aaa;">🏆 ทายแชมป์ถูก</td>
+              <td colspan="2" style="text-align:center; color:#FFD700; font-weight:bold;">ตามที่ Admin กำหนด</td>
+            </tr>
+            <tr>
+              <td style="color:#aaa;">⚽ ทาย Top Scorer ถูก</td>
+              <td colspan="2" style="text-align:center; color:#2ecc71; font-weight:bold;">ตามที่ Admin กำหนด</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center; padding: 10px 0 20px;">
+      <button class="btn" style="max-width:300px; margin:0 auto; font-size:1rem;"
+        onclick="showPage('predict', document.querySelectorAll('nav button')[1])">
+        📝 เริ่มทายผลเลย!
+      </button>
+    </div>
+
+  </div><!-- end page-rules -->
 
   <!-- ===== LOGIN / REGISTER PAGE ===== -->
   <div id="page-login" class="page">
@@ -1484,7 +1832,6 @@
       return;
     }
 
-    // ใช้ innerHTML + getFlag
     document.getElementById("home-team-name").innerHTML = getFlag(match[2]) + match[2];
     document.getElementById("away-team-name").innerHTML = getFlag(match[3]) + match[3];
     document.getElementById("home-label").textContent   = match[2];
@@ -1794,7 +2141,6 @@
     document.getElementById(type + "-team-search-clear").style.display = "none";
     document.getElementById(type + "-selected-team-display").style.display = "block";
 
-    // ใส่ธงใน selected team name
     const nameWrap = document.getElementById(type + "-selected-team-name-wrap");
     if (nameWrap) {
       const emoji = type === "champion" ? "🏆 " : "";
@@ -1897,9 +2243,7 @@
 
     document.getElementById("selected-player-display").style.display = "block";
     document.getElementById("selected-player-name").textContent      = "⚽ " + name;
-    // ใส่ธงใน selected player team
-    document.getElementById("selected-player-team").innerHTML =
-      getFlag(team, 18) + team;
+    document.getElementById("selected-player-team").innerHTML        = getFlag(team, 18) + team;
     document.getElementById("topscorer-btn").disabled = false;
   }
 
