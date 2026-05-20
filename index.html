@@ -84,6 +84,8 @@
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-danger    { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
     .btn-secondary { background: linear-gradient(135deg, #333366, #222255); color: #fff; }
+    .btn-blue      { background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; }
+    .btn-green     { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; }
 
     /* ===== AUTH TABS ===== */
     .auth-tabs {
@@ -173,6 +175,12 @@
     .admin-nav-btn:hover, .admin-nav-btn.active {
       background: #e74c3c !important; color: #fff !important; border-color: #e74c3c !important;
     }
+
+    /* ===== ADMIN TOOL GRID ===== */
+    .admin-tool-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;
+    }
+    @media (max-width: 500px) { .admin-tool-grid { grid-template-columns: 1fr; } }
 
     /* ===== HISTORY ===== */
     .filter-btn {
@@ -436,7 +444,6 @@
         <div id="match-deadline" style="text-align:center; margin-top:10px;"></div>
       </div>
 
-      <!-- Previous Prediction Box -->
       <div id="predict-prev-box" class="predict-prev-box" style="display:none;">
         📝 ทายไว้เดิม:
         <strong id="predict-prev-score" style="color:#FFD700; font-size:1.1rem;"></strong>
@@ -792,12 +799,15 @@
     </div>
 
     <div id="admin-panel" style="display:none;">
+
+      <!-- ===== INFO BOX ===== -->
       <div class="info-box">
         🎯 <strong>ทายสกอร์แม่นทั้งคู่</strong> = 3 pts &nbsp;|&nbsp;
         ✅ <strong>ทายผลแพ้/ชนะ/เสมอถูก</strong> = 1 pt &nbsp;|&nbsp;
         ⭐ <strong>Double Point</strong> = คะแนน x2
       </div>
 
+      <!-- ===== UPDATE SCORE CARD ===== -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:20px;">📝 อัปเดตผลการแข่งขัน</h3>
         <div class="form-group">
@@ -840,6 +850,28 @@
         </button>
       </div>
 
+      <!-- ===== 🆕 SYNC & RECALCULATE CARD ===== -->
+      <div class="card" style="border-color:#3498db;">
+        <h3 style="color:#3498db; margin-bottom:8px;">🛠️ เครื่องมือจัดการคะแนน</h3>
+        <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
+          ใช้เมื่อ Leaderboard ว่างเปล่า หรือคะแนนไม่ถูกต้อง<br>
+          <strong style="color:#f39c12;">⚠️ แนะนำ: Sync ก่อน แล้วค่อย Recalculate</strong>
+        </p>
+        <div class="admin-tool-grid">
+          <button class="btn btn-blue" onclick="syncLeaderboard()">
+            🔄 Sync ผู้เล่นเข้า Leaderboard
+          </button>
+          <button class="btn btn-green" onclick="recalculateAll()">
+            🔁 คำนวณคะแนนใหม่ทั้งหมด
+          </button>
+        </div>
+        <div id="tool-result-box" style="display:none; margin-top:15px;
+          background:#0a1a0a; border:1px solid #2a4a2a; border-radius:10px;
+          padding:12px 15px; font-size:0.88rem; color:#2ecc71; text-align:center;">
+        </div>
+      </div>
+
+      <!-- ===== GRADE SPECIAL CARD ===== -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">⭐ เฉลยการทายพิเศษ</h3>
         <div class="info-box">
@@ -870,6 +902,7 @@
         </div>
       </div>
 
+      <!-- ===== FINISHED MATCHES CARD ===== -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">✅ แมตช์ที่อัปเดตแล้ว</h3>
         <div id="finished-matches-list">
@@ -938,7 +971,7 @@
 <script>
   // ===== CONFIG =====
   const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkEmjRfM7zsHXKydZnz5_rn-2aSv76itjMBuTGv-2pHg_NX6l_NVKCG-p3Bhf0IIu8/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDSNBP5uDVb9NS0kcF5pioLqljAeT_popG5Xncv38GI65DMtQpzqOO-15pPSck2N1_/exec";
   const API_KEY         = "AIzaSyC9ryHUiSV77BcyU0MsvI-1108e8UbykmI";
 
   // ==========================================
@@ -953,7 +986,6 @@
   let specialCountdowns = {};
   let editingMatch   = null;
 
-  // Players / Teams State
   let allTeams     = [];
   let playersCache = {};
 
@@ -1284,7 +1316,6 @@
     btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
     btn.style.color      = "#000";
 
-    // ===== ตรวจว่าเคยทายไว้มั้ย =====
     const prevBox = document.getElementById("predict-prev-box");
     if (currentUser) {
       const prev = await getPrediction(matchId);
@@ -1363,7 +1394,6 @@
       showAlert("error", "❌ หมดเวลาทายผลแล้ว!"); return;
     }
 
-    // ===== ตรวจว่าเคยทายไว้มั้ย → Confirm ก่อน =====
     const prev = await getPrediction(matchId);
     if (prev) {
       const isSame =
@@ -1521,7 +1551,6 @@
     }
   }
 
-  // ===== ปิด Modal เมื่อกด Outside =====
   document.getElementById("edit-modal").addEventListener("click", function(e) {
     if (e.target === this) closeEditModal();
   });
@@ -1877,12 +1906,18 @@
       const rows = data.values || [];
       const medals = ["🥇", "🥈", "🥉"];
 
-      const sorted = [...rows].sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
+      if (rows.length === 0) {
+        document.getElementById("leaderboard-list").innerHTML =
+          "<p style='text-align:center;color:#888;padding:40px;'>ยังไม่มีข้อมูล Leaderboard</p>";
+        return;
+      }
+
+      const sorted = [...rows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
       const html   = sorted.map((row, i) => {
-        const [, name, totalScore, exactScore, resultScore] = row;
+        const [email, name, totalScore, exactScore, resultScore] = row;
         const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
         const isMe        = currentUser &&
-          row[0].toLowerCase() === currentUser.email.toLowerCase();
+          (row[0] || "").toLowerCase() === currentUser.email.toLowerCase();
         return `
           <div class="card"
             style="${isMe
@@ -1892,7 +1927,7 @@
               <div class="rank rank-${i + 1}">${rankDisplay}</div>
               <div class="player-info">
                 <div class="player-name">
-                  ${name}
+                  ${name || "-"}
                   ${isMe
                     ? '<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>'
                     : ""}
@@ -1906,8 +1941,7 @@
           </div>`;
       }).join("");
 
-      document.getElementById("leaderboard-list").innerHTML =
-        html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล</p>";
+      document.getElementById("leaderboard-list").innerHTML = html;
     } catch (err) {
       document.getElementById("leaderboard-list").innerHTML =
         "<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้</p>";
@@ -1939,7 +1973,7 @@
       const matches     = matchData.values || [];
 
       const myPreds = predictions.filter(
-        row => row[2].toLowerCase() === currentUser.email.toLowerCase()
+        row => (row[2] || "").toLowerCase() === currentUser.email.toLowerCase()
       );
 
       if (myPreds.length === 0) {
@@ -2197,66 +2231,145 @@
   }
 
   async function submitAdminScore() {
-  const matchId   = document.getElementById("admin-match-select").value;
-  const homeScore = document.getElementById("admin-home-score").value;
-  const awayScore = document.getElementById("admin-away-score").value;
-  if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
+    const matchId   = document.getElementById("admin-match-select").value;
+    const homeScore = document.getElementById("admin-home-score").value;
+    const awayScore = document.getElementById("admin-away-score").value;
+    if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
 
-  const match = matchesData.find(r => r[0] === matchId);
-  if (!confirm(
-    `ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`
-  )) return;
+    const match = matchesData.find(r => r[0] === matchId);
+    if (!confirm(
+      `ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`
+    )) return;
 
-  const btn = document.getElementById("admin-submit-btn");
-  btn.disabled         = true;
-  btn.textContent      = "⏳ กำลังคำนวณ...";
-  btn.style.background = "#555";
-  btn.style.color      = "#fff";
+    const btn = document.getElementById("admin-submit-btn");
+    btn.disabled         = true;
+    btn.textContent      = "⏳ กำลังคำนวณ...";
+    btn.style.background = "#555";
+    btn.style.color      = "#fff";
 
-  try {
-    console.log("📤 Sending:", { matchId, homeScore, awayScore, password: adminPassword });
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action:   "updateScore",
+          password: adminPassword,
+          matchId, homeScore, awayScore
+        })
+      });
 
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "updateScore",
-        password: adminPassword,
-        matchId, homeScore, awayScore
-      })
-    });
+      const rawText = await res.text();
+      const result  = JSON.parse(rawText);
 
-    console.log("📥 HTTP Status:", res.status);
-    const rawText = await res.text();
-    console.log("📥 Raw Response:", rawText);
-
-    const result = JSON.parse(rawText);
-    console.log("📥 Parsed Result:", result);
-
-    if (result.status === "success") {
-      showAlert("success", "✅ " + result.message);
-      btn.textContent      = "✅ อัปเดตสำเร็จ!";
-      btn.style.background = "#2ecc71";
-      btn.style.color      = "#fff";
-      setTimeout(() => loadAdminMatches(), 1500);
-    } else if (result.status === "unauthorized") {
-      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
-    } else {
-      showAlert("error", "❌ " + result.message);
+      if (result.status === "success") {
+        showAlert("success", "✅ " + result.message);
+        btn.textContent      = "✅ อัปเดตสำเร็จ!";
+        btn.style.background = "#2ecc71";
+        btn.style.color      = "#fff";
+        setTimeout(() => loadAdminMatches(), 1500);
+      } else if (result.status === "unauthorized") {
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+      } else {
+        showAlert("error", "❌ " + result.message);
+        btn.disabled         = false;
+        btn.textContent      = "💾 บันทึกผลและคำนวณคะแนน";
+        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+        btn.style.color      = "#000";
+      }
+    } catch (err) {
+      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
       btn.disabled         = false;
       btn.textContent      = "💾 บันทึกผลและคำนวณคะแนน";
       btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
       btn.style.color      = "#000";
     }
-  } catch (err) {
-    console.error("❌ Catch Error:", err);
-    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    btn.disabled         = false;
-    btn.textContent      = "💾 บันทึกผลและคำนวณคะแนน";
-    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-    btn.style.color      = "#000";
   }
-}
 
+  // ==========================================
+  // ===== 🆕 SYNC LEADERBOARD (ADMIN) =====
+  // ==========================================
+  async function syncLeaderboard() {
+    if (!confirm("Sync ผู้เล่นทั้งหมดจาก Users → Leaderboard ใช่ไหมครับ?")) return;
+
+    const resultBox = document.getElementById("tool-result-box");
+    resultBox.style.display = "block";
+    resultBox.style.color   = "#aaa";
+    resultBox.textContent   = "⏳ กำลัง Sync...";
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action:   "syncLeaderboard",
+          password: adminPassword
+        })
+      });
+      const result = await res.json();
+
+      if (result.status === "success") {
+        resultBox.style.color   = "#2ecc71";
+        resultBox.textContent   = "✅ " + result.message;
+        showAlert("success", "✅ " + result.message);
+      } else if (result.status === "unauthorized") {
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+      } else {
+        resultBox.style.color = "#e74c3c";
+        resultBox.textContent = "❌ " + result.message;
+        showAlert("error", "❌ " + result.message);
+      }
+    } catch (err) {
+      resultBox.style.color = "#e74c3c";
+      resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
+      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    }
+  }
+
+  // ==========================================
+  // ===== 🆕 RECALCULATE ALL (ADMIN) =====
+  // ==========================================
+  async function recalculateAll() {
+    if (!confirm(
+      "⚠️ คำนวณคะแนนใหม่ทั้งหมด?\n\n" +
+      "ระบบจะ Reset คะแนนทุกคนเป็น 0\n" +
+      "แล้วคำนวณใหม่จากทุกแมตช์ที่ Finished\n\n" +
+      "ดำเนินการต่อใช่ไหม?"
+    )) return;
+
+    const resultBox = document.getElementById("tool-result-box");
+    resultBox.style.display = "block";
+    resultBox.style.color   = "#aaa";
+    resultBox.textContent   = "⏳ กำลังคำนวณใหม่ทั้งหมด... (อาจใช้เวลาสักครู่)";
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action:   "recalculateAll",
+          password: adminPassword
+        })
+      });
+      const result = await res.json();
+
+      if (result.status === "success") {
+        resultBox.style.color = "#2ecc71";
+        resultBox.textContent = "✅ " + result.message;
+        showAlert("success", "✅ " + result.message);
+      } else if (result.status === "unauthorized") {
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+      } else {
+        resultBox.style.color = "#e74c3c";
+        resultBox.textContent = "❌ " + result.message;
+        showAlert("error", "❌ " + result.message);
+      }
+    } catch (err) {
+      resultBox.style.color = "#e74c3c";
+      resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
+      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    }
+  }
+
+  // ==========================================
+  // ===== GRADE SPECIAL =====
+  // ==========================================
   async function gradeSpecial(type) {
     const answer = document.getElementById("admin-" + type + "-answer").value.trim();
     if (!answer) { showAlert("error", "❌ กรุณากรอกคำตอบ"); return; }
@@ -2270,7 +2383,7 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify({
-          action: "gradeSpecialPredictions",
+          action:   "gradeSpecialPredictions",
           password: adminPassword,
           type, answer
         })
