@@ -2675,56 +2675,86 @@ async function fetchSheet(sheetName) {
   }
 
   async function submitAdminScore() {
-    const matchId   = document.getElementById("admin-match-select").value;
-    const homeScore = document.getElementById("admin-home-score").value;
-    const awayScore = document.getElementById("admin-away-score").value;
-    if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
+  const matchId   = document.getElementById("admin-match-select").value;
+  const homeScore = document.getElementById("admin-home-score").value;
+  const awayScore = document.getElementById("admin-away-score").value;
 
-    const match = matchesData.find(r => r[0] === matchId);
-    if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
+  if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
 
-    const btn = document.getElementById("admin-submit-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังคำนวณ...";
-    btn.style.background = "#555"; btn.style.color = "#fff";
+  const match = matchesData.find(r => r[0] === matchId);
+  if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
 
+  const btn = document.getElementById("admin-submit-btn");
+  btn.disabled = true;
+  btn.textContent = "⏳ กำลังคำนวณ...";
+  btn.style.background = "#555";
+  btn.style.color = "#fff";
+
+  // ✅ สร้าง payload ก่อน แล้ว log ดูว่าถูกต้องไหม
+  const payload = {
+    action:    "updateScore",
+    password:  adminPassword,
+    matchId:   String(matchId),
+    homeScore: String(homeScore),
+    awayScore: String(awayScore)
+  };
+
+  console.log("📤 Sending payload:", JSON.stringify(payload));
+
+  try {
+    // ✅ ไม่ใส่ headers เลย — ให้ browser จัดการเอง
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      body:   JSON.stringify(payload)
+    });
+
+    const rawText = await res.text();
+    console.log("📥 Raw response:", rawText);
+
+    let result;
     try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method:  "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body:    JSON.stringify({
-          action: "updateScore", password: adminPassword,
-          matchId: String(matchId), homeScore: String(homeScore), awayScore: String(awayScore)
-        })
-      });
-      const rawText = await res.text();
-      let result;
-      try { result = JSON.parse(rawText); }
-      catch (e) {
-        showAlert("error", "❌ Response ไม่ใช่ JSON: " + rawText.substring(0, 100));
-        btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
-        return;
-      }
-
-      if (result.status === "success") {
-        showAlert("success", "✅ " + result.message);
-        btn.textContent = "✅ อัปเดตสำเร็จ!"; btn.style.background = "#2ecc71"; btn.style.color = "#fff";
-        setTimeout(() => loadAdminMatches(), 1500);
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
-        btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
-      } else {
-        showAlert("error", "❌ " + (result.message || "Unknown error"));
-        btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
-      }
-    } catch (err) {
-      showAlert("error", "❌ Network Error: " + err.message);
-      btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
+      result = JSON.parse(rawText);
+    } catch (e) {
+      showAlert("error", "❌ Response ไม่ใช่ JSON: " + rawText.substring(0, 200));
+      btn.disabled = false;
+      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+      btn.style.color = "#000";
+      return;
     }
+
+    if (result.status === "success") {
+      showAlert("success", "✅ " + result.message);
+      btn.textContent = "✅ อัปเดตสำเร็จ!";
+      btn.style.background = "#2ecc71";
+      btn.style.color = "#fff";
+      setTimeout(() => loadAdminMatches(), 1500);
+
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
+      // ✅ ไม่ logout ทันที — ให้กรอกรหัสใหม่แทน
+      btn.disabled = false;
+      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+      btn.style.color = "#000";
+
+    } else {
+      showAlert("error", "❌ " + (result.message || "Unknown error"));
+      btn.disabled = false;
+      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+      btn.style.color = "#000";
+    }
+
+  } catch (err) {
+    showAlert("error", "❌ Network Error: " + err.message);
+    console.error("Network error:", err);
+    btn.disabled = false;
+    btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+    btn.style.color = "#000";
   }
+}
 
   async function syncLeaderboard() {
     if (!confirm("Sync ผู้เล่นทั้งหมดจาก Users → Leaderboard ใช่ไหมครับ?")) return;
