@@ -8,6 +8,34 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #0a0a2e; color: #fff; min-height: 100vh; }
 
+    /* ==================== BETA BANNER ==================== */
+    .beta-banner {
+      background: linear-gradient(135deg, #7b2d00, #c0392b);
+      border-bottom: 2px solid #e74c3c;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #fff;
+      position: relative;
+      z-index: 100;
+    }
+    .beta-banner strong { color: #FFD700; }
+    .beta-banner .beta-badge {
+      display: inline-block;
+      background: #FFD700; color: #000;
+      border-radius: 20px; padding: 2px 10px;
+      font-size: 0.78rem; font-weight: bold;
+      margin-right: 8px; vertical-align: middle;
+    }
+    .beta-countdown {
+      display: inline-block;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px; padding: 2px 10px;
+      margin-left: 8px; font-weight: bold;
+      color: #FFD700; font-size: 0.88rem;
+      vertical-align: middle;
+    }
+
     header {
       background: linear-gradient(135deg, #1a1a4e, #2d2d7e);
       padding: 20px; text-align: center;
@@ -182,6 +210,37 @@
       border: 1px solid #FFD700; border-radius: 12px;
       padding: 2px 10px; font-size: 0.75rem; font-weight: bold;
     }
+
+    /* ==================== DOUBLE POINT ALERT BOX ==================== */
+    .double-point-alert {
+      background: linear-gradient(135deg, #2a1a00, #1a0f00);
+      border: 2px solid #FFD700;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(255,215,0,0.3); }
+      50%       { box-shadow: 0 0 20px rgba(255,215,0,0.7); }
+    }
+    .double-point-alert .dp-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .double-point-alert .dp-text { flex: 1; }
+    .double-point-alert .dp-title {
+      color: #FFD700; font-weight: bold; font-size: 1rem; margin-bottom: 4px;
+    }
+    .double-point-alert .dp-detail { color: #aaa; font-size: 0.82rem; line-height: 1.5; }
+    .double-point-alert .dp-pts {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(255,215,0,0.1); border-radius: 10px;
+      padding: 8px 14px; flex-shrink: 0;
+    }
+    .double-point-alert .dp-pts span:first-child { color: #FFD700; font-size: 1.3rem; font-weight: bold; }
+    .double-point-alert .dp-pts span:last-child  { color: #aaa; font-size: 0.72rem; }
+
     .info-box {
       background: #0a1a0a; border: 1px solid #2a4a2a;
       border-radius: 10px; padding: 15px; margin-bottom: 20px;
@@ -451,6 +510,45 @@
       display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
     }
 
+    /* ==================== LEADERBOARD CHAMPION TAG ==================== */
+    .champion-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(255,215,0,0.12);
+      border: 1px solid rgba(255,215,0,0.35);
+      border-radius: 20px; padding: 2px 8px;
+      font-size: 0.75rem; color: #FFD700;
+      margin-left: 6px; vertical-align: middle;
+      white-space: nowrap;
+    }
+    .champion-tag img { width: 16px; height: auto; border-radius: 2px; vertical-align: middle; }
+
+    /* ==================== SPECIAL SECTION IN MODAL ==================== */
+    .modal-special-section {
+      background: #0a0a2e;
+      border: 1px solid #333366;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .modal-special-section h4 {
+      color: #FFD700;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #222255;
+    }
+    .modal-special-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid #1a1a3e;
+      font-size: 0.88rem;
+    }
+    .modal-special-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .modal-special-label { color: #888; min-width: 90px; flex-shrink: 0; }
+    .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
+    .modal-special-locked {
+      color: #555; font-style: italic; font-size: 0.82rem;
+    }
+
     #user-history-modal {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.82); z-index: 1000;
@@ -515,6 +613,15 @@
 </head>
 <body>
 
+<!-- ==================== BETA BANNER ==================== -->
+<div class="beta-banner" id="beta-banner">
+  <span class="beta-badge">🧪 BETA</span>
+  เว็บนี้อยู่ในช่วง<strong>ทดลองใช้งาน</strong> —
+  จะเปิดให้ใช้งานจริงวันที่ <strong>2 มิถุนายน 2026</strong>
+  <span class="beta-countdown" id="beta-countdown">⏳ กำลังนับ...</span>
+  <span style="color:#aaa; font-size:0.8rem; margin-left:8px;">ข้อมูลอาจมีการเปลี่ยนแปลง</span>
+</div>
+
 <header>
   <h1>⚽ FIFA World Cup 2026</h1>
   <p>Prediction League — ทายผลชิงแชมป์!</p>
@@ -551,6 +658,24 @@
           <option value="">-- เลือกนัด --</option>
         </select>
       </div>
+
+      <!-- ⭐ DOUBLE POINT ALERT (แสดงหลังเลือกนัด) -->
+      <div id="double-point-alert" class="double-point-alert" style="display:none;">
+        <div class="dp-icon">⭐</div>
+        <div class="dp-text">
+          <div class="dp-title">Double Point Match!</div>
+          <div class="dp-detail">นัดนี้เป็นนัดพิเศษ — คะแนนคูณ 2 ทุกประเภท</div>
+        </div>
+        <div class="dp-pts">
+          <span>🎯 6 pts</span>
+          <span>ทายแม่น</span>
+        </div>
+        <div class="dp-pts" style="margin-left:6px;">
+          <span style="color:#2ecc71;">✅ 2 pts</span>
+          <span>ผลถูก</span>
+        </div>
+      </div>
+
       <div id="match-preview" style="display:none; margin-bottom:20px;">
         <div class="match-card">
           <div><div class="team-name" id="home-team-name">-</div></div>
@@ -812,7 +937,7 @@
         <div class="rules-step-num">4</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">รับคะแนนและดู Leaderboard</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">หลังแมตช์จบ Admin จะอัปเดตผล ระบบคำนวณคะแนนให้อัตโนมัติ ดูอันดับได้ที่หน้า <strong style="color:#FFD700;">🏆 Leaderboard</strong></div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">หลังแมตช์จบ Admin จะอัปเดตผล ระบบคำนวณคะแนนให้อัตโนมัติ</div>
         </div>
       </div>
     </div>
@@ -1255,7 +1380,23 @@
         <div class="user-history-stat-label">📋 ทั้งหมด</div>
       </div>
     </div>
-    <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+
+    <!-- ⭐ SPECIAL PREDICTIONS SECTION IN MODAL -->
+    <div id="modal-special-section" class="modal-special-section" style="display:none;">
+      <h4>⭐ การทายพิเศษ</h4>
+      <div class="modal-special-row">
+        <span class="modal-special-label">🏆 ทีมแชมป์</span>
+        <span class="modal-special-value" id="modal-champion-val">—</span>
+        <span id="modal-champion-result"></span>
+      </div>
+      <div class="modal-special-row">
+        <span class="modal-special-label">⚽ Top Scorer</span>
+        <span class="modal-special-value" id="modal-topscorer-val">—</span>
+        <span id="modal-topscorer-result"></span>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:8px; margin-top:16px; margin-bottom:16px; flex-wrap:wrap;">
       <button class="filter-btn active" id="modal-filter-all"   onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
       <button class="filter-btn"        id="modal-filter-exact"  onclick="filterModalHistory('exact',  this)">🎯 แม่น</button>
       <button class="filter-btn"        id="modal-filter-result" onclick="filterModalHistory('result', this)">✅ ถูก</button>
@@ -1273,6 +1414,38 @@
   // ==========================================
   const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TOaOjIO7LoyaG58Wgi1R_rf531aFJkETtDOWFILkDpDhEeawcK_EXe3gMPvN7dc/exec";
+
+  // ==========================================
+  // BETA COUNTDOWN  ← ใหม่ (ข้อ 3)
+  // ==========================================
+  const LAUNCH_DATE = new Date("2026-06-02T00:00:00+07:00"); // 2 มิ.ย. 2026 เที่ยงคืน (ICT)
+
+  function updateBetaCountdown() {
+    const now  = new Date();
+    const diff = LAUNCH_DATE - now;
+    const el   = document.getElementById("beta-countdown");
+    if (!el) return;
+
+    if (diff <= 0) {
+      el.textContent = "🚀 เปิดให้ใช้งานแล้ว!";
+      el.style.color = "#2ecc71";
+      return;
+    }
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    if (days > 0) {
+      el.textContent = `⏳ อีก ${days} วัน ${hours} ชม. ${minutes} นาที`;
+    } else if (hours > 0) {
+      el.textContent = `⏳ อีก ${hours} ชม. ${minutes} นาที ${seconds} วิ`;
+    } else {
+      el.textContent = `⏳ อีก ${minutes} นาที ${seconds} วิ`;
+    }
+  }
+  updateBetaCountdown();
+  setInterval(updateBetaCountdown, 1000);
 
   // ==========================================
   // FLAG MAP
@@ -1344,37 +1517,32 @@
   };
 
   // ==========================================
-  // FETCH SHEET HELPER (ไม่ต้องใช้ API Key)
+  // FETCH SHEET HELPER
   // ==========================================
-async function fetchSheet(sheetName) {
-  const encodedSheet = encodeURIComponent(sheetName);
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodedSheet}`;
-  const res  = await fetch(url);
-  const text = await res.text();
+  async function fetchSheet(sheetName) {
+    const encodedSheet = encodeURIComponent(sheetName);
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodedSheet}`;
+    const res  = await fetch(url);
+    const text = await res.text();
 
-  const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
-  if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
+    const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+    if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
 
-  const json = JSON.parse(match[1]);
-  if (!json.table || !json.table.rows) return [];
+    const json = JSON.parse(match[1]);
+    if (!json.table || !json.table.rows) return [];
 
-  return json.table.rows.map(row =>
-    (row.c || []).map(cell => {
-      if (!cell || cell.v === null || cell.v === undefined) return "";
-
-      // ✅ แปลง gviz Date format → ISO String
-      if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-        const parts = cell.v.replace("Date(", "").replace(")", "").split(",").map(Number);
-        // parts = [year, month(0-based), day, hour, min, sec]
-        const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3] || 0, parts[4] || 0, parts[5] || 0));
-        // แปลงเป็น format ที่อ่านง่าย เช่น "2026-06-12 02:00"
-        return d.toISOString().replace("T", " ").substring(0, 16);
-      }
-
-      return String(cell.v).trim();
-    })
-  );
-}
+    return json.table.rows.map(row =>
+      (row.c || []).map(cell => {
+        if (!cell || cell.v === null || cell.v === undefined) return "";
+        if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
+          const parts = cell.v.replace("Date(", "").replace(")", "").split(",").map(Number);
+          const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3] || 0, parts[4] || 0, parts[5] || 0));
+          return d.toISOString().replace("T", " ").substring(0, 16);
+        }
+        return String(cell.v).trim();
+      })
+    );
+  }
 
   // ==========================================
   // NAVIGATION
@@ -1674,7 +1842,7 @@ async function fetchSheet(sheetName) {
   }
 
   // ==========================================
-  // LOAD MATCHES FOR FORM
+  // LOAD MATCHES FOR FORM  ← ข้อ 1: เพิ่ม ⭐ ใน dropdown
   // ==========================================
   async function loadMatchesForForm() {
     try {
@@ -1686,17 +1854,18 @@ async function fetchSheet(sheetName) {
       const now = new Date();
 
       rows.forEach(row => {
-        const [id, , home, away, date, , , , status] = row;
+        const [id, , home, away, date, , , dp, status] = row;
         if (status === "Finished") return;
         const matchTime = new Date(date);
         const isExpired = now >= matchTime;
+        const isDouble  = dp === "Yes";
         const opt       = document.createElement("option");
         opt.value       = id;
         if (isExpired) {
-          opt.textContent = `🔒 ${home} vs ${away} (ปิดรับทายแล้ว)`;
+          opt.textContent = `🔒 ${home} vs ${away}${isDouble ? " ⭐ Double" : ""} (ปิดรับทายแล้ว)`;
           opt.disabled    = true;
         } else {
-          opt.textContent = `${home} vs ${away} — ${formatTimeLeft(matchTime)}`;
+          opt.textContent = `${isDouble ? "⭐ " : ""}${home} vs ${away}${isDouble ? " [Double Point]" : ""} — ${formatTimeLeft(matchTime)}`;
         }
         select.appendChild(opt);
       });
@@ -1720,17 +1889,26 @@ async function fetchSheet(sheetName) {
   }
 
   // ==========================================
-  // UPDATE MATCH INFO
+  // UPDATE MATCH INFO  ← ข้อ 1: แสดง double point alert
   // ==========================================
   async function updateMatchInfo() {
     const matchId = document.getElementById("match-select").value;
     const match   = matchesData.find(r => r[0] === matchId);
     if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
 
+    // ซ่อน double point alert ก่อน
+    document.getElementById("double-point-alert").style.display = "none";
+
     if (!match) {
       document.getElementById("match-preview").style.display    = "none";
       document.getElementById("predict-prev-box").style.display = "none";
       return;
+    }
+
+    // ⭐ แสดง double point alert ถ้าเป็น double match
+    const isDouble = match[7] === "Yes";
+    if (isDouble) {
+      document.getElementById("double-point-alert").style.display = "flex";
     }
 
     document.getElementById("home-team-name").innerHTML = getFlag(match[2]) + match[2];
@@ -2252,25 +2430,51 @@ async function fetchSheet(sheetName) {
   }
 
   // ==========================================
-  // LEADERBOARD
+  // LEADERBOARD  ← ข้อ 2: เพิ่มธงแชมป์หลังชื่อ
   // ==========================================
   async function loadLeaderboard() {
     try {
-      const rows   = await fetchSheet("Leaderboard");
+      const [lbRows, specialRows, settingsRows] = await Promise.all([
+        fetchSheet("Leaderboard"),
+        fetchSheet("SpecialPredictions"),
+        fetchSheet("Settings")
+      ]);
+
+      // อ่าน settings เพื่อดูว่า champion deadline ปิดแล้วหรือยัง
+      const settings = {};
+      settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+      const champDeadline = settings["champion_deadline"]
+        ? new Date(settings["champion_deadline"]) : null;
+      const champClosed = champDeadline && new Date() >= champDeadline;
+
+      // สร้าง map: email → champion prediction
+      const champMap = {};
+      specialRows.forEach(r => {
+        if ((r[3] || "").toString() === "champion") {
+          champMap[(r[1] || "").toLowerCase()] = (r[4] || "").toString().trim();
+        }
+      });
+
       const medals = ["🥇", "🥈", "🥉"];
 
-      if (rows.length === 0) {
+      if (lbRows.length === 0) {
         document.getElementById("leaderboard-list").innerHTML =
           "<p style='text-align:center;color:#888;padding:40px;'>ยังไม่มีข้อมูล Leaderboard</p>";
         return;
       }
 
-      const sorted = [...rows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
+      const sorted = [...lbRows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
       const html   = sorted.map((row, i) => {
         const [email, name, totalScore, exactScore, resultScore] = row;
         const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
         const isMe        = currentUser &&
           (row[0] || "").toLowerCase() === currentUser.email.toLowerCase();
+
+        // ⭐ แสดงธงแชมป์หลังชื่อ (เฉพาะเมื่อปิดรับแล้ว)
+        const userChamp = champMap[(email || "").toLowerCase()] || "";
+        const champTagHtml = (champClosed && userChamp)
+          ? `<span class="champion-tag">🏆 ${getFlag(userChamp, 16)}${userChamp}</span>`
+          : "";
 
         return `
           <div class="card"
@@ -2285,6 +2489,7 @@ async function fetchSheet(sheetName) {
                 <div class="player-name">
                   ${name || "-"}
                   ${isMe ? '<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>' : ""}
+                  ${champTagHtml}
                   <span style="color:#555; font-size:0.75rem; margin-left:6px;">👆 ดูประวัติ</span>
                 </div>
                 <div class="player-stats">🎯 ทายแม่น: ${exactScore || 0} | ✅ ทายผลถูก: ${resultScore || 0}</div>
@@ -2303,7 +2508,7 @@ async function fetchSheet(sheetName) {
   }
 
   // ==========================================
-  // USER HISTORY MODAL
+  // USER HISTORY MODAL  ← ข้อ 2: เพิ่ม special section
   // ==========================================
   async function openUserHistoryModal(email, name, rank, totalPts) {
     document.getElementById("user-history-modal").style.display = "flex";
@@ -2315,17 +2520,91 @@ async function fetchSheet(sheetName) {
     document.getElementById("modal-stat-total").textContent  = "—";
     document.getElementById("modal-history-list").innerHTML  =
       `<div class="loading"><div class="spinner"></div><p>กำลังโหลดประวัติ...</p></div>`;
+    document.getElementById("modal-special-section").style.display = "none";
 
     document.querySelectorAll("#user-history-modal .filter-btn")
       .forEach(b => b.classList.remove("active"));
     document.getElementById("modal-filter-all").classList.add("active");
 
     try {
-      const [predictions, matches] = await Promise.all([
+      const [predictions, matches, specialRows, settingsRows] = await Promise.all([
         fetchSheet("Predictions"),
-        fetchSheet("Matches")
+        fetchSheet("Matches"),
+        fetchSheet("SpecialPredictions"),
+        fetchSheet("Settings")
       ]);
 
+      // ==================== Special Predictions ====================
+      // อ่าน settings
+      const settings = {};
+      settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+
+      const champDeadline = settings["champion_deadline"]
+        ? new Date(settings["champion_deadline"]) : null;
+      const tsDeadline    = settings["topscorer_deadline"]
+        ? new Date(settings["topscorer_deadline"]) : null;
+      const champClosed   = champDeadline && new Date() >= champDeadline;
+      const tsClosed      = tsDeadline    && new Date() >= tsDeadline;
+      const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
+      const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
+
+      // หา special prediction ของ user นี้
+      let userChamp = "", userTs = "";
+      specialRows.forEach(r => {
+        const rEmail = (r[1] || "").toLowerCase();
+        const rType  = (r[3] || "").toString();
+        const rPred  = (r[4] || "").toString().trim();
+        if (rEmail === email.toLowerCase()) {
+          if (rType === "champion")  userChamp = rPred;
+          if (rType === "topscorer") userTs    = rPred;
+        }
+      });
+
+      // แสดง special section เฉพาะเมื่อปิดรับแล้ว
+      if (champClosed || tsClosed) {
+        document.getElementById("modal-special-section").style.display = "block";
+
+        // Champion
+        const champValEl    = document.getElementById("modal-champion-val");
+        const champResultEl = document.getElementById("modal-champion-result");
+        if (champClosed) {
+          champValEl.innerHTML = userChamp
+            ? `${getFlag(userChamp, 16)} ${userChamp}`
+            : `<span style="color:#555;">ไม่ได้ทาย</span>`;
+          if (champAnswer) {
+            const correct = userChamp && userChamp.toLowerCase() === champAnswer;
+            champResultEl.innerHTML = correct
+              ? `<span style="color:#FFD700; font-weight:bold;">🎉 ถูก!</span>`
+              : `<span style="color:#e74c3c;">❌ ผิด (${champAnswer})</span>`;
+          } else {
+            champResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
+          }
+        } else {
+          champValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
+          champResultEl.innerHTML = "";
+        }
+
+        // Top Scorer
+        const tsValEl    = document.getElementById("modal-topscorer-val");
+        const tsResultEl = document.getElementById("modal-topscorer-result");
+        if (tsClosed) {
+          tsValEl.textContent = userTs || "ไม่ได้ทาย";
+          if (!userTs) tsValEl.style.color = "#555";
+          if (tsAnswer) {
+            const correct = userTs && userTs.toLowerCase() === tsAnswer;
+            tsResultEl.innerHTML = correct
+              ? `<span style="color:#2ecc71; font-weight:bold;">🎉 ถูก!</span>`
+              : `<span style="color:#e74c3c;">❌ ผิด (${tsAnswer})</span>`;
+          } else {
+            tsResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
+          }
+        } else {
+          tsValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
+          tsResultEl.innerHTML = "";
+        }
+      }
+
+      // ==================== Match History ====================
       const finishedMatches = matches.filter(r => r[8] === "Finished");
       const matchMap = {};
       finishedMatches.forEach(row => { matchMap[row[0]] = row; });
@@ -2591,52 +2870,43 @@ async function fetchSheet(sheetName) {
     }
   }
 
-async function adminLogin() {
-  const pw = document.getElementById("admin-password").value;
-  if (!pw) { showAlert("error", "❌ กรุณากรอกรหัสผ่าน"); return; }
+  async function adminLogin() {
+    const pw = document.getElementById("admin-password").value;
+    if (!pw) { showAlert("error", "❌ กรุณากรอกรหัสผ่าน"); return; }
 
-  const btn = document.querySelector("#admin-login-box .btn");
-  btn.disabled    = true;
-  btn.textContent = "⏳ กำลังตรวจสอบ...";
+    const btn = document.querySelector("#admin-login-box .btn");
+    btn.disabled    = true;
+    btn.textContent = "⏳ กำลังตรวจสอบ...";
 
-  try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action:   "verifyAdmin",
-        password: pw
-      })
-    });
-    const result = await res.json();
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({ action: "verifyAdmin", password: pw })
+      });
+      const result = await res.json();
 
-    if (result.status === "success") {
-      // ✅ verify ผ่านแล้วค่อย set state
-      adminPassword = pw;
-      adminLoggedIn = true;
-      document.getElementById("admin-login-box").style.display = "none";
-      document.getElementById("admin-panel").style.display     = "block";
-      document.getElementById("admin-password").value          = "";
-      loadAdminMatches();
-      showAlert("success", "✅ เข้าสู่ระบบ Admin สำเร็จ!");
-
-    } else if (result.status === "unauthorized") {
-      // ❌ รหัสผ่านผิด
-      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
-      document.getElementById("admin-password").value = "";
-      document.getElementById("admin-password").focus();
-
-    } else {
-      showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
+      if (result.status === "success") {
+        adminPassword = pw;
+        adminLoggedIn = true;
+        document.getElementById("admin-login-box").style.display = "none";
+        document.getElementById("admin-panel").style.display     = "block";
+        document.getElementById("admin-password").value          = "";
+        loadAdminMatches();
+        showAlert("success", "✅ เข้าสู่ระบบ Admin สำเร็จ!");
+      } else if (result.status === "unauthorized") {
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
+        document.getElementById("admin-password").value = "";
+        document.getElementById("admin-password").focus();
+      } else {
+        showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
+      }
+    } catch (err) {
+      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = "🔓 เข้าสู่ระบบ Admin";
     }
-
-  } catch (err) {
-    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-
-  } finally {
-    btn.disabled    = false;
-    btn.textContent = "🔓 เข้าสู่ระบบ Admin";
   }
-}
 
   function adminLogout() {
     adminLoggedIn = false; adminPassword = "";
@@ -2712,86 +2982,70 @@ async function adminLogin() {
   }
 
   async function submitAdminScore() {
-  const matchId   = document.getElementById("admin-match-select").value;
-  const homeScore = document.getElementById("admin-home-score").value;
-  const awayScore = document.getElementById("admin-away-score").value;
+    const matchId   = document.getElementById("admin-match-select").value;
+    const homeScore = document.getElementById("admin-home-score").value;
+    const awayScore = document.getElementById("admin-away-score").value;
 
-  if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
+    if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
 
-  const match = matchesData.find(r => r[0] === matchId);
-  if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
+    const match = matchesData.find(r => r[0] === matchId);
+    if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
 
-  const btn = document.getElementById("admin-submit-btn");
-  btn.disabled = true;
-  btn.textContent = "⏳ กำลังคำนวณ...";
-  btn.style.background = "#555";
-  btn.style.color = "#fff";
+    const btn = document.getElementById("admin-submit-btn");
+    btn.disabled = true;
+    btn.textContent = "⏳ กำลังคำนวณ...";
+    btn.style.background = "#555";
+    btn.style.color = "#fff";
 
-  // ✅ สร้าง payload ก่อน แล้ว log ดูว่าถูกต้องไหม
-  const payload = {
-    action:    "updateScore",
-    password:  adminPassword,
-    matchId:   String(matchId),
-    homeScore: String(homeScore),
-    awayScore: String(awayScore)
-  };
+    const payload = {
+      action:    "updateScore",
+      password:  adminPassword,
+      matchId:   String(matchId),
+      homeScore: String(homeScore),
+      awayScore: String(awayScore)
+    };
 
-  console.log("📤 Sending payload:", JSON.stringify(payload));
-
-  try {
-    // ✅ ไม่ใส่ headers เลย — ให้ browser จัดการเอง
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      body:   JSON.stringify(payload)
-    });
-
-    const rawText = await res.text();
-    console.log("📥 Raw response:", rawText);
-
-    let result;
     try {
-      result = JSON.parse(rawText);
-    } catch (e) {
-      showAlert("error", "❌ Response ไม่ใช่ JSON: " + rawText.substring(0, 200));
+      const res     = await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
+      const rawText = await res.text();
+      let result;
+      try { result = JSON.parse(rawText); }
+      catch (e) {
+        showAlert("error", "❌ Response ไม่ใช่ JSON: " + rawText.substring(0, 200));
+        btn.disabled = false;
+        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+        btn.style.color = "#000";
+        return;
+      }
+
+      if (result.status === "success") {
+        showAlert("success", "✅ " + result.message);
+        btn.textContent = "✅ อัปเดตสำเร็จ!";
+        btn.style.background = "#2ecc71";
+        btn.style.color = "#fff";
+        setTimeout(() => loadAdminMatches(), 1500);
+      } else if (result.status === "unauthorized") {
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
+        btn.disabled = false;
+        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+        btn.style.color = "#000";
+      } else {
+        showAlert("error", "❌ " + (result.message || "Unknown error"));
+        btn.disabled = false;
+        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+        btn.style.color = "#000";
+      }
+    } catch (err) {
+      showAlert("error", "❌ Network Error: " + err.message);
       btn.disabled = false;
       btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
       btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
       btn.style.color = "#000";
-      return;
     }
-
-    if (result.status === "success") {
-      showAlert("success", "✅ " + result.message);
-      btn.textContent = "✅ อัปเดตสำเร็จ!";
-      btn.style.background = "#2ecc71";
-      btn.style.color = "#fff";
-      setTimeout(() => loadAdminMatches(), 1500);
-
-    } else if (result.status === "unauthorized") {
-      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
-      // ✅ ไม่ logout ทันที — ให้กรอกรหัสใหม่แทน
-      btn.disabled = false;
-      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-      btn.style.color = "#000";
-
-    } else {
-      showAlert("error", "❌ " + (result.message || "Unknown error"));
-      btn.disabled = false;
-      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-      btn.style.color = "#000";
-    }
-
-  } catch (err) {
-    showAlert("error", "❌ Network Error: " + err.message);
-    console.error("Network error:", err);
-    btn.disabled = false;
-    btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-    btn.style.color = "#000";
   }
-}
 
   async function syncLeaderboard() {
     if (!confirm("Sync ผู้เล่นทั้งหมดจาก Users → Leaderboard ใช่ไหมครับ?")) return;
