@@ -60,7 +60,6 @@
     select,
     input[type="number"],
     input[type="text"],
-    input[type="email"],
     input[type="password"] {
       width: 100%; padding: 12px 15px; background: #0a0a2e;
       border: 2px solid #333366; border-radius: 10px;
@@ -814,11 +813,14 @@
         <div style="font-size:2rem;">🎮</div>
         <h3 style="color:#FFD700; font-size:1.2rem;">วิธีการเล่น</h3>
       </div>
+      <!-- ✅ เปลี่ยน Step 1 ให้พูดถึง username แทน email -->
       <div class="rules-step">
         <div class="rules-step-num">1</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">สมัครสมาชิก / Login</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">สมัครสมาชิกด้วย Email ตั้งชื่อและ Password</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            สมัครสมาชิกด้วย <strong style="color:#FFD700;">Username</strong> และ Password (ไม่ต้องใช้ Email)
+          </div>
         </div>
       </div>
       <div class="rules-step">
@@ -938,13 +940,15 @@
             <button class="auth-tab active" id="tab-login"  onclick="switchTab('login')">🔑 Login</button>
             <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
           </div>
+
+          <!-- ✅ LOGIN FORM — ใช้ username แทน email -->
           <div class="auth-form active" id="form-login">
             <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="login-email" placeholder="example@gmail.com"
-                oninput="clearHint('login-email-hint')"
+              <label>Username</label>
+              <input type="text" id="login-username" placeholder="กรอก Username ของคุณ"
+                oninput="clearHint('login-username-hint')"
                 onkeydown="if(event.key==='Enter') document.getElementById('login-password').focus()">
-              <div class="input-hint" id="login-email-hint"></div>
+              <div class="input-hint" id="login-username-hint"></div>
             </div>
             <div class="form-group">
               <label>Password</label>
@@ -960,20 +964,17 @@
             <div class="divider">หรือ</div>
             <button class="btn btn-secondary" onclick="switchTab('signup')" style="font-size:0.95rem;">✨ สมัครสมาชิกใหม่</button>
           </div>
+
+          <!-- ✅ SIGN UP FORM — ใช้แค่ username + password (ไม่มี email, ไม่มี name แยก) -->
           <div class="auth-form" id="form-signup">
             <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="signup-email" placeholder="example@gmail.com"
-                oninput="clearHint('signup-email-hint')"
-                onkeydown="if(event.key==='Enter') document.getElementById('signup-name').focus()">
-              <div class="input-hint" id="signup-email-hint"></div>
-            </div>
-            <div class="form-group">
-              <label>ชื่อที่ใช้แสดง</label>
-              <input type="text" id="signup-name" placeholder="ชื่อของคุณ"
-                oninput="clearHint('signup-name-hint')"
+              <label>Username</label>
+              <input type="text" id="signup-username" placeholder="ตั้ง Username ของคุณ"
+                oninput="clearHint('signup-username-hint')"
                 onkeydown="if(event.key==='Enter') document.getElementById('signup-password').focus()">
-              <div class="input-hint warning" id="signup-name-hint">⚠️ ชื่อนี้จะถูกใช้ตลอด เปลี่ยนไม่ได้ในภายหลัง</div>
+              <div class="input-hint warning" id="signup-username-hint">
+                ⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง
+              </div>
             </div>
             <div class="form-group">
               <label>Password</label>
@@ -1002,6 +1003,7 @@
             <div class="divider">มีบัญชีแล้ว?</div>
             <button class="btn btn-secondary" onclick="switchTab('login')" style="font-size:0.95rem;">🔑 เข้าสู่ระบบ</button>
           </div>
+
         </div>
       </div>
       <div id="logged-in-box" style="display:none;">
@@ -1017,7 +1019,7 @@
               <span style="color:#2ecc71; font-weight:bold;">✅ เข้าสู่ระบบแล้ว</span>
             </div>
             <div class="profile-info-row">
-              <span class="profile-info-label">ชื่อ</span>
+              <span class="profile-info-label">Username</span>
               <span class="profile-info-value" id="profile-name-2"></span>
             </div>
           </div>
@@ -1226,7 +1228,7 @@
   // CONFIG
   // ==========================================
   const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysMLIPAY77USt-AnTd_uh9W1q30Hv9VcKOfSMpO9wH5aoRFR20aeAYccRy44tZXXuH/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCQC_j_p5sNtLLWXg_QPkyurh9GYKz3N7ysdiS9oLhWZjtEONXglYRcBVB5smGP0U/exec";
 
   // ==========================================
   // FLAG MAP
@@ -1296,9 +1298,7 @@
     topscorer: { selectedTeam: "", selectedPlayer: "" }
   };
 
-  // ==========================================
   // ✅ currentUser เก็บ playerId + name
-  // ==========================================
   let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
   // ==========================================
@@ -1362,15 +1362,20 @@
     document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
     document.getElementById("form-login").classList.toggle("active",  tab === "login");
     document.getElementById("form-signup").classList.toggle("active", tab === "signup");
-    ["login-email-hint","login-pw-hint","signup-email-hint","signup-confirm-hint"].forEach(id => {
+
+    // ✅ เคลียร์ hint ให้ตรงกับ id ใหม่
+    ["login-username-hint", "login-pw-hint", "signup-pw-hint", "signup-confirm-hint"].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.className = "input-hint"; el.textContent = ""; }
     });
-    const nameHint = document.getElementById("signup-name-hint");
-    if (nameHint) {
-      nameHint.className   = "input-hint warning";
-      nameHint.textContent = "⚠️ ชื่อนี้จะถูกใช้ตลอด เปลี่ยนไม่ได้ในภายหลัง";
+
+    // ✅ reset username hint
+    const usernameHint = document.getElementById("signup-username-hint");
+    if (usernameHint) {
+      usernameHint.className   = "input-hint warning";
+      usernameHint.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
     }
+
     document.getElementById("pw-strength-bar").style.display = "none";
     document.getElementById("pw-strength-fill").style.width  = "0%";
     document.getElementById("login-password").value            = "";
@@ -1381,9 +1386,10 @@
   function clearHint(id) {
     const el = document.getElementById(id);
     if (!el) return;
-    if (id === "signup-name-hint") {
+    // ✅ เปลี่ยนจาก signup-name-hint → signup-username-hint
+    if (id === "signup-username-hint") {
       el.className   = "input-hint warning";
-      el.textContent = "⚠️ ชื่อนี้จะถูกใช้ตลอด เปลี่ยนไม่ได้ในภายหลัง";
+      el.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
     } else {
       el.className   = "input-hint";
       el.textContent = "";
@@ -1462,8 +1468,9 @@
       loginBtn.textContent = "👤 Login";
       document.getElementById("login-form-box").style.display = "block";
       document.getElementById("logged-in-box").style.display  = "none";
-      ["login-email","login-password","signup-email","signup-name",
-       "signup-password","signup-password-confirm"].forEach(id => {
+      // ✅ เคลียร์ field ใหม่ (ไม่มี email แล้ว)
+      ["login-username", "login-password",
+       "signup-username", "signup-password", "signup-password-confirm"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = "";
       });
@@ -1483,14 +1490,14 @@
   }
 
   // ==========================================
-  // LOGIN
-  // ✅ รับ playerId + name จาก server
+  // ✅ LOGIN — ใช้ username แทน email
   // ==========================================
   async function login() {
-    const email    = document.getElementById("login-email").value.trim().toLowerCase();
+    const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value;
-    if (!email)    { setHint("login-email-hint", "error", "❌ กรุณากรอก Email");    return; }
-    if (!password) { setHint("login-pw-hint",    "error", "❌ กรุณากรอก Password"); return; }
+
+    if (!username) { setHint("login-username-hint", "error", "❌ กรุณากรอก Username"); return; }
+    if (!password) { setHint("login-pw-hint",       "error", "❌ กรุณากรอก Password"); return; }
 
     const btn = document.getElementById("login-btn");
     btn.disabled = true; btn.textContent = "⏳ กำลังตรวจสอบ...";
@@ -1498,47 +1505,52 @@
     try {
       const res    = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        body:   JSON.stringify({ action: "loginUser", email, password })
+        body:   JSON.stringify({ action: "loginUser", username, password })
       });
       const result = await res.json();
 
       if (result.status === "success") {
-        // ✅ เก็บ playerId + name ใน localStorage
         currentUser = { playerId: result.playerId, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
-        document.getElementById("login-email").value    = "";
+        document.getElementById("login-username").value = "";
         document.getElementById("login-password").value = "";
         updateLoginUI();
         showAlert("success", "✅ ยินดีต้อนรับกลับ " + result.name + "!");
         showPage("matches", document.querySelector("nav button"));
       } else if (result.status === "no_password") {
-        setHint("login-email-hint", "warning", "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
+        setHint("login-username-hint", "warning", "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
       } else {
-        setHint("login-email-hint", "error", "❌ " + result.message);
+        setHint("login-username-hint", "error", "❌ " + result.message);
         document.getElementById("login-password").value = "";
       }
     } catch (err) {
-      setHint("login-email-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+      setHint("login-username-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
     } finally {
       btn.disabled = false; btn.textContent = "🔑 เข้าสู่ระบบ";
     }
   }
 
   // ==========================================
-  // SIGN UP
-  // ✅ รับ playerId + name จาก server ทันทีหลัง register
+  // ✅ SIGN UP — ใช้แค่ username + password
   // ==========================================
   async function signup() {
-    const email    = document.getElementById("signup-email").value.trim().toLowerCase();
-    const name     = document.getElementById("signup-name").value.trim();
+    const username = document.getElementById("signup-username").value.trim();
     const password = document.getElementById("signup-password").value;
     const confirm  = document.getElementById("signup-password-confirm").value;
 
-    if (!email)           { setHint("signup-email-hint", "error", "❌ กรุณากรอก Email");                  return; }
-    if (!name)            { setHint("signup-name-hint",  "error", "❌ กรุณากรอกชื่อ");                   return; }
-    if (name.length < 2)  { setHint("signup-name-hint",  "error", "❌ ชื่อต้องมีอย่างน้อย 2 ตัวอักษร"); return; }
-    if (password.length < 8) { setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return; }
-    if (password !== confirm) { setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return; }
+    // ✅ Validate username เท่านั้น (ไม่มี email, ไม่มี name แยก)
+    if (!username) {
+      setHint("signup-username-hint", "error", "❌ กรุณากรอก Username"); return;
+    }
+    if (username.length < 2) {
+      setHint("signup-username-hint", "error", "❌ Username ต้องมีอย่างน้อย 2 ตัวอักษร"); return;
+    }
+    if (password.length < 8) {
+      setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return;
+    }
+    if (password !== confirm) {
+      setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return;
+    }
 
     const btn = document.getElementById("signup-btn");
     btn.disabled = true; btn.textContent = "⏳ กำลังสมัคร...";
@@ -1546,25 +1558,23 @@
     try {
       const res    = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        body:   JSON.stringify({ action: "registerUser", email, name, password })
+        // ✅ ส่งแค่ username + password (ไม่มี email, ไม่มี name)
+        body:   JSON.stringify({ action: "registerUser", username, password })
       });
       const result = await res.json();
 
       if (result.status === "success") {
-        // ✅ เก็บ playerId + name ทันทีหลัง register
         currentUser = { playerId: result.playerId, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
-        document.getElementById("signup-email").value            = "";
-        document.getElementById("signup-name").value             = "";
+        document.getElementById("signup-username").value         = "";
         document.getElementById("signup-password").value         = "";
         document.getElementById("signup-password-confirm").value = "";
         updateLoginUI();
-        showAlert("success", "🎉 สมัครสมาชิกสำเร็จ! ยินดีต้อนรับ " + name + "!");
+        showAlert("success", "🎉 สมัครสมาชิกสำเร็จ! ยินดีต้อนรับ " + result.name + "!");
         showPage("matches", document.querySelector("nav button"));
       } else if (result.status === "duplicate") {
-        setHint("signup-email-hint", "error", "❌ Email นี้มีอยู่แล้ว กรุณา Login");
-      } else if (result.status === "duplicate_name") {
-        setHint("signup-name-hint", "error", "❌ ชื่อนี้ถูกใช้แล้ว กรุณาใช้ชื่ออื่น");
+        // ✅ เปลี่ยน message ให้ตรงกับ username
+        setHint("signup-username-hint", "error", "❌ Username นี้ถูกใช้แล้ว กรุณาใช้ชื่ออื่น");
       } else {
         showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
       }
@@ -1753,13 +1763,11 @@
 
   // ==========================================
   // GET PREDICTION
-  // ✅ ค้นหาด้วย playerId (col[1] ของ Predictions)
   // ==========================================
   async function getPrediction(matchId) {
     if (!currentUser) return null;
     try {
       const rows = await fetchSheet("Predictions");
-      // PRED_COL: [0]=timestamp, [1]=playerId, [2]=playerName, [3]=matchId, [4]=homeScore, [5]=awayScore
       const row = rows.find(
         r => (r[1] || "").toString() === currentUser.playerId &&
              (r[3] || "").toString() === matchId.toString()
@@ -1770,7 +1778,6 @@
 
   // ==========================================
   // SUBMIT PREDICTION
-  // ✅ ส่ง playerId + playerName ไปกับ request
   // ==========================================
   async function submitPrediction() {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อนทายผล!"); return; }
@@ -1804,8 +1811,8 @@
         method: "POST",
         body:   JSON.stringify({
           action:     "submitPrediction",
-          playerId:   currentUser.playerId,   // ✅ ส่ง playerId
-          playerName: currentUser.name,        // ✅ ส่ง name
+          playerId:   currentUser.playerId,
+          playerName: currentUser.name,
           matchId,
           homeScore,
           awayScore
@@ -1891,8 +1898,8 @@
         method: "POST",
         body:   JSON.stringify({
           action:     "submitPrediction",
-          playerId:   currentUser.playerId,  // ✅ ส่ง playerId
-          playerName: currentUser.name,       // ✅ ส่ง name
+          playerId:   currentUser.playerId,
+          playerName: currentUser.name,
           matchId:    editingMatch.matchId,
           homeScore:  newHome,
           awayScore:  newAway
@@ -2087,7 +2094,7 @@
         method: "POST",
         body:   JSON.stringify({
           action:   "getSpecialStatus",
-          playerId: currentUser.playerId  // ✅ ส่ง playerId แทน email
+          playerId: currentUser.playerId
         })
       });
       const result = await res.json();
@@ -2187,7 +2194,6 @@
 
   // ==========================================
   // SUBMIT SPECIAL
-  // ✅ ส่ง playerId + playerName
   // ==========================================
   async function submitSpecial(type) {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อน!"); return; }
@@ -2209,8 +2215,8 @@
         method: "POST",
         body:   JSON.stringify({
           action:     "submitSpecialPrediction",
-          playerId:   currentUser.playerId,  // ✅ ส่ง playerId
-          playerName: currentUser.name,       // ✅ ส่ง name
+          playerId:   currentUser.playerId,
+          playerName: currentUser.name,
           type,
           prediction
         })
@@ -2253,7 +2259,6 @@
         ? new Date(settings["champion_deadline"]) : null;
       const champClosed = champDeadline && new Date() >= champDeadline;
 
-      // ✅ SpecialPredictions col[1] = playerId
       const champMap = {};
       specialRows.forEach(r => {
         if ((r[3] || "").toString() === "champion") {
@@ -2274,7 +2279,6 @@
       const html = sorted.map((row, i) => {
         const [playerId, name, totalScore, exactScore, resultScore] = row;
         const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
-        // ✅ เช็ค isMe ด้วย playerId
         const isMe = currentUser &&
           (playerId || "").toString() === currentUser.playerId;
 
@@ -2316,7 +2320,6 @@
 
   // ==========================================
   // USER HISTORY MODAL
-  // ✅ ค้นหาด้วย playerId ทุกจุด
   // ==========================================
   async function openUserHistoryModal(playerId, name, rank, totalPts) {
     document.getElementById("user-history-modal").style.display = "flex";
@@ -2354,7 +2357,6 @@
       const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
       const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
-      // ✅ ค้นหาด้วย playerId (col[1] ของ SpecialPredictions)
       let userChamp = "", userTs = "";
       specialRows.forEach(r => {
         const rPlayerId = (r[1] || "").toString();
@@ -2411,7 +2413,6 @@
       const matchMap = {};
       finishedMatches.forEach(row => { matchMap[row[0]] = row; });
 
-      // ✅ filter ด้วย playerId (col[1] ของ Predictions)
       const myPreds = predictions.filter(row =>
         (row[1] || "").toString() === playerId && matchMap[row[3]]
       );
@@ -2505,7 +2506,6 @@
 
   // ==========================================
   // HISTORY
-  // ✅ filter ด้วย playerId (col[1] ของ Predictions)
   // ==========================================
   async function loadHistory() {
     if (!currentUser) {
@@ -2524,7 +2524,6 @@
         fetchSheet("Matches")
       ]);
 
-      // ✅ filter ด้วย playerId (col[1])
       const myPreds = predictions.filter(
         row => (row[1] || "").toString() === currentUser.playerId
       );
