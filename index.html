@@ -185,13 +185,9 @@
 
     .double-point-alert {
       background: linear-gradient(135deg, #2a1a00, #1a0f00);
-      border: 2px solid #FFD700;
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border: 2px solid #FFD700; border-radius: 12px;
+      padding: 14px 18px; margin-bottom: 15px;
+      display: flex; align-items: center; gap: 12px;
       animation: glowPulse 2s ease-in-out infinite;
     }
     @keyframes glowPulse {
@@ -397,26 +393,18 @@
     .change-btn:hover { color: #e74c3c; }
 
     .edit-pred-btn {
-      padding: 5px 14px;
-      background: transparent;
-      border: 1px solid #3498db;
-      color: #3498db;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      transition: all 0.2s;
+      padding: 5px 14px; background: transparent;
+      border: 1px solid #3498db; color: #3498db;
+      border-radius: 20px; cursor: pointer;
+      font-size: 0.82rem; transition: all 0.2s;
     }
     .edit-pred-btn:hover { background: #3498db; color: #fff; }
 
     .predict-prev-box {
-      background: #0a1a2a;
-      border: 1px solid #3498db;
-      border-radius: 10px;
-      padding: 12px 15px;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 0.88rem;
-      color: #aaa;
+      background: #0a1a2a; border: 1px solid #3498db;
+      border-radius: 10px; padding: 12px 15px;
+      margin-bottom: 15px; text-align: center;
+      font-size: 0.88rem; color: #aaa;
     }
 
     #edit-modal {
@@ -433,40 +421,28 @@
 
     .champion-tag {
       display: inline-flex; align-items: center; gap: 4px;
-      background: rgba(255,215,0,0.12);
-      border: 1px solid rgba(255,215,0,0.35);
+      background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35);
       border-radius: 20px; padding: 2px 8px;
       font-size: 0.75rem; color: #FFD700;
-      margin-left: 6px; vertical-align: middle;
-      white-space: nowrap;
+      margin-left: 6px; vertical-align: middle; white-space: nowrap;
     }
-    .champion-tag img { width: 16px; height: auto; border-radius: 2px; vertical-align: middle; }
 
     .modal-special-section {
-      background: #0a0a2e;
-      border: 1px solid #333366;
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 16px;
+      background: #0a0a2e; border: 1px solid #333366;
+      border-radius: 12px; padding: 16px; margin-top: 16px;
     }
     .modal-special-section h4 {
-      color: #FFD700;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #222255;
+      color: #FFD700; font-size: 0.95rem; margin-bottom: 12px;
+      padding-bottom: 8px; border-bottom: 1px solid #222255;
     }
     .modal-special-row {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 0; border-bottom: 1px solid #1a1a3e;
-      font-size: 0.88rem;
+      padding: 10px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
     }
     .modal-special-row:last-child { border-bottom: none; padding-bottom: 0; }
     .modal-special-label { color: #888; min-width: 90px; flex-shrink: 0; }
     .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
-    .modal-special-locked {
-      color: #555; font-style: italic; font-size: 0.82rem;
-    }
+    .modal-special-locked { color: #555; font-style: italic; font-size: 0.82rem; }
 
     #user-history-modal {
       display: none; position: fixed; inset: 0;
@@ -478,8 +454,7 @@
       background: #111133; border: 2px solid #FFD700;
       border-radius: 20px; padding: 28px;
       width: 100%; max-width: 600px;
-      box-shadow: 0 0 40px rgba(255,215,0,0.2);
-      margin: auto;
+      box-shadow: 0 0 40px rgba(255,215,0,0.2); margin: auto;
     }
     .user-history-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -524,55 +499,36 @@
       background: none; border: 2px solid #555; color: #aaa;
       border-radius: 50%; width: 34px; height: 34px;
       cursor: pointer; font-size: 1.1rem; transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .close-modal-btn:hover { border-color: #e74c3c; color: #e74c3c; }
 
     .rules-step {
       display: flex; gap: 15px; align-items: flex-start;
-      padding: 15px; background: #0a0a2e;
-      border-radius: 12px; margin-bottom: 10px;
+      padding: 15px; background: #0a0a2e; border-radius: 12px; margin-bottom: 10px;
     }
     .rules-step-num {
-      background: #FFD700; color: #000;
-      border-radius: 50%; width: 34px; height: 34px; min-width: 34px;
+      background: #FFD700; color: #000; border-radius: 50%;
+      width: 34px; height: 34px; min-width: 34px;
       display: flex; align-items: center; justify-content: center;
       font-weight: bold; font-size: 0.95rem;
     }
     .rules-score-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;
     }
-    .rules-score-card {
-      border-radius: 15px; padding: 20px; text-align: center;
-    }
-    .rules-table {
-      width: 100%; border-collapse: collapse; font-size: 0.88rem;
-    }
+    .rules-score-card { border-radius: 15px; padding: 20px; text-align: center; }
+    .rules-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
     .rules-table th {
       padding: 12px 15px; text-align: left;
       color: #FFD700; border-bottom: 2px solid #333366; background: #0a0a2e;
     }
-    .rules-table td {
-      padding: 12px 15px; border-bottom: 1px solid #1a1a3e;
-    }
+    .rules-table td { padding: 12px 15px; border-bottom: 1px solid #1a1a3e; }
     .rules-table tr:last-child td { border-bottom: none; }
-    .rules-example-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
-    }
-    .rules-example-row:last-child { border-bottom: none; }
     .rules-rule-item {
       display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
     }
-    .flag-img {
-      width: 24px; height: auto; border-radius: 3px;
-      vertical-align: middle; margin-right: 5px;
-    }
-    .flag-img-sm {
-      width: 20px; height: auto; border-radius: 2px;
-      vertical-align: middle; margin-right: 4px;
-    }
+    .flag-img    { width: 24px; height: auto; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
+    .flag-img-sm { width: 20px; height: auto; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
   </style>
 </head>
 <body>
@@ -619,14 +575,8 @@
           <div class="dp-title">Double Point Match!</div>
           <div class="dp-detail">นัดนี้เป็นนัดพิเศษ — คะแนนคูณ 2 ทุกประเภท</div>
         </div>
-        <div class="dp-pts">
-          <span>🎯 6 pts</span>
-          <span>ทายแม่น</span>
-        </div>
-        <div class="dp-pts" style="margin-left:6px;">
-          <span style="color:#2ecc71;">✅ 2 pts</span>
-          <span>ผลถูก</span>
-        </div>
+        <div class="dp-pts"><span>🎯 6 pts</span><span>ทายแม่น</span></div>
+        <div class="dp-pts" style="margin-left:6px;"><span style="color:#2ecc71;">✅ 2 pts</span><span>ผลถูก</span></div>
       </div>
       <div id="match-preview" style="display:none; margin-bottom:20px;">
         <div class="match-card">
@@ -985,8 +935,8 @@
         <h2>👤 เข้าสู่ระบบ</h2>
         <div class="card">
           <div class="auth-tabs">
-            <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">🔑 Login</button>
-            <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
+            <button class="auth-tab active" id="tab-login"  onclick="switchTab('login')">🔑 Login</button>
+            <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
           </div>
           <div class="auth-form active" id="form-login">
             <div class="form-group">
@@ -1142,7 +1092,7 @@
           <strong style="color:#f39c12;">⚠️ แนะนำ: Sync ก่อน แล้วค่อย Recalculate</strong>
         </p>
         <div class="admin-tool-grid">
-          <button class="btn btn-blue" onclick="syncLeaderboard()">🔄 Sync ผู้เล่นเข้า Leaderboard</button>
+          <button class="btn btn-blue"  onclick="syncLeaderboard()">🔄 Sync ผู้เล่นเข้า Leaderboard</button>
           <button class="btn btn-green" onclick="recalculateAll()">🔁 คำนวณคะแนนใหม่ทั้งหมด</button>
         </div>
         <div id="tool-result-box" style="display:none; margin-top:15px;
@@ -1230,11 +1180,11 @@
     </div>
     <div class="user-history-stat-grid">
       <div class="user-history-stat-card" style="border-color:#FFD700;">
-        <div class="user-history-stat-num" id="modal-stat-pts" style="color:#FFD700;">0</div>
+        <div class="user-history-stat-num" id="modal-stat-pts"    style="color:#FFD700;">0</div>
         <div class="user-history-stat-label">คะแนนรวม</div>
       </div>
       <div class="user-history-stat-card" style="border-color:#FFD700;">
-        <div class="user-history-stat-num" id="modal-stat-exact" style="color:#FFD700;">0</div>
+        <div class="user-history-stat-num" id="modal-stat-exact"  style="color:#FFD700;">0</div>
         <div class="user-history-stat-label">🎯 ทายแม่น</div>
       </div>
       <div class="user-history-stat-card" style="border-color:#2ecc71;">
@@ -1242,7 +1192,7 @@
         <div class="user-history-stat-label">✅ ผลถูก</div>
       </div>
       <div class="user-history-stat-card" style="border-color:#555;">
-        <div class="user-history-stat-num" id="modal-stat-total" style="color:#aaa;">0</div>
+        <div class="user-history-stat-num" id="modal-stat-total"  style="color:#aaa;">0</div>
         <div class="user-history-stat-label">📋 ทั้งหมด</div>
       </div>
     </div>
@@ -1260,13 +1210,13 @@
       </div>
     </div>
     <div style="display:flex; gap:8px; margin-top:16px; margin-bottom:16px; flex-wrap:wrap;">
-      <button class="filter-btn active" id="modal-filter-all"   onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
+      <button class="filter-btn active" id="modal-filter-all"    onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
       <button class="filter-btn"        id="modal-filter-exact"  onclick="filterModalHistory('exact',  this)">🎯 แม่น</button>
       <button class="filter-btn"        id="modal-filter-result" onclick="filterModalHistory('result', this)">✅ ถูก</button>
       <button class="filter-btn"        id="modal-filter-wrong"  onclick="filterModalHistory('wrong',  this)">❌ ผิด</button>
     </div>
     <div id="modal-history-list">
-      <div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
+      <div class="loading"><div class="spinner"></div><p>กำลังโหลดประวัติ...</p></div>
     </div>
   </div>
 </div>
@@ -1276,7 +1226,7 @@
   // CONFIG
   // ==========================================
   const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUdRK5XDDAVQF7-zOLl5AQ08PwlmipQhGKmiNEIDS2UbskQkNMsHUdbhA3XQcd578p/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysMLIPAY77USt-AnTd_uh9W1q30Hv9VcKOfSMpO9wH5aoRFR20aeAYccRy44tZXXuH/exec";
 
   // ==========================================
   // FLAG MAP
@@ -1347,8 +1297,7 @@
   };
 
   // ==========================================
-  // ✅ currentUser เก็บแค่ token + name
-  // ไม่เก็บ email ใน localStorage อีกต่อไป
+  // ✅ currentUser เก็บ playerId + name
   // ==========================================
   let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
@@ -1357,7 +1306,7 @@
   // ==========================================
   async function fetchSheet(sheetName) {
     const encodedSheet = encodeURIComponent(sheetName);
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodedSheet}`;
+    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodedSheet}`;
     const res  = await fetch(url);
     const text = await res.text();
 
@@ -1372,7 +1321,7 @@
         if (!cell || cell.v === null || cell.v === undefined) return "";
         if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
           const parts = cell.v.replace("Date(", "").replace(")", "").split(",").map(Number);
-          const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3] || 0, parts[4] || 0, parts[5] || 0));
+          const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3]||0, parts[4]||0, parts[5]||0));
           return d.toISOString().replace("T", " ").substring(0, 16);
         }
         return String(cell.v).trim();
@@ -1470,11 +1419,11 @@
     if (!pw) { bar.style.display = "none"; return; }
     bar.style.display = "block";
     let score = 0;
-    if (pw.length >= 8)              score++;
-    if (pw.length >= 12)             score++;
-    if (/[A-Z]/.test(pw))            score++;
-    if (/[0-9]/.test(pw))            score++;
-    if (/[^A-Za-z0-9]/.test(pw))     score++;
+    if (pw.length >= 8)          score++;
+    if (pw.length >= 12)         score++;
+    if (/[A-Z]/.test(pw))        score++;
+    if (/[0-9]/.test(pw))        score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
     const levels = [
       { pct: "20%",  color: "#e74c3c", label: "😰 อ่อนมาก",      cls: "error"   },
       { pct: "40%",  color: "#e67e22", label: "😟 อ่อน",          cls: "error"   },
@@ -1500,7 +1449,6 @@
 
   // ==========================================
   // UPDATE LOGIN UI
-  // ✅ ไม่แสดง email ใน profile อีกต่อไป
   // ==========================================
   function updateLoginUI() {
     const loginBtn = document.getElementById("loginBtn");
@@ -1536,7 +1484,7 @@
 
   // ==========================================
   // LOGIN
-  // ✅ รับ token จาก server แทน email
+  // ✅ รับ playerId + name จาก server
   // ==========================================
   async function login() {
     const email    = document.getElementById("login-email").value.trim().toLowerCase();
@@ -1549,13 +1497,14 @@
 
     try {
       const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "loginUser", email, password })
+        method: "POST",
+        body:   JSON.stringify({ action: "loginUser", email, password })
       });
       const result = await res.json();
 
       if (result.status === "success") {
-        // ✅ เก็บแค่ token + name ไม่เก็บ email
-        currentUser = { token: result.token, name: result.name };
+        // ✅ เก็บ playerId + name ใน localStorage
+        currentUser = { playerId: result.playerId, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
         document.getElementById("login-email").value    = "";
         document.getElementById("login-password").value = "";
@@ -1577,7 +1526,7 @@
 
   // ==========================================
   // SIGN UP
-  // ✅ รับ token จาก server ทันทีหลัง register
+  // ✅ รับ playerId + name จาก server ทันทีหลัง register
   // ==========================================
   async function signup() {
     const email    = document.getElementById("signup-email").value.trim().toLowerCase();
@@ -1585,9 +1534,9 @@
     const password = document.getElementById("signup-password").value;
     const confirm  = document.getElementById("signup-password-confirm").value;
 
-    if (!email)          { setHint("signup-email-hint", "error", "❌ กรุณากรอก Email");                  return; }
-    if (!name)           { setHint("signup-name-hint",  "error", "❌ กรุณากรอกชื่อ");                   return; }
-    if (name.length < 2) { setHint("signup-name-hint",  "error", "❌ ชื่อต้องมีอย่างน้อย 2 ตัวอักษร"); return; }
+    if (!email)           { setHint("signup-email-hint", "error", "❌ กรุณากรอก Email");                  return; }
+    if (!name)            { setHint("signup-name-hint",  "error", "❌ กรุณากรอกชื่อ");                   return; }
+    if (name.length < 2)  { setHint("signup-name-hint",  "error", "❌ ชื่อต้องมีอย่างน้อย 2 ตัวอักษร"); return; }
     if (password.length < 8) { setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return; }
     if (password !== confirm) { setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return; }
 
@@ -1596,13 +1545,14 @@
 
     try {
       const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "registerUser", email, name, password })
+        method: "POST",
+        body:   JSON.stringify({ action: "registerUser", email, name, password })
       });
       const result = await res.json();
 
       if (result.status === "success") {
-        // ✅ เก็บแค่ token + name
-        currentUser = { token: result.token, name: result.name };
+        // ✅ เก็บ playerId + name ทันทีหลัง register
+        currentUser = { playerId: result.playerId, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
         document.getElementById("signup-email").value            = "";
         document.getElementById("signup-name").value             = "";
@@ -1627,40 +1577,14 @@
 
   // ==========================================
   // LOGOUT
-  // ✅ เรียก API เพื่อ destroy token ที่ server
   // ==========================================
-  async function logout() {
+  function logout() {
     if (!confirm("ต้องการออกจากระบบใช่ไหม?")) return;
-
-    // Destroy token ที่ server (fire-and-forget)
-    if (currentUser && currentUser.token) {
-      try {
-        await fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify({ action: "logoutUser", token: currentUser.token })
-        });
-      } catch (err) {
-        // ไม่ต้อง block logout แม้ network จะล้มเหลว
-        console.warn("Logout API failed:", err.message);
-      }
-    }
-
     currentUser = null;
     localStorage.removeItem("wc2026_user");
     updateLoginUI();
     showAlert("success", "🚪 ออกจากระบบแล้ว");
     showPage("matches", document.querySelector("nav button"));
-  }
-
-  // ==========================================
-  // HANDLE SESSION EXPIRED
-  // ==========================================
-  function handleSessionExpired() {
-    currentUser = null;
-    localStorage.removeItem("wc2026_user");
-    updateLoginUI();
-    showAlert("error", "⏰ Session หมดอายุ กรุณา Login ใหม่");
-    showPage("login", document.getElementById("loginBtn"));
   }
 
   // ==========================================
@@ -1829,19 +1753,16 @@
 
   // ==========================================
   // GET PREDICTION
-  // ✅ ใช้ token ในการ query แทน email
+  // ✅ ค้นหาด้วย playerId (col[1] ของ Predictions)
   // ==========================================
   async function getPrediction(matchId) {
     if (!currentUser) return null;
     try {
       const rows = await fetchSheet("Predictions");
-      // Predictions sheet ตอนนี้เก็บ playerId ใน col[2]
-      // แต่เราไม่รู้ playerId ฝั่ง client → ต้อง match ด้วย playerName แทน
-      // หรือ fetch ทั้งหมดแล้ว filter ด้วย playerName
-      // ✅ วิธีที่ปลอดภัยกว่า: เรียก API แยก (แต่ในที่นี้ใช้ชื่อเป็น fallback)
+      // PRED_COL: [0]=timestamp, [1]=playerId, [2]=playerName, [3]=matchId, [4]=homeScore, [5]=awayScore
       const row = rows.find(
-        r => (r[1] || "").toLowerCase() === currentUser.name.toLowerCase() &&
-             r[3].toString() === matchId.toString()
+        r => (r[1] || "").toString() === currentUser.playerId &&
+             (r[3] || "").toString() === matchId.toString()
       );
       return row ? { homeScore: row[4], awayScore: row[5] } : null;
     } catch (err) { return null; }
@@ -1849,7 +1770,7 @@
 
   // ==========================================
   // SUBMIT PREDICTION
-  // ✅ ส่ง token แทน email
+  // ✅ ส่ง playerId + playerName ไปกับ request
   // ==========================================
   async function submitPrediction() {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อนทายผล!"); return; }
@@ -1882,18 +1803,15 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action:    "submitPrediction",
-          token:     currentUser.token, // ✅ ส่ง token แทน email + playerName
+          action:     "submitPrediction",
+          playerId:   currentUser.playerId,   // ✅ ส่ง playerId
+          playerName: currentUser.name,        // ✅ ส่ง name
           matchId,
           homeScore,
           awayScore
         })
       });
       const result = await res.json();
-
-      if (result.status === "unauthorized") {
-        handleSessionExpired(); return;
-      }
 
       if (result.status === "success") {
         showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
@@ -1972,18 +1890,15 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action:    "submitPrediction",
-          token:     currentUser.token, // ✅ ส่ง token
-          matchId:   editingMatch.matchId,
-          homeScore: newHome,
-          awayScore: newAway
+          action:     "submitPrediction",
+          playerId:   currentUser.playerId,  // ✅ ส่ง playerId
+          playerName: currentUser.name,       // ✅ ส่ง name
+          matchId:    editingMatch.matchId,
+          homeScore:  newHome,
+          awayScore:  newAway
         })
       });
       const result = await res.json();
-
-      if (result.status === "unauthorized") {
-        handleSessionExpired(); closeEditModal(); return;
-      }
 
       if (result.status === "updated" || result.status === "success") {
         showAlert("success", "✅ แก้ไขผลทายสำเร็จ!");
@@ -2171,15 +2086,11 @@
       const res    = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action: "getSpecialStatus",
-          token:  currentUser.token // ✅ ส่ง token แทน email
+          action:   "getSpecialStatus",
+          playerId: currentUser.playerId  // ✅ ส่ง playerId แทน email
         })
       });
       const result = await res.json();
-
-      if (result.status === "unauthorized") {
-        handleSessionExpired(); return;
-      }
 
       if (result.status === "success") {
         renderSpecialCard("champion",  result.data.champion);
@@ -2276,7 +2187,7 @@
 
   // ==========================================
   // SUBMIT SPECIAL
-  // ✅ ส่ง token แทน email
+  // ✅ ส่ง playerId + playerName
   // ==========================================
   async function submitSpecial(type) {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อน!"); return; }
@@ -2298,16 +2209,13 @@
         method: "POST",
         body:   JSON.stringify({
           action:     "submitSpecialPrediction",
-          token:      currentUser.token, // ✅ ส่ง token แทน email + playerName
+          playerId:   currentUser.playerId,  // ✅ ส่ง playerId
+          playerName: currentUser.name,       // ✅ ส่ง name
           type,
           prediction
         })
       });
       const result = await res.json();
-
-      if (result.status === "unauthorized") {
-        handleSessionExpired(); return;
-      }
 
       if (result.status === "success" || result.status === "updated") {
         showAlert("success", "✅ " + result.message);
@@ -2345,8 +2253,7 @@
         ? new Date(settings["champion_deadline"]) : null;
       const champClosed = champDeadline && new Date() >= champDeadline;
 
-      // SpecialPredictions ตอนนี้ใช้ playerId ใน col[1]
-      // Leaderboard ใช้ playerId ใน col[0]
+      // ✅ SpecialPredictions col[1] = playerId
       const champMap = {};
       specialRows.forEach(r => {
         if ((r[3] || "").toString() === "champion") {
@@ -2364,13 +2271,12 @@
 
       const sorted = [...lbRows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
 
-      // หา playerId ของ currentUser จาก Leaderboard
-      // ไม่สามารถรู้ playerId ฝั่ง client ได้ → ใช้ name เป็น fallback
       const html = sorted.map((row, i) => {
         const [playerId, name, totalScore, exactScore, resultScore] = row;
         const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
-        const isMe        = currentUser &&
-          (name || "").toLowerCase() === currentUser.name.toLowerCase();
+        // ✅ เช็ค isMe ด้วย playerId
+        const isMe = currentUser &&
+          (playerId || "").toString() === currentUser.playerId;
 
         const userChamp = champMap[(playerId || "").toString()] || "";
         const champTagHtml = (champClosed && userChamp)
@@ -2410,7 +2316,7 @@
 
   // ==========================================
   // USER HISTORY MODAL
-  // ✅ รับ playerId แทน email
+  // ✅ ค้นหาด้วย playerId ทุกจุด
   // ==========================================
   async function openUserHistoryModal(playerId, name, rank, totalPts) {
     document.getElementById("user-history-modal").style.display = "flex";
@@ -2448,7 +2354,7 @@
       const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
       const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
-      // ✅ ค้นหาด้วย playerId
+      // ✅ ค้นหาด้วย playerId (col[1] ของ SpecialPredictions)
       let userChamp = "", userTs = "";
       specialRows.forEach(r => {
         const rPlayerId = (r[1] || "").toString();
@@ -2505,9 +2411,9 @@
       const matchMap = {};
       finishedMatches.forEach(row => { matchMap[row[0]] = row; });
 
-      // ✅ filter ด้วย playerId (col[2] ของ Predictions)
+      // ✅ filter ด้วย playerId (col[1] ของ Predictions)
       const myPreds = predictions.filter(row =>
-        (row[2] || "").toString() === playerId && matchMap[row[3]]
+        (row[1] || "").toString() === playerId && matchMap[row[3]]
       );
 
       modalHistoryData = myPreds.map(pred => {
@@ -2599,7 +2505,7 @@
 
   // ==========================================
   // HISTORY
-  // ✅ filter ด้วย playerName (เพราะไม่รู้ playerId ฝั่ง client)
+  // ✅ filter ด้วย playerId (col[1] ของ Predictions)
   // ==========================================
   async function loadHistory() {
     if (!currentUser) {
@@ -2618,9 +2524,9 @@
         fetchSheet("Matches")
       ]);
 
-      // ✅ filter ด้วย playerName (col[1]) เพราะ client ไม่รู้ playerId
+      // ✅ filter ด้วย playerId (col[1])
       const myPreds = predictions.filter(
-        row => (row[1] || "").toLowerCase() === currentUser.name.toLowerCase()
+        row => (row[1] || "").toString() === currentUser.playerId
       );
 
       if (myPreds.length === 0) {
