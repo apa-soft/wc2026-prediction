@@ -60,6 +60,7 @@
     select,
     input[type="number"],
     input[type="text"],
+    input[type="email"],
     input[type="password"] {
       width: 100%; padding: 12px 15px; background: #0a0a2e;
       border: 2px solid #333366; border-radius: 10px;
@@ -85,6 +86,13 @@
     .btn-secondary { background: linear-gradient(135deg, #333366, #222255); color: #fff; }
     .btn-blue      { background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; }
     .btn-green     { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; }
+    .btn-orange    { background: linear-gradient(135deg, #e67e22, #d35400); color: #fff; }
+    .btn-sm {
+      width: auto; padding: 8px 16px; font-size: 0.85rem;
+      border-radius: 8px; border: none; cursor: pointer;
+      font-weight: bold; transition: opacity 0.2s;
+    }
+    .btn-sm:hover { opacity: 0.85; }
 
     .auth-tabs {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -137,6 +145,35 @@
       content: ""; flex: 1; height: 1px; background: #333366;
     }
 
+    /* ===== FORGOT PASSWORD ===== */
+    .forgot-link-btn {
+      background: none; border: none; color: #888;
+      font-size: 0.88rem; cursor: pointer;
+      text-decoration: underline; padding: 0;
+      transition: color 0.2s;
+    }
+    .forgot-link-btn:hover { color: #FFD700; }
+
+    .forgot-section {
+      border-top: 1px solid #333366;
+      margin-top: 20px; padding-top: 20px;
+    }
+    .forgot-back-btn {
+      background: none; border: none; color: #888;
+      cursor: pointer; font-size: 1.1rem;
+      padding: 2px 6px; transition: color 0.2s;
+    }
+    .forgot-back-btn:hover { color: #FFD700; }
+
+    .forgot-success-box {
+      background: #0a2a0a; border: 1px solid #2ecc71;
+      border-radius: 12px; padding: 25px; text-align: center;
+    }
+    .forgot-success-icon  { font-size: 2.5rem; margin-bottom: 10px; }
+    .forgot-success-title { color: #2ecc71; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; }
+    .forgot-success-desc  { color: #aaa; font-size: 0.88rem; line-height: 1.8; }
+
+    /* ===== LEADERBOARD ===== */
     .leaderboard-item {
       display: flex; align-items: center; gap: 15px; padding: 15px 20px;
     }
@@ -195,9 +232,7 @@
     }
     .double-point-alert .dp-icon { font-size: 1.8rem; flex-shrink: 0; }
     .double-point-alert .dp-text { flex: 1; }
-    .double-point-alert .dp-title {
-      color: #FFD700; font-weight: bold; font-size: 1rem; margin-bottom: 4px;
-    }
+    .double-point-alert .dp-title { color: #FFD700; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
     .double-point-alert .dp-detail { color: #aaa; font-size: 0.82rem; line-height: 1.5; }
     .double-point-alert .dp-pts {
       display: flex; flex-direction: column; align-items: center;
@@ -296,9 +331,7 @@
     .special-card:hover          { transform: translateY(-3px); }
     .special-card.champion-card  { border-color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.1); }
     .special-card.topscorer-card { border-color: #2ecc71; box-shadow: 0 0 15px rgba(46,204,113,0.1); }
-    .special-header {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-    }
+    .special-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
     .special-icon  { font-size: 2.5rem; }
     .special-title { font-size: 1.2rem; font-weight: bold; }
     .special-deadline { font-size: 0.82rem; color: #aaa; margin-top: 3px; }
@@ -308,17 +341,13 @@
       border: 1px solid #FFD700; border-radius: 20px;
       font-size: 0.85rem; font-weight: bold; white-space: nowrap;
     }
-    .special-pts-badge.green {
-      background: #0a2a0a; color: #2ecc71; border-color: #2ecc71;
-    }
+    .special-pts-badge.green { background: #0a2a0a; color: #2ecc71; border-color: #2ecc71; }
     .current-pred-box {
       background: #0a1a0a; border: 1px solid #2a4a2a;
       border-radius: 10px; padding: 12px 15px; margin-bottom: 15px;
       font-size: 0.9rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     }
-    .result-reveal-box {
-      border-radius: 12px; padding: 20px; text-align: center; margin-top: 10px;
-    }
+    .result-reveal-box { border-radius: 12px; padding: 20px; text-align: center; margin-top: 10px; }
     .result-reveal-box.correct { background: #0a2a0a; border: 1px solid #2ecc71; }
     .result-reveal-box.wrong   { background: #1a0a0a; border: 1px solid #e74c3c; }
     .result-reveal-box.pending { background: #111133; border: 1px solid #333366; }
@@ -349,9 +378,7 @@
     }
     .team-dropdown-item:hover { background: #1a1a4e; }
     .team-dropdown-item:last-child { border-bottom: none; }
-    .team-dropdown-empty {
-      padding: 15px; text-align: center; color: #888; font-size: 0.9rem;
-    }
+    .team-dropdown-empty { padding: 15px; text-align: center; color: #888; font-size: 0.9rem; }
 
     .players-grid {
       display: grid;
@@ -406,48 +433,21 @@
       font-size: 0.88rem; color: #aaa;
     }
 
-    #edit-modal {
+    /* ===== MODALS ===== */
+    #edit-modal, #user-history-modal {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.75); z-index: 1000;
       align-items: center; justify-content: center;
+    }
+    #user-history-modal {
+      align-items: flex-start;
+      overflow-y: auto; padding: 20px;
     }
     .edit-modal-box {
       background: #111133; border: 2px solid #FFD700;
       border-radius: 20px; padding: 30px;
       width: 90%; max-width: 420px;
       box-shadow: 0 0 40px rgba(255,215,0,0.2);
-    }
-
-    .champion-tag {
-      display: inline-flex; align-items: center; gap: 4px;
-      background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35);
-      border-radius: 20px; padding: 2px 8px;
-      font-size: 0.75rem; color: #FFD700;
-      margin-left: 6px; vertical-align: middle; white-space: nowrap;
-    }
-
-    .modal-special-section {
-      background: #0a0a2e; border: 1px solid #333366;
-      border-radius: 12px; padding: 16px; margin-top: 16px;
-    }
-    .modal-special-section h4 {
-      color: #FFD700; font-size: 0.95rem; margin-bottom: 12px;
-      padding-bottom: 8px; border-bottom: 1px solid #222255;
-    }
-    .modal-special-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
-    }
-    .modal-special-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .modal-special-label { color: #888; min-width: 90px; flex-shrink: 0; }
-    .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
-    .modal-special-locked { color: #555; font-style: italic; font-size: 0.82rem; }
-
-    #user-history-modal {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.82); z-index: 1000;
-      align-items: flex-start; justify-content: center;
-      overflow-y: auto; padding: 20px;
     }
     .user-history-box {
       background: #111133; border: 2px solid #FFD700;
@@ -463,9 +463,7 @@
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 10px; margin-bottom: 20px;
     }
-    @media (max-width: 480px) {
-      .user-history-stat-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 480px) { .user-history-stat-grid { grid-template-columns: repeat(2, 1fr); } }
     .user-history-stat-card {
       background: #0a0a2e; border: 1px solid #333366;
       border-radius: 12px; padding: 14px; text-align: center;
@@ -502,6 +500,45 @@
     }
     .close-modal-btn:hover { border-color: #e74c3c; color: #e74c3c; }
 
+    /* ===== PENDING RESET BADGE ===== */
+    .pending-reset-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.5);
+      border-radius: 20px; padding: 2px 8px;
+      font-size: 0.72rem; color: #e74c3c;
+      margin-left: 6px; vertical-align: middle; white-space: nowrap;
+      animation: pendingPulse 2s ease-in-out infinite;
+    }
+    @keyframes pendingPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.6; }
+    }
+
+    /* ===== USER LIST TABLE ===== */
+    .user-list-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+    .user-list-table th {
+      padding: 10px 12px; text-align: left; color: #FFD700;
+      border-bottom: 2px solid #333366; background: #0a0a2e; white-space: nowrap;
+    }
+    .user-list-table td { padding: 10px 12px; border-bottom: 1px solid #1a1a3e; vertical-align: middle; }
+    .user-list-table tr:last-child td { border-bottom: none; }
+    .user-list-table tr:hover td { background: #0a0a3e; }
+    .user-list-search {
+      width: 100%; padding: 10px 14px; background: #0a0a2e;
+      border: 2px solid #333366; border-radius: 10px;
+      color: #fff; font-size: 0.95rem; margin-bottom: 12px; transition: border-color 0.3s;
+    }
+    .user-list-search:focus { outline: none; border-color: #e67e22; }
+    .select-user-btn {
+      padding: 6px 14px; background: transparent;
+      border: 1px solid #e67e22; color: #e67e22;
+      border-radius: 8px; cursor: pointer; font-size: 0.82rem;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .select-user-btn:hover { background: #e67e22; color: #fff; }
+    .user-list-wrap { max-height: 320px; overflow-y: auto; border: 1px solid #333366; border-radius: 10px; }
+
+    /* ===== RULES ===== */
     .rules-step {
       display: flex; gap: 15px; align-items: flex-start;
       padding: 15px; background: #0a0a2e; border-radius: 12px; margin-bottom: 10px;
@@ -512,9 +549,7 @@
       display: flex; align-items: center; justify-content: center;
       font-weight: bold; font-size: 0.95rem;
     }
-    .rules-score-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;
-    }
+    .rules-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
     .rules-score-card { border-radius: 15px; padding: 20px; text-align: center; }
     .rules-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
     .rules-table th {
@@ -523,9 +558,34 @@
     }
     .rules-table td { padding: 12px 15px; border-bottom: 1px solid #1a1a3e; }
     .rules-table tr:last-child td { border-bottom: none; }
-    .rules-rule-item {
-      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
+    .rules-rule-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+
+    /* ===== SPECIAL MODAL ===== */
+    .modal-special-section {
+      background: #0a0a2e; border: 1px solid #333366;
+      border-radius: 12px; padding: 16px; margin-top: 16px;
     }
+    .modal-special-section h4 {
+      color: #FFD700; font-size: 0.95rem; margin-bottom: 12px;
+      padding-bottom: 8px; border-bottom: 1px solid #222255;
+    }
+    .modal-special-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
+    }
+    .modal-special-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .modal-special-label { color: #888; min-width: 90px; flex-shrink: 0; }
+    .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
+    .modal-special-locked { color: #555; font-style: italic; font-size: 0.82rem; }
+
+    .champion-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35);
+      border-radius: 20px; padding: 2px 8px;
+      font-size: 0.75rem; color: #FFD700;
+      margin-left: 6px; vertical-align: middle; white-space: nowrap;
+    }
+
     .flag-img    { width: 24px; height: auto; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
     .flag-img-sm { width: 20px; height: auto; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
   </style>
@@ -550,7 +610,7 @@
 
 <div class="container">
 
-  <!-- MATCHES PAGE -->
+  <!-- ==================== MATCHES PAGE ==================== -->
   <div id="page-matches" class="page active">
     <h2 class="section-title">⚽ ตารางการแข่งขัน</h2>
     <div id="matches-list">
@@ -558,7 +618,7 @@
     </div>
   </div>
 
-  <!-- PREDICT PAGE -->
+  <!-- ==================== PREDICT PAGE ==================== -->
   <div id="page-predict" class="page">
     <h2 class="section-title">📝 ทายผลการแข่งขัน</h2>
     <div class="card">
@@ -608,13 +668,14 @@
         👤 ทายในนาม: <strong id="user-display" style="color:#FFD700;"></strong>
       </div>
       <div id="login-warning" style="text-align:center; color:#f44336; margin-bottom:15px; display:none;">
-        ⚠️ กรุณา <a href="#" onclick="showPage('login', document.getElementById('loginBtn'))" style="color:#FFD700;">Login</a> ก่อนทายผล
+        ⚠️ กรุณา <a href="#" onclick="showPage('login', document.getElementById('loginBtn'))"
+          style="color:#FFD700;">Login</a> ก่อนทายผล
       </div>
       <button class="btn" id="submit-btn" onclick="submitPrediction()">✅ ส่งผลทาย</button>
     </div>
   </div>
 
-  <!-- SPECIAL PAGE -->
+  <!-- ==================== SPECIAL PAGE ==================== -->
   <div id="page-special" class="page">
     <h2 class="section-title">⭐ การทายพิเศษ</h2>
     <div id="special-login-warning" style="display:none;">
@@ -626,7 +687,7 @@
       </div>
     </div>
     <div id="special-content" style="display:none;">
-      <!-- CHAMPION CARD -->
+      <!-- Champion Card -->
       <div class="special-card champion-card">
         <div class="special-header">
           <div class="special-icon">🏆</div>
@@ -673,7 +734,7 @@
         </div>
       </div>
 
-      <!-- TOP SCORER CARD -->
+      <!-- Top Scorer Card -->
       <div class="special-card topscorer-card">
         <div class="special-header">
           <div class="special-icon">⚽</div>
@@ -740,7 +801,7 @@
     </div>
   </div>
 
-  <!-- HISTORY PAGE -->
+  <!-- ==================== HISTORY PAGE ==================== -->
   <div id="page-history" class="page">
     <h2 class="section-title">📋 ประวัติการทายของฉัน</h2>
     <div id="history-login-warning" style="display:none;">
@@ -772,11 +833,11 @@
         <span style="color:#aaa;"> pts</span>
       </div>
       <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterHistory('all', this)">📋 ทั้งหมด</button>
-        <button class="filter-btn" onclick="filterHistory('exact',   this)">🎯 ทายแม่น</button>
-        <button class="filter-btn" onclick="filterHistory('result',  this)">✅ ทายผลถูก</button>
-        <button class="filter-btn" onclick="filterHistory('wrong',   this)">❌ ทายผิด</button>
-        <button class="filter-btn" onclick="filterHistory('pending', this)">⏳ รอผล</button>
+        <button class="filter-btn active" onclick="filterHistory('all',     this)">📋 ทั้งหมด</button>
+        <button class="filter-btn"        onclick="filterHistory('exact',   this)">🎯 ทายแม่น</button>
+        <button class="filter-btn"        onclick="filterHistory('result',  this)">✅ ทายผลถูก</button>
+        <button class="filter-btn"        onclick="filterHistory('wrong',   this)">❌ ทายผิด</button>
+        <button class="filter-btn"        onclick="filterHistory('pending', this)">⏳ รอผล</button>
       </div>
     </div>
     <div id="history-list">
@@ -784,7 +845,7 @@
     </div>
   </div>
 
-  <!-- LEADERBOARD PAGE -->
+  <!-- ==================== LEADERBOARD PAGE ==================== -->
   <div id="page-leaderboard" class="page">
     <h2 class="section-title">🏆 Leaderboard</h2>
     <p style="color:#888; font-size:0.85rem; margin-bottom:15px;">👆 คลิกที่ชื่อผู้เล่นเพื่อดูประวัติการทาย</p>
@@ -793,7 +854,7 @@
     </div>
   </div>
 
-  <!-- RULES PAGE -->
+  <!-- ==================== RULES PAGE ==================== -->
   <div id="page-rules" class="page">
     <h2 class="section-title">📖 กติกาการเล่น</h2>
     <div style="background:linear-gradient(135deg,#1a1a4e,#2d2d7e); border:1px solid #FFD700;
@@ -807,19 +868,17 @@
         ทายผลการแข่งขัน สะสมคะแนน และพิสูจน์ว่าคุณคือผู้เชี่ยวชาญฟุตบอลตัวจริง!
       </div>
     </div>
-
     <div class="card" style="margin-bottom:20px;">
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
         <div style="font-size:2rem;">🎮</div>
         <h3 style="color:#FFD700; font-size:1.2rem;">วิธีการเล่น</h3>
       </div>
-      <!-- ✅ เปลี่ยน Step 1 ให้พูดถึง username แทน email -->
       <div class="rules-step">
         <div class="rules-step-num">1</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">สมัครสมาชิก / Login</div>
           <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
-            สมัครสมาชิกด้วย <strong style="color:#FFD700;">Username</strong> และ Password (ไม่ต้องใช้ Email)
+            สมัครสมาชิกด้วย <strong style="color:#FFD700;">Username</strong> และ Password
           </div>
         </div>
       </div>
@@ -827,38 +886,45 @@
         <div class="rules-step-num">2</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">เลือกนัดและทายสกอร์</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ไปที่หน้า <strong style="color:#FFD700;">📝 ทายผล</strong> เลือกนัดการแข่งขันที่ต้องการ</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            ไปที่หน้า <strong style="color:#FFD700;">📝 ทายผล</strong> เลือกนัดการแข่งขันที่ต้องการ
+          </div>
         </div>
       </div>
       <div class="rules-step">
         <div class="rules-step-num">3</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">ส่งก่อนแมตช์เริ่ม</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ต้องส่งผลทายก่อนเวลาแมตช์เริ่ม</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            ต้องส่งผลทายก่อนเวลาแมตช์เริ่ม
+          </div>
         </div>
       </div>
       <div class="rules-step" style="margin-bottom:0;">
         <div class="rules-step-num">4</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">รับคะแนนและดู Leaderboard</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">หลังแมตช์จบ Admin จะอัปเดตผล ระบบคำนวณคะแนนให้อัตโนมัติ</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+            หลังแมตช์จบ Admin จะอัปเดตผล ระบบคำนวณคะแนนให้อัตโนมัติ
+          </div>
         </div>
       </div>
     </div>
-
     <div class="card" style="margin-bottom:20px;">
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
         <div style="font-size:2rem;">🎯</div>
         <h3 style="color:#FFD700; font-size:1.2rem;">การให้คะแนน</h3>
       </div>
       <div class="rules-score-grid">
-        <div class="rules-score-card" style="background:linear-gradient(135deg,#2a2000,#1a1400); border:2px solid #FFD700;">
+        <div class="rules-score-card"
+          style="background:linear-gradient(135deg,#2a2000,#1a1400); border:2px solid #FFD700;">
           <div style="font-size:2rem; margin-bottom:8px;">🎯</div>
           <div style="font-size:2rem; font-weight:bold; color:#FFD700;">3 pts</div>
           <div style="color:#fff; font-weight:bold; margin:8px 0 6px;">ทายสกอร์แม่น</div>
           <div style="color:#aaa; font-size:0.82rem; line-height:1.5;">ทายสกอร์ถูกต้องทั้งสองฝั่ง</div>
         </div>
-        <div class="rules-score-card" style="background:linear-gradient(135deg,#0a2a0a,#051505); border:2px solid #2ecc71;">
+        <div class="rules-score-card"
+          style="background:linear-gradient(135deg,#0a2a0a,#051505); border:2px solid #2ecc71;">
           <div style="font-size:2rem; margin-bottom:8px;">✅</div>
           <div style="font-size:2rem; font-weight:bold; color:#2ecc71;">1 pt</div>
           <div style="color:#fff; font-weight:bold; margin:8px 0 6px;">ทายผลถูก</div>
@@ -902,7 +968,6 @@
         </table>
       </div>
     </div>
-
     <div class="card" style="margin-bottom:20px; border-color:#e74c3c;">
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
         <div style="font-size:2rem;">⚠️</div>
@@ -910,18 +975,23 @@
       </div>
       <div class="rules-rule-item">
         <span style="color:#e74c3c; font-size:1.2rem; flex-shrink:0;">🔒</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">ปิดรับทายอัตโนมัติ</strong> — เมื่อถึงเวลาแมตช์เริ่ม</div>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">ปิดรับทายอัตโนมัติ</strong> — เมื่อถึงเวลาแมตช์เริ่ม
+        </div>
       </div>
       <div class="rules-rule-item">
         <span style="color:#f39c12; font-size:1.2rem; flex-shrink:0;">✏️</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">แก้ไขได้ก่อนปิดรับ</strong> — สามารถเปลี่ยนผลทายได้กี่ครั้งก็ได้</div>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">แก้ไขได้ก่อนปิดรับ</strong> — สามารถเปลี่ยนผลทายได้กี่ครั้งก็ได้
+        </div>
       </div>
       <div class="rules-rule-item" style="margin-bottom:0;">
         <span style="color:#9b59b6; font-size:1.2rem; flex-shrink:0;">🏆</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">การตัดสินของ Admin ถือเป็นที่สิ้นสุด</strong></div>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">
+          <strong style="color:#fff;">การตัดสินของ Admin ถือเป็นที่สิ้นสุด</strong>
+        </div>
       </div>
     </div>
-
     <div style="text-align:center; padding:10px 0 20px;">
       <button class="btn" style="max-width:300px; margin:0 auto; font-size:1rem;"
         onclick="showPage('predict', document.querySelectorAll('nav button')[1])">
@@ -930,7 +1000,7 @@
     </div>
   </div>
 
-  <!-- LOGIN PAGE -->
+  <!-- ==================== LOGIN PAGE ==================== -->
   <div id="page-login" class="page">
     <div class="login-box">
       <div id="login-form-box">
@@ -941,7 +1011,7 @@
             <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
           </div>
 
-          <!-- ✅ LOGIN FORM — ใช้ username แทน email -->
+          <!-- ===== LOGIN FORM ===== -->
           <div class="auth-form active" id="form-login">
             <div class="form-group">
               <label>Username</label>
@@ -956,16 +1026,83 @@
                 <input type="password" id="login-password" placeholder="กรอก Password"
                   oninput="clearHint('login-pw-hint')"
                   onkeydown="if(event.key==='Enter') login()">
-                <button type="button" class="pw-toggle" onclick="togglePw('login-password', this)" tabindex="-1">👁️</button>
+                <button type="button" class="pw-toggle"
+                  onclick="togglePw('login-password', this)" tabindex="-1">👁️</button>
               </div>
               <div class="input-hint" id="login-pw-hint"></div>
             </div>
             <button class="btn" id="login-btn" onclick="login()">🔑 เข้าสู่ระบบ</button>
+
+            <!-- Forgot Password Link -->
+            <div style="text-align:center; margin-top:14px;">
+              <button type="button" class="forgot-link-btn" onclick="showForgotForm()">
+                🔑 ลืม Password?
+              </button>
+            </div>
+
+            <!-- ===== FORGOT PASSWORD SECTION ===== -->
+            <div id="forgot-section" class="forgot-section" style="display:none;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+                <button type="button" class="forgot-back-btn" onclick="hideForgotForm()">←</button>
+                <h3 style="color:#FFD700; font-size:1.1rem; margin:0;">🔑 ลืม Password</h3>
+              </div>
+              <p style="color:#aaa; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
+                กรอก Username และ Email ของคุณ<br>
+                ระบบจะแจ้ง Admin เพื่อ Reset Password ให้
+              </p>
+
+              <div id="forgot-fields">
+                <div class="form-group">
+                  <label style="color:#3498db;">Username</label>
+                  <input type="text" id="forgot-username"
+                    placeholder="กรอก Username ของคุณ"
+                    oninput="clearHint('forgot-username-hint')"
+                    onkeydown="if(event.key==='Enter') document.getElementById('forgot-email').focus()">
+                  <div class="input-hint" id="forgot-username-hint"></div>
+                </div>
+                <div class="form-group">
+                  <label style="color:#3498db;">Email ของคุณ</label>
+                  <input type="email" id="forgot-email"
+                    placeholder="กรอก Email เพื่อรับแจ้งเตือน"
+                    oninput="clearHint('forgot-email-hint')"
+                    onkeydown="if(event.key==='Enter') submitForgotPassword()">
+                  <div class="input-hint" id="forgot-email-hint"></div>
+                  <div class="input-hint warning" style="display:block; margin-top:6px;">
+                    ⚠️ Admin จะส่ง Password ใหม่ไปยัง Email นี้
+                  </div>
+                </div>
+                <button class="btn btn-blue" id="forgot-btn" onclick="submitForgotPassword()">
+                  📧 ส่งคำขอ Reset Password
+                </button>
+              </div>
+
+              <!-- Forgot Success State -->
+              <div id="forgot-success" style="display:none;">
+                <div class="forgot-success-box">
+                  <div class="forgot-success-icon">📧</div>
+                  <div class="forgot-success-title">ส่งคำขอสำเร็จ!</div>
+                  <div class="forgot-success-desc">
+                    Admin ได้รับแจ้งเตือนแล้ว<br>
+                    กรุณารอ Admin Reset Password<br>
+                    และตรวจสอบ Email ของคุณ 📬
+                  </div>
+                  <button class="btn btn-secondary"
+                    style="margin-top:16px; font-size:0.9rem;"
+                    onclick="hideForgotForm()">
+                    ← กลับไป Login
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- END FORGOT PASSWORD SECTION -->
+
             <div class="divider">หรือ</div>
-            <button class="btn btn-secondary" onclick="switchTab('signup')" style="font-size:0.95rem;">✨ สมัครสมาชิกใหม่</button>
+            <button class="btn btn-secondary" onclick="switchTab('signup')" style="font-size:0.95rem;">
+              ✨ สมัครสมาชิกใหม่
+            </button>
           </div>
 
-          <!-- ✅ SIGN UP FORM — ใช้แค่ username + password (ไม่มี email, ไม่มี name แยก) -->
+          <!-- ===== SIGNUP FORM ===== -->
           <div class="auth-form" id="form-signup">
             <div class="form-group">
               <label>Username</label>
@@ -982,7 +1119,8 @@
                 <input type="password" id="signup-password" placeholder="อย่างน้อย 8 ตัวอักษร"
                   oninput="onSignupPwInput(this.value)"
                   onkeydown="if(event.key==='Enter') document.getElementById('signup-password-confirm').focus()">
-                <button type="button" class="pw-toggle" onclick="togglePw('signup-password', this)" tabindex="-1">👁️</button>
+                <button type="button" class="pw-toggle"
+                  onclick="togglePw('signup-password', this)" tabindex="-1">👁️</button>
               </div>
               <div class="pw-strength-bar" id="pw-strength-bar">
                 <div class="pw-strength-fill" id="pw-strength-fill"></div>
@@ -995,17 +1133,21 @@
                 <input type="password" id="signup-password-confirm" placeholder="กรอก Password อีกครั้ง"
                   oninput="checkPwMatch()"
                   onkeydown="if(event.key==='Enter') signup()">
-                <button type="button" class="pw-toggle" onclick="togglePw('signup-password-confirm', this)" tabindex="-1">👁️</button>
+                <button type="button" class="pw-toggle"
+                  onclick="togglePw('signup-password-confirm', this)" tabindex="-1">👁️</button>
               </div>
               <div class="input-hint" id="signup-confirm-hint"></div>
             </div>
             <button class="btn" id="signup-btn" onclick="signup()">✨ สมัครสมาชิก</button>
             <div class="divider">มีบัญชีแล้ว?</div>
-            <button class="btn btn-secondary" onclick="switchTab('login')" style="font-size:0.95rem;">🔑 เข้าสู่ระบบ</button>
+            <button class="btn btn-secondary" onclick="switchTab('login')" style="font-size:0.95rem;">
+              🔑 เข้าสู่ระบบ
+            </button>
           </div>
-
         </div>
       </div>
+
+      <!-- Logged In Box -->
       <div id="logged-in-box" style="display:none;">
         <h2>👤 บัญชีของฉัน</h2>
         <div class="card" style="padding:30px;">
@@ -1025,17 +1167,23 @@
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
             <button class="btn" style="font-size:0.9rem;"
-              onclick="showPage('history', document.querySelectorAll('nav button')[3])">📋 ดูประวัติการทาย</button>
-            <button class="btn btn-danger" style="font-size:0.9rem;" onclick="logout()">🚪 ออกจากระบบ</button>
+              onclick="showPage('history', document.querySelectorAll('nav button')[3])">
+              📋 ดูประวัติการทาย
+            </button>
+            <button class="btn btn-danger" style="font-size:0.9rem;" onclick="logout()">
+              🚪 ออกจากระบบ
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ADMIN PAGE -->
+  <!-- ==================== ADMIN PAGE ==================== -->
   <div id="page-admin" class="page">
     <h2 class="section-title">🔐 Admin Panel</h2>
+
+    <!-- Admin Login -->
     <div id="admin-login-box" class="admin-lock">
       <div class="card">
         <h3>🔑 Admin Login</h3>
@@ -1047,12 +1195,16 @@
         <button class="btn" onclick="adminLogin()">🔓 เข้าสู่ระบบ Admin</button>
       </div>
     </div>
+
+    <!-- Admin Panel -->
     <div id="admin-panel" style="display:none;">
       <div class="info-box">
         🎯 <strong>ทายสกอร์แม่นทั้งคู่</strong> = 3 pts &nbsp;|&nbsp;
         ✅ <strong>ทายผลแพ้/ชนะ/เสมอถูก</strong> = 1 pt &nbsp;|&nbsp;
         ⭐ <strong>Double Point</strong> = คะแนน x2
       </div>
+
+      <!-- อัปเดตผลการแข่งขัน -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:20px;">📝 อัปเดตผลการแข่งขัน</h3>
         <div class="form-group">
@@ -1086,8 +1238,12 @@
         <div id="score-preview" style="display:none; text-align:center; margin-bottom:15px; color:#aaa; font-size:0.9rem;">
           <div id="score-preview-text"></div>
         </div>
-        <button class="btn" id="admin-submit-btn" onclick="submitAdminScore()">💾 บันทึกผลและคำนวณคะแนน</button>
+        <button class="btn" id="admin-submit-btn" onclick="submitAdminScore()">
+          💾 บันทึกผลและคำนวณคะแนน
+        </button>
       </div>
+
+      <!-- เครื่องมือจัดการคะแนน -->
       <div class="card" style="border-color:#3498db;">
         <h3 style="color:#3498db; margin-bottom:8px;">🛠️ เครื่องมือจัดการคะแนน</h3>
         <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
@@ -1101,6 +1257,84 @@
           background:#0a1a0a; border:1px solid #2a4a2a; border-radius:10px;
           padding:12px 15px; font-size:0.88rem; color:#2ecc71; text-align:center;"></div>
       </div>
+
+      <!-- Reset Password -->
+      <div class="card" style="border-color:#e67e22;">
+        <h3 style="color:#e67e22; margin-bottom:6px;">🔑 Reset Password ผู้เล่น</h3>
+        <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
+          ใช้เมื่อผู้เล่นลืม Password — Admin ตั้ง Password ใหม่ให้<br>
+          <span style="color:#3498db;">📧 ระบบจะส่ง Email แจ้ง User อัตโนมัติ (ถ้ามีคำขอ Reset)</span>
+        </p>
+
+        <!-- User List -->
+        <div style="margin-bottom:18px;">
+          <div style="display:flex; align-items:center; justify-content:space-between;
+            margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+            <label style="color:#e67e22; margin:0;">👥 รายชื่อผู้เล่นทั้งหมด</label>
+            <button class="btn btn-sm btn-orange" onclick="loadUserList()" id="load-user-list-btn">
+              🔄 โหลดรายชื่อ
+            </button>
+          </div>
+          <input type="text" class="user-list-search" id="user-list-search"
+            placeholder="🔍 ค้นหา Username..."
+            oninput="filterUserList(this.value)" style="display:none;">
+          <div id="user-list-container" style="display:none;">
+            <div class="user-list-wrap">
+              <table class="user-list-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th style="text-align:center;">คะแนน</th>
+                    <th style="text-align:center;">🎯</th>
+                    <th style="text-align:center;">✅</th>
+                    <th style="text-align:center;">สมัครเมื่อ</th>
+                    <th style="text-align:center;">เลือก</th>
+                  </tr>
+                </thead>
+                <tbody id="user-list-tbody"></tbody>
+              </table>
+            </div>
+            <div id="user-list-count"
+              style="color:#888; font-size:0.82rem; margin-top:8px; text-align:right;"></div>
+          </div>
+          <div id="user-list-loading"
+            style="display:none; text-align:center; padding:20px; color:#888;">
+            <div class="spinner" style="width:28px; height:28px; border-width:3px; margin:0 auto 8px;"></div>
+            กำลังโหลดรายชื่อผู้เล่น...
+          </div>
+        </div>
+
+        <!-- Reset Form -->
+        <div style="border-top:1px solid #333366; padding-top:18px;">
+          <div class="form-group">
+            <label style="color:#e67e22;">Username ของผู้เล่น</label>
+            <input type="text" id="reset-target-username"
+              placeholder="กรอก หรือ คลิก 'เลือก' จากตารางด้านบน"
+              oninput="clearHint('reset-username-hint')"
+              onkeydown="if(event.key==='Enter') document.getElementById('reset-new-password').focus()">
+            <div class="input-hint" id="reset-username-hint"></div>
+          </div>
+          <div class="form-group">
+            <label style="color:#e67e22;">Password ใหม่</label>
+            <div class="pw-wrapper">
+              <input type="password" id="reset-new-password"
+                placeholder="อย่างน้อย 8 ตัวอักษร"
+                onkeydown="if(event.key==='Enter') adminResetPassword()">
+              <button type="button" class="pw-toggle"
+                onclick="togglePw('reset-new-password', this)" tabindex="-1">👁️</button>
+            </div>
+            <div class="input-hint" id="reset-pw-hint"></div>
+          </div>
+          <button class="btn btn-orange" id="reset-pw-btn" onclick="adminResetPassword()">
+            🔑 Reset Password
+          </button>
+          <div id="reset-result-box" style="display:none; margin-top:15px;
+            border-radius:10px; padding:12px 15px; font-size:0.88rem; text-align:center;"></div>
+        </div>
+      </div>
+
+      <!-- เฉลยการทายพิเศษ -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">⭐ เฉลยการทายพิเศษ</h3>
         <div style="margin-bottom:20px;">
@@ -1116,24 +1350,30 @@
           <div style="display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center;">
             <input type="text" id="admin-topscorer-answer" placeholder="ชื่อนักเตะ (ภาษาอังกฤษ)">
             <button class="btn"
-              style="width:auto; padding:12px 20px; white-space:nowrap; background:linear-gradient(135deg,#2ecc71,#27ae60);"
+              style="width:auto; padding:12px 20px; white-space:nowrap;
+                     background:linear-gradient(135deg,#2ecc71,#27ae60);"
               onclick="gradeSpecial('topscorer')">✅ เฉลย</button>
           </div>
         </div>
       </div>
+
+      <!-- แมตช์ที่อัปเดตแล้ว -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">✅ แมตช์ที่อัปเดตแล้ว</h3>
         <div id="finished-matches-list">
           <div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
         </div>
       </div>
-      <button class="btn btn-danger" onclick="adminLogout()" style="margin-top:10px;">🚪 ออกจากระบบ Admin</button>
+
+      <button class="btn btn-danger" onclick="adminLogout()" style="margin-top:10px;">
+        🚪 ออกจากระบบ Admin
+      </button>
     </div>
   </div>
 
 </div><!-- end .container -->
 
-<!-- EDIT MODAL -->
+<!-- ==================== EDIT MODAL ==================== -->
 <div id="edit-modal">
   <div class="edit-modal-box">
     <h3 style="color:#FFD700; margin-bottom:5px; font-size:1.2rem;">✏️ แก้ไขผลทาย</h3>
@@ -1170,7 +1410,7 @@
   </div>
 </div>
 
-<!-- USER HISTORY MODAL -->
+<!-- ==================== USER HISTORY MODAL ==================== -->
 <div id="user-history-modal">
   <div class="user-history-box">
     <div class="user-history-header">
@@ -1212,10 +1452,14 @@
       </div>
     </div>
     <div style="display:flex; gap:8px; margin-top:16px; margin-bottom:16px; flex-wrap:wrap;">
-      <button class="filter-btn active" id="modal-filter-all"    onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
-      <button class="filter-btn"        id="modal-filter-exact"  onclick="filterModalHistory('exact',  this)">🎯 แม่น</button>
-      <button class="filter-btn"        id="modal-filter-result" onclick="filterModalHistory('result', this)">✅ ถูก</button>
-      <button class="filter-btn"        id="modal-filter-wrong"  onclick="filterModalHistory('wrong',  this)">❌ ผิด</button>
+      <button class="filter-btn active" id="modal-filter-all"
+        onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
+      <button class="filter-btn" id="modal-filter-exact"
+        onclick="filterModalHistory('exact',  this)">🎯 แม่น</button>
+      <button class="filter-btn" id="modal-filter-result"
+        onclick="filterModalHistory('result', this)">✅ ถูก</button>
+      <button class="filter-btn" id="modal-filter-wrong"
+        onclick="filterModalHistory('wrong',  this)">❌ ผิด</button>
     </div>
     <div id="modal-history-list">
       <div class="loading"><div class="spinner"></div><p>กำลังโหลดประวัติ...</p></div>
@@ -1223,1747 +1467,1856 @@
   </div>
 </div>
 
+<!-- ==================== JAVASCRIPT ==================== -->
 <script>
-  // ==========================================
-  // CONFIG
-  // ==========================================
-  const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCQC_j_p5sNtLLWXg_QPkyurh9GYKz3N7ysdiS9oLhWZjtEONXglYRcBVB5smGP0U/exec";
+// ==========================================
+// CONFIG
+// ==========================================
+const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQz6KTLOcia2Grk1DJWM5nkVQCDtqkWKQdzWEEFUb6J6qMCHr1Td2sNfCoZVPpYTF9/exec";
 
-  // ==========================================
-  // FLAG MAP
-  // ==========================================
-  const FLAG_MAP = {
-    "Mexico":"mx","South Africa":"za","Korea Republic":"kr","Czechia":"cz",
-    "Canada":"ca","Bosnia and Herzegovina":"ba","USA":"us","Brazil":"br",
-    "Argentina":"ar","France":"fr","Germany":"de","Spain":"es","England":"gb-eng",
-    "Japan":"jp","Portugal":"pt","Netherlands":"nl","Morocco":"ma","Senegal":"sn",
-    "Australia":"au","Saudi Arabia":"sa","Belgium":"be","Croatia":"hr","Uruguay":"uy",
-    "Switzerland":"ch","Denmark":"dk","Poland":"pl","Serbia":"rs","Ecuador":"ec",
-    "Cameroon":"cm","Ghana":"gh","Tunisia":"tn","Iran":"ir","Qatar":"qa",
-    "Costa Rica":"cr","Wales":"gb-wls","Colombia":"co","Venezuela":"ve","Chile":"cl",
-    "Peru":"pe","Panama":"pa","Honduras":"hn","Jamaica":"jm","New Zealand":"nz",
-    "Nigeria":"ng","Egypt":"eg","Algeria":"dz","Ivory Coast":"ci","Mali":"ml",
-    "China":"cn","Indonesia":"id","Thailand":"th","Iraq":"iq","Turkey":"tr",
-    "Ukraine":"ua","Austria":"at","Hungary":"hu","Slovakia":"sk","Romania":"ro",
-    "Greece":"gr","Scotland":"gb-sct","Sweden":"se","Norway":"no","Finland":"fi",
-    "Czech Republic":"cz","Russia":"ru","Israel":"il","Paraguay":"py","Bolivia":"bo",
-    "Cuba":"cu","El Salvador":"sv","Guatemala":"gt","Trinidad and Tobago":"tt",
-    "Kenya":"ke","Tanzania":"tz","Uganda":"ug","Zimbabwe":"zw","Zambia":"zm",
-    "Angola":"ao","Mozambique":"mz","Libya":"ly","Sudan":"sd","Ethiopia":"et",
-    "Burkina Faso":"bf","Guinea":"gn","Benin":"bj","Togo":"tg","Gabon":"ga",
-    "Congo":"cg","DR Congo":"cd","Equatorial Guinea":"gq","Cape Verde":"cv",
-    "Mauritania":"mr","Comoros":"km","Gambia":"gm","Sierra Leone":"sl",
-    "Liberia":"lr","Guinea-Bissau":"gw","South Korea":"kr","North Korea":"kp",
-    "Vietnam":"vn","Philippines":"ph","Malaysia":"my","Singapore":"sg",
-    "Myanmar":"mm","Cambodia":"kh","Laos":"la","Uzbekistan":"uz","Kazakhstan":"kz",
-    "Kyrgyzstan":"kg","Tajikistan":"tj","Turkmenistan":"tm","Afghanistan":"af",
-    "Pakistan":"pk","India":"in","Bangladesh":"bd","Sri Lanka":"lk","Nepal":"np",
-    "Bahrain":"bh","Kuwait":"kw","Oman":"om","UAE":"ae","Jordan":"jo",
-    "Lebanon":"lb","Syria":"sy","Palestine":"ps","Yemen":"ye","Cyprus":"cy",
-    "Albania":"al","Armenia":"am","Azerbaijan":"az","Georgia":"ge","Belarus":"by",
-    "Moldova":"md","Lithuania":"lt","Latvia":"lv","Estonia":"ee","Iceland":"is",
-    "Ireland":"ie","Northern Ireland":"gb-nir","Luxembourg":"lu","Malta":"mt",
-    "Andorra":"ad","Liechtenstein":"li","San Marino":"sm","Kosovo":"xk",
-    "North Macedonia":"mk","Montenegro":"me","Slovenia":"si","Bulgaria":"bg",
-    "Italy":"it","Curacao":"cw","Haiti":"ht"
-  };
+// ==========================================
+// FLAG MAP
+// ==========================================
+const FLAG_MAP = {
+  "Mexico":"mx","South Africa":"za","Korea Republic":"kr","Czechia":"cz",
+  "Canada":"ca","Bosnia and Herzegovina":"ba","USA":"us","Brazil":"br",
+  "Argentina":"ar","France":"fr","Germany":"de","Spain":"es","England":"gb-eng",
+  "Japan":"jp","Portugal":"pt","Netherlands":"nl","Morocco":"ma","Senegal":"sn",
+  "Australia":"au","Saudi Arabia":"sa","Belgium":"be","Croatia":"hr","Uruguay":"uy",
+  "Switzerland":"ch","Denmark":"dk","Poland":"pl","Serbia":"rs","Ecuador":"ec",
+  "Cameroon":"cm","Ghana":"gh","Tunisia":"tn","Iran":"ir","Qatar":"qa",
+  "Costa Rica":"cr","Wales":"gb-wls","Colombia":"co","Venezuela":"ve","Chile":"cl",
+  "Peru":"pe","Panama":"pa","Honduras":"hn","Jamaica":"jm","New Zealand":"nz",
+  "Nigeria":"ng","Egypt":"eg","Algeria":"dz","Ivory Coast":"ci","Mali":"ml",
+  "China":"cn","Indonesia":"id","Thailand":"th","Iraq":"iq","Turkey":"tr",
+  "Ukraine":"ua","Austria":"at","Hungary":"hu","Slovakia":"sk","Romania":"ro",
+  "Greece":"gr","Scotland":"gb-sct","Sweden":"se","Norway":"no","Finland":"fi",
+  "Czech Republic":"cz","Russia":"ru","Israel":"il","Paraguay":"py","Bolivia":"bo",
+  "Cuba":"cu","El Salvador":"sv","Guatemala":"gt","Trinidad and Tobago":"tt",
+  "Kenya":"ke","Tanzania":"tz","Uganda":"ug","Zimbabwe":"zw","Zambia":"zm",
+  "Angola":"ao","Mozambique":"mz","Libya":"ly","Sudan":"sd","Ethiopia":"et",
+  "Burkina Faso":"bf","Guinea":"gn","Benin":"bj","Togo":"tg","Gabon":"ga",
+  "Congo":"cg","DR Congo":"cd","Equatorial Guinea":"gq","Cape Verde":"cv",
+  "Mauritania":"mr","Comoros":"km","Gambia":"gm","Sierra Leone":"sl",
+  "Liberia":"lr","Guinea-Bissau":"gw","South Korea":"kr","North Korea":"kp",
+  "Vietnam":"vn","Philippines":"ph","Malaysia":"my","Singapore":"sg",
+  "Myanmar":"mm","Cambodia":"kh","Laos":"la","Uzbekistan":"uz","Kazakhstan":"kz",
+  "Kyrgyzstan":"kg","Tajikistan":"tj","Turkmenistan":"tm","Afghanistan":"af",
+  "Pakistan":"pk","India":"in","Bangladesh":"bd","Sri Lanka":"lk","Nepal":"np",
+  "Bahrain":"bh","Kuwait":"kw","Oman":"om","UAE":"ae","Jordan":"jo",
+  "Lebanon":"lb","Syria":"sy","Palestine":"ps","Yemen":"ye","Cyprus":"cy",
+  "Albania":"al","Armenia":"am","Azerbaijan":"az","Georgia":"ge","Belarus":"by",
+  "Moldova":"md","Lithuania":"lt","Latvia":"lv","Estonia":"ee","Iceland":"is",
+  "Ireland":"ie","Northern Ireland":"gb-nir","Luxembourg":"lu","Malta":"mt",
+  "Andorra":"ad","Liechtenstein":"li","San Marino":"sm","Kosovo":"xk",
+  "North Macedonia":"mk","Montenegro":"me","Slovenia":"si","Bulgaria":"bg",
+  "Italy":"it","Curacao":"cw","Haiti":"ht"
+};
 
-  function getFlag(teamName, size = 24) {
-    const code = FLAG_MAP[teamName];
-    if (!code) return "🏳️ ";
-    return `<img src="https://flagcdn.com/w40/${code}.png"
-                 alt="${teamName}"
-                 style="width:${size}px; height:auto; border-radius:3px;
-                        vertical-align:middle; margin-right:5px;"
-                 onerror="this.outerHTML='🏳️ '">`;
+function getFlag(teamName, size = 24) {
+  const code = FLAG_MAP[teamName];
+  if (!code) return "🏳️ ";
+  return `<img src="https://flagcdn.com/w40/${code}.png"
+               alt="${teamName}"
+               style="width:${size}px; height:auto; border-radius:3px;
+                      vertical-align:middle; margin-right:5px;"
+               onerror="this.outerHTML='🏳️ '">`;
+}
+
+// ==========================================
+// STATE
+// ==========================================
+let matchesData      = [];
+let historyData      = [];
+let modalHistoryData = [];
+let countdownTimer   = null;
+let adminLoggedIn    = false;
+let adminPassword    = "";
+let specialCountdowns = {};
+let editingMatch     = null;
+let allTeams         = [];
+let playersCache     = {};
+let allUsersData     = [];
+
+const specialState = {
+  champion:  { selectedTeam: "", selectedValue: "" },
+  topscorer: { selectedTeam: "", selectedPlayer: "" }
+};
+
+let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
+
+// ==========================================
+// FETCH SHEET HELPER
+// ==========================================
+async function fetchSheet(sheetName) {
+  const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  const res  = await fetch(url);
+  const text = await res.text();
+  const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+  if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
+  const json = JSON.parse(match[1]);
+  if (!json.table || !json.table.rows) return [];
+  return json.table.rows.map(row =>
+    (row.c || []).map(cell => {
+      if (!cell || cell.v === null || cell.v === undefined) return "";
+      if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
+        const parts = cell.v.replace("Date(","").replace(")","").split(",").map(Number);
+        const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3]||0, parts[4]||0, parts[5]||0));
+        return d.toISOString().replace("T"," ").substring(0,16);
+      }
+      return String(cell.v).trim();
+    })
+  );
+}
+
+// ==========================================
+// NAVIGATION
+// ==========================================
+function showPage(page, el) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  document.getElementById("page-" + page).classList.add("active");
+  if (el) el.classList.add("active");
+
+  if (page === "matches")     loadMatches();
+  if (page === "predict")     { loadMatchesForForm(); updateUserInfo(); }
+  if (page === "special")     loadSpecialPage();
+  if (page === "history")     loadHistory();
+  if (page === "leaderboard") loadLeaderboard();
+  if (page === "admin")       initAdminPage();
+
+  if (page !== "predict" && countdownTimer) {
+    clearInterval(countdownTimer); countdownTimer = null;
   }
-
-  // ==========================================
-  // STATE
-  // ==========================================
-  let matchesData      = [];
-  let historyData      = [];
-  let modalHistoryData = [];
-  let countdownTimer   = null;
-  let adminLoggedIn    = false;
-  let adminPassword    = "";
-  let specialCountdowns = {};
-  let editingMatch     = null;
-  let allTeams         = [];
-  let playersCache     = {};
-
-  const specialState = {
-    champion:  { selectedTeam: "", selectedValue: "" },
-    topscorer: { selectedTeam: "", selectedPlayer: "" }
-  };
-
-  // ✅ currentUser เก็บ playerId + name
-  let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
-
-  // ==========================================
-  // FETCH SHEET HELPER
-  // ==========================================
-  async function fetchSheet(sheetName) {
-    const encodedSheet = encodeURIComponent(sheetName);
-    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodedSheet}`;
-    const res  = await fetch(url);
-    const text = await res.text();
-
-    const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
-    if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
-
-    const json = JSON.parse(match[1]);
-    if (!json.table || !json.table.rows) return [];
-
-    return json.table.rows.map(row =>
-      (row.c || []).map(cell => {
-        if (!cell || cell.v === null || cell.v === undefined) return "";
-        if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-          const parts = cell.v.replace("Date(", "").replace(")", "").split(",").map(Number);
-          const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3]||0, parts[4]||0, parts[5]||0));
-          return d.toISOString().replace("T", " ").substring(0, 16);
-        }
-        return String(cell.v).trim();
-      })
-    );
+  if (page !== "special") {
+    Object.values(specialCountdowns).forEach(t => clearInterval(t));
+    specialCountdowns = {};
   }
+}
 
-  // ==========================================
-  // NAVIGATION
-  // ==========================================
-  function showPage(page, el) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-    document.getElementById("page-" + page).classList.add("active");
-    if (el) el.classList.add("active");
-
-    if (page === "matches")     loadMatches();
-    if (page === "predict")     { loadMatchesForForm(); updateUserInfo(); }
-    if (page === "special")     loadSpecialPage();
-    if (page === "history")     loadHistory();
-    if (page === "leaderboard") loadLeaderboard();
-    if (page === "admin")       initAdminPage();
-
-    if (page !== "predict" && countdownTimer) {
-      clearInterval(countdownTimer); countdownTimer = null;
-    }
-    if (page !== "special") {
-      Object.values(specialCountdowns).forEach(t => clearInterval(t));
-      specialCountdowns = {};
-    }
+// ==========================================
+// AUTH HELPERS
+// ==========================================
+function switchTab(tab) {
+  document.getElementById("tab-login").classList.toggle("active",  tab === "login");
+  document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
+  document.getElementById("form-login").classList.toggle("active",  tab === "login");
+  document.getElementById("form-signup").classList.toggle("active", tab === "signup");
+  hideForgotForm();
+  ["login-username-hint","login-pw-hint","signup-pw-hint","signup-confirm-hint"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.className = "input-hint"; el.textContent = ""; }
+  });
+  const usernameHint = document.getElementById("signup-username-hint");
+  if (usernameHint) {
+    usernameHint.className   = "input-hint warning";
+    usernameHint.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
   }
+  document.getElementById("pw-strength-bar").style.display = "none";
+  document.getElementById("pw-strength-fill").style.width  = "0%";
+  document.getElementById("login-password").value           = "";
+  document.getElementById("signup-password").value          = "";
+  document.getElementById("signup-password-confirm").value  = "";
+}
 
-  // ==========================================
-  // AUTH HELPERS
-  // ==========================================
-  function switchTab(tab) {
-    document.getElementById("tab-login").classList.toggle("active",  tab === "login");
-    document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
-    document.getElementById("form-login").classList.toggle("active",  tab === "login");
-    document.getElementById("form-signup").classList.toggle("active", tab === "signup");
+function clearHint(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (id === "signup-username-hint") {
+    el.className   = "input-hint warning";
+    el.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
+  } else {
+    el.className   = "input-hint";
+    el.textContent = "";
+  }
+}
 
-    // ✅ เคลียร์ hint ให้ตรงกับ id ใหม่
-    ["login-username-hint", "login-pw-hint", "signup-pw-hint", "signup-confirm-hint"].forEach(id => {
+function setHint(id, type, message) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className   = "input-hint " + type;
+  el.textContent = message;
+}
+
+// ==========================================
+// PASSWORD HELPERS
+// ==========================================
+function togglePw(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (input.type === "password") { input.type = "text";     btn.textContent = "🙈"; }
+  else                           { input.type = "password"; btn.textContent = "👁️"; }
+}
+
+function onSignupPwInput(value) {
+  clearHint("signup-pw-hint");
+  checkPwStrength(value);
+  checkPwMatch();
+}
+
+function checkPwStrength(pw) {
+  const bar  = document.getElementById("pw-strength-bar");
+  const fill = document.getElementById("pw-strength-fill");
+  const hint = document.getElementById("signup-pw-hint");
+  if (!pw) { bar.style.display = "none"; return; }
+  bar.style.display = "block";
+  let score = 0;
+  if (pw.length >= 8)          score++;
+  if (pw.length >= 12)         score++;
+  if (/[A-Z]/.test(pw))        score++;
+  if (/[0-9]/.test(pw))        score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+  const levels = [
+    { pct:"20%",  color:"#e74c3c", label:"😰 อ่อนมาก",      cls:"error"   },
+    { pct:"40%",  color:"#e67e22", label:"😟 อ่อน",          cls:"error"   },
+    { pct:"60%",  color:"#f39c12", label:"😐 พอใช้",         cls:"warning" },
+    { pct:"80%",  color:"#2ecc71", label:"😊 แข็งแกร่ง",     cls:"success" },
+    { pct:"100%", color:"#27ae60", label:"💪 แข็งแกร่งมาก!", cls:"success" }
+  ];
+  const lvl = levels[Math.min(score, 4)];
+  fill.style.width      = lvl.pct;
+  fill.style.background = lvl.color;
+  hint.className        = "input-hint " + lvl.cls;
+  hint.textContent      = lvl.label;
+}
+
+function checkPwMatch() {
+  const pw      = document.getElementById("signup-password").value;
+  const confirm = document.getElementById("signup-password-confirm").value;
+  const hint    = document.getElementById("signup-confirm-hint");
+  if (!confirm) { hint.className = "input-hint"; hint.textContent = ""; return; }
+  if (pw === confirm) { hint.className = "input-hint success"; hint.textContent = "✅ Password ตรงกัน"; }
+  else                { hint.className = "input-hint error";   hint.textContent = "❌ Password ไม่ตรงกัน"; }
+}
+
+// ==========================================
+// UPDATE LOGIN UI
+// ==========================================
+function updateLoginUI() {
+  const loginBtn = document.getElementById("loginBtn");
+  if (currentUser) {
+    loginBtn.textContent = "👤 " + currentUser.name;
+    document.getElementById("login-form-box").style.display = "none";
+    document.getElementById("logged-in-box").style.display  = "block";
+    document.getElementById("profile-name").textContent     = currentUser.name;
+    document.getElementById("profile-name-2").textContent   = currentUser.name;
+  } else {
+    loginBtn.textContent = "👤 Login";
+    document.getElementById("login-form-box").style.display = "block";
+    document.getElementById("logged-in-box").style.display  = "none";
+    ["login-username","login-password",
+     "signup-username","signup-password","signup-password-confirm"].forEach(id => {
       const el = document.getElementById(id);
-      if (el) { el.className = "input-hint"; el.textContent = ""; }
+      if (el) el.value = "";
     });
-
-    // ✅ reset username hint
-    const usernameHint = document.getElementById("signup-username-hint");
-    if (usernameHint) {
-      usernameHint.className   = "input-hint warning";
-      usernameHint.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
-    }
-
     document.getElementById("pw-strength-bar").style.display = "none";
-    document.getElementById("pw-strength-fill").style.width  = "0%";
-    document.getElementById("login-password").value            = "";
-    document.getElementById("signup-password").value           = "";
-    document.getElementById("signup-password-confirm").value   = "";
   }
+}
 
-  function clearHint(id) {
+function updateUserInfo() {
+  if (currentUser) {
+    document.getElementById("current-user-info").style.display = "block";
+    document.getElementById("login-warning").style.display     = "none";
+    document.getElementById("user-display").textContent        = currentUser.name;
+  } else {
+    document.getElementById("current-user-info").style.display = "none";
+    document.getElementById("login-warning").style.display     = "block";
+  }
+}
+
+// ==========================================
+// LOGIN
+// ==========================================
+async function login() {
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value;
+  if (!username) { setHint("login-username-hint", "error", "❌ กรุณากรอก Username"); return; }
+  if (!password) { setHint("login-pw-hint",       "error", "❌ กรุณากรอก Password"); return; }
+  const btn = document.getElementById("login-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังตรวจสอบ...";
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST", body: JSON.stringify({ action:"loginUser", username, password })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      currentUser = { playerId: result.playerId, name: result.name };
+      localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
+      document.getElementById("login-username").value = "";
+      document.getElementById("login-password").value = "";
+      updateLoginUI();
+      showAlert("success", "✅ ยินดีต้อนรับกลับ " + result.name + "!");
+      showPage("matches", document.querySelector("nav button"));
+    } else if (result.status === "no_password") {
+      setHint("login-username-hint", "warning",
+        "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
+    } else {
+      setHint("login-username-hint", "error", "❌ " + result.message);
+      document.getElementById("login-password").value = "";
+    }
+  } catch (err) {
+    setHint("login-username-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = "🔑 เข้าสู่ระบบ";
+  }
+}
+
+// ==========================================
+// SIGN UP
+// ==========================================
+async function signup() {
+  const username = document.getElementById("signup-username").value.trim();
+  const password = document.getElementById("signup-password").value;
+  const confirm  = document.getElementById("signup-password-confirm").value;
+  if (!username) { setHint("signup-username-hint", "error", "❌ กรุณากรอก Username"); return; }
+  if (username.length < 2) { setHint("signup-username-hint", "error", "❌ Username ต้องมีอย่างน้อย 2 ตัวอักษร"); return; }
+  if (password.length < 8) { setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return; }
+  if (password !== confirm) { setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return; }
+  const btn = document.getElementById("signup-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังสมัคร...";
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST", body: JSON.stringify({ action:"registerUser", username, password })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      currentUser = { playerId: result.playerId, name: result.name };
+      localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
+      document.getElementById("signup-username").value         = "";
+      document.getElementById("signup-password").value         = "";
+      document.getElementById("signup-password-confirm").value = "";
+      updateLoginUI();
+      showAlert("success", "🎉 สมัครสมาชิกสำเร็จ! ยินดีต้อนรับ " + result.name + "!");
+      showPage("matches", document.querySelector("nav button"));
+    } else if (result.status === "duplicate") {
+      setHint("signup-username-hint", "error", "❌ Username นี้ถูกใช้แล้ว กรุณาใช้ชื่ออื่น");
+    } else {
+      showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
+    }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = "✨ สมัครสมาชิก";
+  }
+}
+
+// ==========================================
+// LOGOUT
+// ==========================================
+function logout() {
+  if (!confirm("ต้องการออกจากระบบใช่ไหม?")) return;
+  currentUser = null;
+  localStorage.removeItem("wc2026_user");
+  updateLoginUI();
+  showAlert("success", "🚪 ออกจากระบบแล้ว");
+  showPage("matches", document.querySelector("nav button"));
+}
+
+// ==========================================
+// FORGOT PASSWORD
+// ==========================================
+function showForgotForm() {
+  const section = document.getElementById("forgot-section");
+  section.style.display = "block";
+  document.getElementById("forgot-success").style.display = "none";
+  document.getElementById("forgot-fields").style.display  = "block";
+  document.getElementById("forgot-btn").style.display     = "block";
+  document.getElementById("forgot-username").value        = "";
+  document.getElementById("forgot-email").value           = "";
+  ["forgot-username-hint","forgot-email-hint"].forEach(id => {
     const el = document.getElementById(id);
-    if (!el) return;
-    // ✅ เปลี่ยนจาก signup-name-hint → signup-username-hint
-    if (id === "signup-username-hint") {
-      el.className   = "input-hint warning";
-      el.textContent = "⚠️ Username จะใช้เป็นชื่อแสดงผลใน Leaderboard — เปลี่ยนไม่ได้ในภายหลัง";
-    } else {
-      el.className   = "input-hint";
-      el.textContent = "";
-    }
+    if (el) { el.className = "input-hint"; el.textContent = ""; }
+  });
+  // Pre-fill username ถ้ากรอกไว้แล้ว
+  const existingUsername = document.getElementById("login-username").value.trim();
+  if (existingUsername) {
+    document.getElementById("forgot-username").value = existingUsername;
   }
+  section.scrollIntoView({ behavior:"smooth", block:"center" });
+}
 
-  function setHint(id, type, message) {
+function hideForgotForm() {
+  document.getElementById("forgot-section").style.display = "none";
+  document.getElementById("forgot-success").style.display = "none";
+  document.getElementById("forgot-fields").style.display  = "block";
+  document.getElementById("forgot-btn").style.display     = "block";
+  document.getElementById("forgot-username").value        = "";
+  document.getElementById("forgot-email").value           = "";
+  ["forgot-username-hint","forgot-email-hint"].forEach(id => {
     const el = document.getElementById(id);
-    if (!el) return;
-    el.className   = "input-hint " + type;
-    el.textContent = message;
+    if (el) { el.className = "input-hint"; el.textContent = ""; }
+  });
+}
+
+async function submitForgotPassword() {
+  const username  = document.getElementById("forgot-username").value.trim();
+  const userEmail = document.getElementById("forgot-email").value.trim();
+
+  if (!username) {
+    setHint("forgot-username-hint", "error", "❌ กรุณากรอก Username"); return;
+  }
+  if (!userEmail) {
+    setHint("forgot-email-hint", "error", "❌ กรุณากรอก Email"); return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+    setHint("forgot-email-hint", "error", "❌ รูปแบบ Email ไม่ถูกต้อง"); return;
   }
 
-  // ==========================================
-  // PASSWORD HELPERS
-  // ==========================================
-  function togglePw(inputId, btn) {
-    const input = document.getElementById(inputId);
-    if (input.type === "password") { input.type = "text";     btn.textContent = "🙈"; }
-    else                           { input.type = "password"; btn.textContent = "👁️"; }
-  }
+  const btn = document.getElementById("forgot-btn");
+  btn.disabled    = true;
+  btn.textContent = "⏳ กำลังส่งคำขอ...";
 
-  function onSignupPwInput(value) {
-    clearHint("signup-pw-hint");
-    checkPwStrength(value);
-    checkPwMatch();
-  }
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      body:   JSON.stringify({
+        action:    "forgotPassword",
+        username:  username,
+        userEmail: userEmail
+      })
+    });
+    const result = await res.json();
 
-  function checkPwStrength(pw) {
-    const bar  = document.getElementById("pw-strength-bar");
-    const fill = document.getElementById("pw-strength-fill");
-    const hint = document.getElementById("signup-pw-hint");
-    if (!pw) { bar.style.display = "none"; return; }
-    bar.style.display = "block";
-    let score = 0;
-    if (pw.length >= 8)          score++;
-    if (pw.length >= 12)         score++;
-    if (/[A-Z]/.test(pw))        score++;
-    if (/[0-9]/.test(pw))        score++;
-    if (/[^A-Za-z0-9]/.test(pw)) score++;
-    const levels = [
-      { pct: "20%",  color: "#e74c3c", label: "😰 อ่อนมาก",      cls: "error"   },
-      { pct: "40%",  color: "#e67e22", label: "😟 อ่อน",          cls: "error"   },
-      { pct: "60%",  color: "#f39c12", label: "😐 พอใช้",         cls: "warning" },
-      { pct: "80%",  color: "#2ecc71", label: "😊 แข็งแกร่ง",     cls: "success" },
-      { pct: "100%", color: "#27ae60", label: "💪 แข็งแกร่งมาก!", cls: "success" }
-    ];
-    const lvl = levels[Math.min(score, 4)];
-    fill.style.width      = lvl.pct;
-    fill.style.background = lvl.color;
-    hint.className        = "input-hint " + lvl.cls;
-    hint.textContent      = lvl.label;
-  }
-
-  function checkPwMatch() {
-    const pw      = document.getElementById("signup-password").value;
-    const confirm = document.getElementById("signup-password-confirm").value;
-    const hint    = document.getElementById("signup-confirm-hint");
-    if (!confirm) { hint.className = "input-hint"; hint.textContent = ""; return; }
-    if (pw === confirm) { hint.className = "input-hint success"; hint.textContent = "✅ Password ตรงกัน"; }
-    else                { hint.className = "input-hint error";   hint.textContent = "❌ Password ไม่ตรงกัน"; }
-  }
-
-  // ==========================================
-  // UPDATE LOGIN UI
-  // ==========================================
-  function updateLoginUI() {
-    const loginBtn = document.getElementById("loginBtn");
-    if (currentUser) {
-      loginBtn.textContent = "👤 " + currentUser.name;
-      document.getElementById("login-form-box").style.display = "none";
-      document.getElementById("logged-in-box").style.display  = "block";
-      document.getElementById("profile-name").textContent     = currentUser.name;
-      document.getElementById("profile-name-2").textContent   = currentUser.name;
+    if (result.status === "success") {
+      // แสดง Success State
+      document.getElementById("forgot-fields").style.display  = "none";
+      document.getElementById("forgot-btn").style.display     = "none";
+      document.getElementById("forgot-success").style.display = "block";
     } else {
-      loginBtn.textContent = "👤 Login";
-      document.getElementById("login-form-box").style.display = "block";
-      document.getElementById("logged-in-box").style.display  = "none";
-      // ✅ เคลียร์ field ใหม่ (ไม่มี email แล้ว)
-      ["login-username", "login-password",
-       "signup-username", "signup-password", "signup-password-confirm"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = "";
-      });
-      document.getElementById("pw-strength-bar").style.display = "none";
+      setHint("forgot-email-hint", "error", "❌ " + result.message);
+      btn.disabled    = false;
+      btn.textContent = "📧 ส่งคำขอ Reset Password";
     }
+  } catch (err) {
+    setHint("forgot-email-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    btn.disabled    = false;
+    btn.textContent = "📧 ส่งคำขอ Reset Password";
   }
+}
 
-  function updateUserInfo() {
-    if (currentUser) {
-      document.getElementById("current-user-info").style.display = "block";
-      document.getElementById("login-warning").style.display     = "none";
-      document.getElementById("user-display").textContent        = currentUser.name;
-    } else {
-      document.getElementById("current-user-info").style.display = "none";
-      document.getElementById("login-warning").style.display     = "block";
-    }
-  }
-
-  // ==========================================
-  // ✅ LOGIN — ใช้ username แทน email
-  // ==========================================
-  async function login() {
-    const username = document.getElementById("login-username").value.trim();
-    const password = document.getElementById("login-password").value;
-
-    if (!username) { setHint("login-username-hint", "error", "❌ กรุณากรอก Username"); return; }
-    if (!password) { setHint("login-pw-hint",       "error", "❌ กรุณากรอก Password"); return; }
-
-    const btn = document.getElementById("login-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังตรวจสอบ...";
-
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({ action: "loginUser", username, password })
-      });
-      const result = await res.json();
-
-      if (result.status === "success") {
-        currentUser = { playerId: result.playerId, name: result.name };
-        localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
-        document.getElementById("login-username").value = "";
-        document.getElementById("login-password").value = "";
-        updateLoginUI();
-        showAlert("success", "✅ ยินดีต้อนรับกลับ " + result.name + "!");
-        showPage("matches", document.querySelector("nav button"));
-      } else if (result.status === "no_password") {
-        setHint("login-username-hint", "warning", "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
-      } else {
-        setHint("login-username-hint", "error", "❌ " + result.message);
-        document.getElementById("login-password").value = "";
-      }
-    } catch (err) {
-      setHint("login-username-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    } finally {
-      btn.disabled = false; btn.textContent = "🔑 เข้าสู่ระบบ";
-    }
-  }
-
-  // ==========================================
-  // ✅ SIGN UP — ใช้แค่ username + password
-  // ==========================================
-  async function signup() {
-    const username = document.getElementById("signup-username").value.trim();
-    const password = document.getElementById("signup-password").value;
-    const confirm  = document.getElementById("signup-password-confirm").value;
-
-    // ✅ Validate username เท่านั้น (ไม่มี email, ไม่มี name แยก)
-    if (!username) {
-      setHint("signup-username-hint", "error", "❌ กรุณากรอก Username"); return;
-    }
-    if (username.length < 2) {
-      setHint("signup-username-hint", "error", "❌ Username ต้องมีอย่างน้อย 2 ตัวอักษร"); return;
-    }
-    if (password.length < 8) {
-      setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return;
-    }
-    if (password !== confirm) {
-      setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return;
-    }
-
-    const btn = document.getElementById("signup-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังสมัคร...";
-
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        // ✅ ส่งแค่ username + password (ไม่มี email, ไม่มี name)
-        body:   JSON.stringify({ action: "registerUser", username, password })
-      });
-      const result = await res.json();
-
-      if (result.status === "success") {
-        currentUser = { playerId: result.playerId, name: result.name };
-        localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
-        document.getElementById("signup-username").value         = "";
-        document.getElementById("signup-password").value         = "";
-        document.getElementById("signup-password-confirm").value = "";
-        updateLoginUI();
-        showAlert("success", "🎉 สมัครสมาชิกสำเร็จ! ยินดีต้อนรับ " + result.name + "!");
-        showPage("matches", document.querySelector("nav button"));
-      } else if (result.status === "duplicate") {
-        // ✅ เปลี่ยน message ให้ตรงกับ username
-        setHint("signup-username-hint", "error", "❌ Username นี้ถูกใช้แล้ว กรุณาใช้ชื่ออื่น");
-      } else {
-        showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
-      }
-    } catch (err) {
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    } finally {
-      btn.disabled = false; btn.textContent = "✨ สมัครสมาชิก";
-    }
-  }
-
-  // ==========================================
-  // LOGOUT
-  // ==========================================
-  function logout() {
-    if (!confirm("ต้องการออกจากระบบใช่ไหม?")) return;
-    currentUser = null;
-    localStorage.removeItem("wc2026_user");
-    updateLoginUI();
-    showAlert("success", "🚪 ออกจากระบบแล้ว");
-    showPage("matches", document.querySelector("nav button"));
-  }
-
-  // ==========================================
-  // LOAD MATCHES
-  // ==========================================
-  async function loadMatches() {
-    try {
-      const rows  = await fetchSheet("Matches");
-      matchesData = rows;
-
-      const html = rows.map(row => {
-        const [id, round, home, away, date, homeScore, awayScore, dp, status] = row;
-        const isFinished = status === "Finished";
-        const scoreText  = isFinished
-          ? `<strong style="font-size:1.3rem;">${homeScore} - ${awayScore}</strong>`
-          : "vs";
-        return `
-          <div class="card">
-            <div class="match-card">
-              <div><div class="team-name">${getFlag(home)}${home || "-"}</div></div>
-              <div>
-                <div class="vs">${scoreText}</div>
-                <div class="match-date">${date || ""}</div>
-              </div>
-              <div><div class="team-name">${getFlag(away)}${away || "-"}</div></div>
+// ==========================================
+// LOAD MATCHES
+// ==========================================
+async function loadMatches() {
+  try {
+    const rows  = await fetchSheet("Matches");
+    matchesData = rows;
+    const html = rows.map(row => {
+      const [id, round, home, away, date, homeScore, awayScore, dp, status] = row;
+      const isFinished = status === "Finished";
+      const scoreText  = isFinished
+        ? `<strong style="font-size:1.3rem;">${homeScore} - ${awayScore}</strong>`
+        : "vs";
+      return `
+        <div class="card">
+          <div class="match-card">
+            <div><div class="team-name">${getFlag(home)}${home||"-"}</div></div>
+            <div>
+              <div class="vs">${scoreText}</div>
+              <div class="match-date">${date||""}</div>
             </div>
-            <div style="text-align:center; margin-top:10px;">
-              <span class="status-badge ${isFinished ? "status-finished" : "status-upcoming"}">
-                ${isFinished ? "✅ จบแล้ว" : "🕐 Upcoming"}
-              </span>
-              <span style="color:#888; font-size:0.8rem; margin-left:10px;">
-                Round: ${round || "-"}
-                ${dp === "Yes" ? '<span class="double-badge" style="margin-left:6px;">⭐ Double</span>' : ""}
-              </span>
-            </div>
-          </div>`;
-      }).join("");
-
-      document.getElementById("matches-list").innerHTML =
-        html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล</p>";
-
-    } catch (err) {
-      document.getElementById("matches-list").innerHTML =
-        `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
-    }
+            <div><div class="team-name">${getFlag(away)}${away||"-"}</div></div>
+          </div>
+          <div style="text-align:center; margin-top:10px;">
+            <span class="status-badge ${isFinished?"status-finished":"status-upcoming"}">
+              ${isFinished?"✅ จบแล้ว":"🕐 Upcoming"}
+            </span>
+            <span style="color:#888; font-size:0.8rem; margin-left:10px;">
+              Round: ${round||"-"}
+              ${dp==="Yes"?'<span class="double-badge" style="margin-left:6px;">⭐ Double</span>':""}
+            </span>
+          </div>
+        </div>`;
+    }).join("");
+    document.getElementById("matches-list").innerHTML =
+      html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล</p>";
+  } catch (err) {
+    document.getElementById("matches-list").innerHTML =
+      `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
   }
+}
 
-  // ==========================================
-  // LOAD MATCHES FOR FORM
-  // ==========================================
-  async function loadMatchesForForm() {
-    try {
-      const rows  = await fetchSheet("Matches");
-      matchesData = rows;
-
-      const select = document.getElementById("match-select");
-      select.innerHTML = '<option value="">-- เลือกนัด --</option>';
-      const now = new Date();
-
-      rows.forEach(row => {
-        const [id, , home, away, date, , , dp, status] = row;
-        if (status === "Finished") return;
-        const matchTime = new Date(date);
-        const isExpired = now >= matchTime;
-        const isDouble  = dp === "Yes";
-        const opt       = document.createElement("option");
-        opt.value       = id;
-        if (isExpired) {
-          opt.textContent = `🔒 ${home} vs ${away}${isDouble ? " ⭐ Double" : ""} (ปิดรับทายแล้ว)`;
-          opt.disabled    = true;
-        } else {
-          opt.textContent = `${isDouble ? "⭐ " : ""}${home} vs ${away}${isDouble ? " [Double Point]" : ""} — ${formatTimeLeft(matchTime)}`;
-        }
-        select.appendChild(opt);
-      });
-    } catch (err) { console.error("loadMatchesForForm:", err); }
-  }
-
-  // ==========================================
-  // FORMAT TIME LEFT
-  // ==========================================
-  function formatTimeLeft(matchTime) {
-    const diff = matchTime - new Date();
-    if (diff <= 0) return "ปิดรับทายแล้ว";
-    const days    = Math.floor(diff / 86400000);
-    const hours   = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000)  / 60000);
-    const seconds = Math.floor((diff % 60000)    / 1000);
-    if (days > 0)    return `เหลือ ${days} วัน ${hours} ชม.`;
-    if (hours > 0)   return `เหลือ ${hours} ชม. ${minutes} นาที`;
-    if (minutes > 0) return `⚠️ เหลือ ${minutes} นาที ${seconds} วิ`;
-    return `🚨 เหลือ ${seconds} วิ!`;
-  }
-
-  // ==========================================
-  // UPDATE MATCH INFO
-  // ==========================================
-  async function updateMatchInfo() {
-    const matchId = document.getElementById("match-select").value;
-    const match   = matchesData.find(r => r[0] === matchId);
-    if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
-
-    document.getElementById("double-point-alert").style.display = "none";
-
-    if (!match) {
-      document.getElementById("match-preview").style.display    = "none";
-      document.getElementById("predict-prev-box").style.display = "none";
-      return;
-    }
-
-    const isDouble = match[7] === "Yes";
-    if (isDouble) document.getElementById("double-point-alert").style.display = "flex";
-
-    document.getElementById("home-team-name").innerHTML = getFlag(match[2]) + match[2];
-    document.getElementById("away-team-name").innerHTML = getFlag(match[3]) + match[3];
-    document.getElementById("home-label").textContent   = match[2];
-    document.getElementById("away-label").textContent   = match[3];
-    document.getElementById("match-preview").style.display = "block";
-
-    const matchTime = new Date(match[4]);
-    updateDeadlineDisplay(matchTime);
-    countdownTimer = setInterval(() => updateDeadlineDisplay(matchTime), 1000);
-
-    const btn = document.getElementById("submit-btn");
-    btn.disabled         = false;
-    btn.textContent      = "✅ ส่งผลทาย";
-    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-    btn.style.color      = "#000";
-
-    const prevBox = document.getElementById("predict-prev-box");
-    if (currentUser) {
-      const prev = await getPrediction(matchId);
-      if (prev) {
-        document.getElementById("predict-prev-score").textContent = prev.homeScore + " - " + prev.awayScore;
-        prevBox.style.display = "block";
-        document.getElementById("home-pred").value = prev.homeScore;
-        document.getElementById("away-pred").value = prev.awayScore;
-        btn.textContent = "✏️ แก้ไขผลทาย";
+// ==========================================
+// LOAD MATCHES FOR FORM
+// ==========================================
+async function loadMatchesForForm() {
+  try {
+    const rows  = await fetchSheet("Matches");
+    matchesData = rows;
+    const select = document.getElementById("match-select");
+    select.innerHTML = '<option value="">-- เลือกนัด --</option>';
+    const now = new Date();
+    rows.forEach(row => {
+      const [id,,home,away,date,,,dp,status] = row;
+      if (status === "Finished") return;
+      const matchTime = new Date(date);
+      const isExpired = now >= matchTime;
+      const isDouble  = dp === "Yes";
+      const opt = document.createElement("option");
+      opt.value = id;
+      if (isExpired) {
+        opt.textContent = `🔒 ${home} vs ${away}${isDouble?" ⭐ Double":""} (ปิดรับทายแล้ว)`;
+        opt.disabled = true;
       } else {
-        prevBox.style.display = "none";
-        document.getElementById("home-pred").value = 0;
-        document.getElementById("away-pred").value = 0;
+        opt.textContent = `${isDouble?"⭐ ":""}${home} vs ${away}${isDouble?" [Double Point]":""} — ${formatTimeLeft(matchTime)}`;
       }
-    } else {
-      prevBox.style.display = "none";
-    }
+      select.appendChild(opt);
+    });
+  } catch (err) { console.error("loadMatchesForForm:", err); }
+}
+
+// ==========================================
+// FORMAT TIME LEFT
+// ==========================================
+function formatTimeLeft(matchTime) {
+  const diff = matchTime - new Date();
+  if (diff <= 0) return "ปิดรับทายแล้ว";
+  const days    = Math.floor(diff / 86400000);
+  const hours   = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000)  / 60000);
+  const seconds = Math.floor((diff % 60000)    / 1000);
+  if (days > 0)    return `เหลือ ${days} วัน ${hours} ชม.`;
+  if (hours > 0)   return `เหลือ ${hours} ชม. ${minutes} นาที`;
+  if (minutes > 0) return `⚠️ เหลือ ${minutes} นาที ${seconds} วิ`;
+  return `🚨 เหลือ ${seconds} วิ!`;
+}
+
+// ==========================================
+// UPDATE MATCH INFO
+// ==========================================
+async function updateMatchInfo() {
+  const matchId = document.getElementById("match-select").value;
+  const match   = matchesData.find(r => r[0] === matchId);
+  if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+  document.getElementById("double-point-alert").style.display = "none";
+  if (!match) {
+    document.getElementById("match-preview").style.display    = "none";
+    document.getElementById("predict-prev-box").style.display = "none";
+    return;
   }
-
-  function updateDeadlineDisplay(matchTime) {
-    const deadlineEl = document.getElementById("match-deadline");
-    const diff       = matchTime - new Date();
-    if (diff <= 0) {
-      deadlineEl.className   = "deadline-red";
-      deadlineEl.textContent = "🔒 ปิดรับทายแล้ว — แมตช์เริ่มแล้ว!";
-      const btn = document.getElementById("submit-btn");
-      btn.disabled = true; btn.textContent = "🔒 หมดเวลาทาย"; btn.style.background = "#555";
-      clearInterval(countdownTimer); countdownTimer = null;
-    } else if (diff <= 3600000) {
-      deadlineEl.className   = "deadline-orange";
-      deadlineEl.textContent = "⚠️ ใกล้ปิดรับ! " + formatTimeLeft(matchTime);
-    } else {
-      deadlineEl.className   = "deadline-green";
-      deadlineEl.textContent = "⏰ " + formatTimeLeft(matchTime);
-    }
-  }
-
-  // ==========================================
-  // GET PREDICTION
-  // ==========================================
-  async function getPrediction(matchId) {
-    if (!currentUser) return null;
-    try {
-      const rows = await fetchSheet("Predictions");
-      const row = rows.find(
-        r => (r[1] || "").toString() === currentUser.playerId &&
-             (r[3] || "").toString() === matchId.toString()
-      );
-      return row ? { homeScore: row[4], awayScore: row[5] } : null;
-    } catch (err) { return null; }
-  }
-
-  // ==========================================
-  // SUBMIT PREDICTION
-  // ==========================================
-  async function submitPrediction() {
-    if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อนทายผล!"); return; }
-
-    const matchId   = document.getElementById("match-select").value;
-    const homeScore = document.getElementById("home-pred").value;
-    const awayScore = document.getElementById("away-pred").value;
-
-    if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัดการแข่งขัน!"); return; }
-
-    const match = matchesData.find(r => r[0] === matchId);
-    if (match && new Date() >= new Date(match[4])) {
-      showAlert("error", "❌ หมดเวลาทายผลแล้ว!"); return;
-    }
-
+  const isDouble = match[7] === "Yes";
+  if (isDouble) document.getElementById("double-point-alert").style.display = "flex";
+  document.getElementById("home-team-name").innerHTML = getFlag(match[2]) + match[2];
+  document.getElementById("away-team-name").innerHTML = getFlag(match[3]) + match[3];
+  document.getElementById("home-label").textContent   = match[2];
+  document.getElementById("away-label").textContent   = match[3];
+  document.getElementById("match-preview").style.display = "block";
+  const matchTime = new Date(match[4]);
+  updateDeadlineDisplay(matchTime);
+  countdownTimer = setInterval(() => updateDeadlineDisplay(matchTime), 1000);
+  const btn = document.getElementById("submit-btn");
+  btn.disabled         = false;
+  btn.textContent      = "✅ ส่งผลทาย";
+  btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+  btn.style.color      = "#000";
+  const prevBox = document.getElementById("predict-prev-box");
+  if (currentUser) {
     const prev = await getPrediction(matchId);
     if (prev) {
-      const isSame = parseInt(homeScore) === parseInt(prev.homeScore) &&
-                     parseInt(awayScore) === parseInt(prev.awayScore);
-      if (isSame) { showAlert("warning", "⚠️ สกอร์เหมือนเดิม ไม่มีการเปลี่ยนแปลง"); return; }
-      if (!confirm(
-        `ยืนยันแก้ไขผลทาย?\n\n${match[2]} vs ${match[3]}\n\nเดิม:  ${prev.homeScore} - ${prev.awayScore}\nใหม่:  ${homeScore} - ${awayScore}`
-      )) return;
+      document.getElementById("predict-prev-score").textContent = prev.homeScore + " - " + prev.awayScore;
+      prevBox.style.display = "block";
+      document.getElementById("home-pred").value = prev.homeScore;
+      document.getElementById("away-pred").value = prev.awayScore;
+      btn.textContent = "✏️ แก้ไขผลทาย";
+    } else {
+      prevBox.style.display = "none";
+      document.getElementById("home-pred").value = 0;
+      document.getElementById("away-pred").value = 0;
     }
+  } else {
+    prevBox.style.display = "none";
+  }
+}
 
+function updateDeadlineDisplay(matchTime) {
+  const deadlineEl = document.getElementById("match-deadline");
+  const diff       = matchTime - new Date();
+  if (diff <= 0) {
+    deadlineEl.className   = "deadline-red";
+    deadlineEl.textContent = "🔒 ปิดรับทายแล้ว — แมตช์เริ่มแล้ว!";
     const btn = document.getElementById("submit-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
+    btn.disabled = true; btn.textContent = "🔒 หมดเวลาทาย"; btn.style.background = "#555";
+    clearInterval(countdownTimer); countdownTimer = null;
+  } else if (diff <= 3600000) {
+    deadlineEl.className   = "deadline-orange";
+    deadlineEl.textContent = "⚠️ ใกล้ปิดรับ! " + formatTimeLeft(matchTime);
+  } else {
+    deadlineEl.className   = "deadline-green";
+    deadlineEl.textContent = "⏰ " + formatTimeLeft(matchTime);
+  }
+}
 
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action:     "submitPrediction",
-          playerId:   currentUser.playerId,
-          playerName: currentUser.name,
-          matchId,
-          homeScore,
-          awayScore
-        })
-      });
-      const result = await res.json();
+// ==========================================
+// GET PREDICTION
+// ==========================================
+async function getPrediction(matchId) {
+  if (!currentUser) return null;
+  try {
+    const rows = await fetchSheet("Predictions");
+    const row = rows.find(
+      r => (r[1]||"").toString() === currentUser.playerId &&
+           (r[3]||"").toString() === matchId.toString()
+    );
+    return row ? { homeScore: row[4], awayScore: row[5] } : null;
+  } catch (err) { return null; }
+}
 
-      if (result.status === "success") {
-        showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
-        btn.textContent = "✅ ส่งผลทายแล้ว!"; btn.style.background = "#2ecc71"; btn.style.color = "#fff";
-      } else if (result.status === "updated") {
-        showAlert("success", "✏️ แก้ไขผลทายสำเร็จ!");
-        btn.textContent = "✏️ แก้ไขแล้ว!"; btn.style.background = "#3498db"; btn.style.color = "#fff";
-        document.getElementById("predict-prev-score").textContent = homeScore + " - " + awayScore;
-      } else {
-        showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
-        btn.disabled = false;
-        btn.textContent      = prev ? "✏️ แก้ไขผลทาย" : "✅ ส่งผลทาย";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-        btn.style.color      = "#000";
-      }
-    } catch (err) {
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+// ==========================================
+// SUBMIT PREDICTION
+// ==========================================
+async function submitPrediction() {
+  if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อนทายผล!"); return; }
+  const matchId   = document.getElementById("match-select").value;
+  const homeScore = document.getElementById("home-pred").value;
+  const awayScore = document.getElementById("away-pred").value;
+  if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัดการแข่งขัน!"); return; }
+  const match = matchesData.find(r => r[0] === matchId);
+  if (match && new Date() >= new Date(match[4])) {
+    showAlert("error", "❌ หมดเวลาทายผลแล้ว!"); return;
+  }
+  const prev = await getPrediction(matchId);
+  if (prev) {
+    const isSame = parseInt(homeScore) === parseInt(prev.homeScore) &&
+                   parseInt(awayScore) === parseInt(prev.awayScore);
+    if (isSame) { showAlert("warning", "⚠️ สกอร์เหมือนเดิม ไม่มีการเปลี่ยนแปลง"); return; }
+    if (!confirm(
+      `ยืนยันแก้ไขผลทาย?\n\n${match[2]} vs ${match[3]}\n\nเดิม:  ${prev.homeScore} - ${prev.awayScore}\nใหม่:  ${homeScore} - ${awayScore}`
+    )) return;
+  }
+  const btn = document.getElementById("submit-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:"submitPrediction",
+        playerId:   currentUser.playerId,
+        playerName: currentUser.name,
+        matchId, homeScore, awayScore
+      })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
+      btn.textContent = "✅ ส่งผลทายแล้ว!"; btn.style.background = "#2ecc71"; btn.style.color = "#fff";
+    } else if (result.status === "updated") {
+      showAlert("success", "✏️ แก้ไขผลทายสำเร็จ!");
+      btn.textContent = "✏️ แก้ไขแล้ว!"; btn.style.background = "#3498db"; btn.style.color = "#fff";
+      document.getElementById("predict-prev-score").textContent = homeScore + " - " + awayScore;
+    } else {
+      showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
       btn.disabled = false;
       btn.textContent      = prev ? "✏️ แก้ไขผลทาย" : "✅ ส่งผลทาย";
       btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
       btn.style.color      = "#000";
     }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    btn.disabled = false;
+    btn.textContent      = prev ? "✏️ แก้ไขผลทาย" : "✅ ส่งผลทาย";
+    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+    btn.style.color      = "#000";
   }
+}
 
-  // ==========================================
-  // EDIT MODAL
-  // ==========================================
-  function openEditModal(matchId, homeTeam, awayTeam, matchDate, prevHome, prevAway) {
-    editingMatch = { matchId, homeTeam, awayTeam, matchDate, prevHome, prevAway };
-    document.getElementById("edit-home-name").innerHTML    = getFlag(homeTeam) + homeTeam;
-    document.getElementById("edit-away-name").innerHTML    = getFlag(awayTeam) + awayTeam;
-    document.getElementById("edit-home-label").textContent = homeTeam;
-    document.getElementById("edit-away-label").textContent = awayTeam;
-    document.getElementById("edit-match-label").textContent = "📅 " + matchDate;
-    document.getElementById("edit-prev-score").textContent  = prevHome + " - " + prevAway;
-    document.getElementById("edit-home-score").value = prevHome;
-    document.getElementById("edit-away-score").value = prevAway;
+// ==========================================
+// EDIT MODAL
+// ==========================================
+function openEditModal(matchId, homeTeam, awayTeam, matchDate, prevHome, prevAway) {
+  editingMatch = { matchId, homeTeam, awayTeam, matchDate, prevHome, prevAway };
+  document.getElementById("edit-home-name").innerHTML    = getFlag(homeTeam) + homeTeam;
+  document.getElementById("edit-away-name").innerHTML    = getFlag(awayTeam) + awayTeam;
+  document.getElementById("edit-home-label").textContent = homeTeam;
+  document.getElementById("edit-away-label").textContent = awayTeam;
+  document.getElementById("edit-match-label").textContent = "📅 " + matchDate;
+  document.getElementById("edit-prev-score").textContent  = prevHome + " - " + prevAway;
+  document.getElementById("edit-home-score").value = prevHome;
+  document.getElementById("edit-away-score").value = prevAway;
+  const dl     = new Date(matchDate);
+  const diff   = dl - new Date();
+  const warnEl = document.getElementById("edit-deadline-warning");
+  warnEl.innerHTML = diff <= 3600000
+    ? `<span style="color:#f39c12;">⚠️ ใกล้ปิดรับ! เหลือ ${formatTimeLeft(dl)}</span>`
+    : `<span style="color:#2ecc71;">⏰ ปิดรับใน ${formatTimeLeft(dl)}</span>`;
+  const btn = document.getElementById("edit-confirm-btn");
+  btn.disabled = false; btn.textContent = "✅ ยืนยันแก้ไข";
+  document.getElementById("edit-modal").style.display = "flex";
+}
 
-    const dl     = new Date(matchDate);
-    const diff   = dl - new Date();
-    const warnEl = document.getElementById("edit-deadline-warning");
-    warnEl.innerHTML = diff <= 3600000
-      ? `<span style="color:#f39c12;">⚠️ ใกล้ปิดรับ! เหลือ ${formatTimeLeft(dl)}</span>`
-      : `<span style="color:#2ecc71;">⏰ ปิดรับใน ${formatTimeLeft(dl)}</span>`;
+function closeEditModal() {
+  document.getElementById("edit-modal").style.display = "none";
+  editingMatch = null;
+}
 
-    const btn = document.getElementById("edit-confirm-btn");
-    btn.disabled = false; btn.textContent = "✅ ยืนยันแก้ไข";
-    document.getElementById("edit-modal").style.display = "flex";
+async function confirmEdit() {
+  if (!editingMatch) return;
+  const newHome = parseInt(document.getElementById("edit-home-score").value);
+  const newAway = parseInt(document.getElementById("edit-away-score").value);
+  if (isNaN(newHome) || isNaN(newAway)) { showAlert("error", "❌ กรุณากรอกสกอร์ให้ถูกต้อง"); return; }
+  if (new Date() >= new Date(editingMatch.matchDate)) {
+    showAlert("error", "❌ หมดเวลาแก้ไขแล้ว!"); closeEditModal(); return;
   }
-
-  function closeEditModal() {
-    document.getElementById("edit-modal").style.display = "none";
-    editingMatch = null;
+  if (newHome === editingMatch.prevHome && newAway === editingMatch.prevAway) {
+    showAlert("warning", "⚠️ สกอร์เหมือนเดิม"); closeEditModal(); return;
   }
-
-  async function confirmEdit() {
-    if (!editingMatch) return;
-    const newHome = parseInt(document.getElementById("edit-home-score").value);
-    const newAway = parseInt(document.getElementById("edit-away-score").value);
-
-    if (isNaN(newHome) || isNaN(newAway)) { showAlert("error", "❌ กรุณากรอกสกอร์ให้ถูกต้อง"); return; }
-    if (new Date() >= new Date(editingMatch.matchDate)) {
-      showAlert("error", "❌ หมดเวลาแก้ไขแล้ว!"); closeEditModal(); return;
-    }
-    if (newHome === editingMatch.prevHome && newAway === editingMatch.prevAway) {
-      showAlert("warning", "⚠️ สกอร์เหมือนเดิม"); closeEditModal(); return;
-    }
-    if (!confirm(
-      `ยืนยันแก้ไขผลทาย?\n\n${editingMatch.homeTeam} vs ${editingMatch.awayTeam}\n\nเดิม:  ${editingMatch.prevHome} - ${editingMatch.prevAway}\nใหม่:  ${newHome} - ${newAway}`
-    )) return;
-
-    const btn = document.getElementById("edit-confirm-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังบันทึก...";
-
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action:     "submitPrediction",
-          playerId:   currentUser.playerId,
-          playerName: currentUser.name,
-          matchId:    editingMatch.matchId,
-          homeScore:  newHome,
-          awayScore:  newAway
-        })
-      });
-      const result = await res.json();
-
-      if (result.status === "updated" || result.status === "success") {
-        showAlert("success", "✅ แก้ไขผลทายสำเร็จ!");
-        closeEditModal(); loadHistory();
-      } else {
-        showAlert("error", "❌ " + result.message);
-        btn.disabled = false; btn.textContent = "✅ ยืนยันแก้ไข";
-      }
-    } catch (err) {
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+  if (!confirm(
+    `ยืนยันแก้ไขผลทาย?\n\n${editingMatch.homeTeam} vs ${editingMatch.awayTeam}\n\nเดิม:  ${editingMatch.prevHome} - ${editingMatch.prevAway}\nใหม่:  ${newHome} - ${newAway}`
+  )) return;
+  const btn = document.getElementById("edit-confirm-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังบันทึก...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:"submitPrediction",
+        playerId:   currentUser.playerId,
+        playerName: currentUser.name,
+        matchId:    editingMatch.matchId,
+        homeScore:  newHome,
+        awayScore:  newAway
+      })
+    });
+    const result = await res.json();
+    if (result.status === "updated" || result.status === "success") {
+      showAlert("success", "✅ แก้ไขผลทายสำเร็จ!");
+      closeEditModal(); loadHistory();
+    } else {
+      showAlert("error", "❌ " + result.message);
       btn.disabled = false; btn.textContent = "✅ ยืนยันแก้ไข";
     }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    btn.disabled = false; btn.textContent = "✅ ยืนยันแก้ไข";
   }
+}
 
-  document.getElementById("edit-modal").addEventListener("click", function(e) {
-    if (e.target === this) closeEditModal();
-  });
+document.getElementById("edit-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeEditModal();
+});
 
-  // ==========================================
-  // LOAD TEAMS
-  // ==========================================
-  async function loadTeams() {
-    if (allTeams.length > 0) return;
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "getPlayers" })
-      });
-      const result = await res.json();
-      if (result.status === "success") allTeams = result.teams;
-    } catch (err) { console.error("loadTeams:", err); }
-  }
-
-  // ==========================================
-  // TEAM SEARCH
-  // ==========================================
-  function showTeamDropdownFor(type) {
-    if (allTeams.length === 0) return;
-    const query = document.getElementById(type + "-team-search").value.toLowerCase();
-    renderTeamDropdownFor(type, query);
-    document.getElementById(type + "-team-dropdown").style.display = "block";
-  }
-
-  function filterTeamsFor(type, query) {
-    document.getElementById(type + "-team-search-clear").style.display = query ? "block" : "none";
-    renderTeamDropdownFor(type, query.toLowerCase());
-    document.getElementById(type + "-team-dropdown").style.display = "block";
-  }
-
-  function renderTeamDropdownFor(type, query) {
-    const filtered = allTeams.filter(t => t.toLowerCase().includes(query));
-    const dropdown = document.getElementById(type + "-team-dropdown");
-    dropdown.innerHTML = filtered.length === 0
-      ? `<div class="team-dropdown-empty">😕 ไม่พบทีม "${query}"</div>`
-      : filtered.map(team => `
-          <div class="team-dropdown-item"
-            onclick="selectTeamFor('${type}', '${team.replace(/'/g, "\\'")}')">
-            ${getFlag(team, 20)} ${team}
-          </div>`).join("");
-  }
-
-  async function selectTeamFor(type, team) {
-    specialState[type].selectedTeam = team;
-    document.getElementById(type + "-team-search").value               = team;
-    document.getElementById(type + "-team-search").style.display       = "none";
-    document.getElementById(type + "-team-dropdown").style.display     = "none";
-    document.getElementById(type + "-team-search-clear").style.display = "none";
-    document.getElementById(type + "-selected-team-display").style.display = "block";
-
-    const nameWrap = document.getElementById(type + "-selected-team-name-wrap");
-    if (nameWrap) {
-      const emoji = type === "champion" ? "🏆 " : "";
-      nameWrap.innerHTML = `${getFlag(team, 22)} ${emoji}<strong style="color:${
-        type === "champion" ? "#FFD700" : "#2ecc71"};">${team}</strong>`;
-    }
-
-    if (type === "champion") {
-      specialState.champion.selectedValue = team;
-      document.getElementById("champion-btn").disabled = false;
-    } else {
-      specialState.topscorer.selectedPlayer = "";
-      document.getElementById("selected-player-display").style.display = "none";
-      document.getElementById("selected-player-name").textContent      = "";
-      document.getElementById("selected-player-team").textContent      = "";
-      document.getElementById("player-select-group").style.display     = "block";
-      document.getElementById("topscorer-btn").disabled                = true;
-      await loadPlayersForTeam(team);
-    }
-  }
-
-  function clearTeamSearchFor(type) {
-    specialState[type].selectedTeam  = "";
-    specialState[type].selectedValue = "";
-    document.getElementById(type + "-team-search").value               = "";
-    document.getElementById(type + "-team-search").style.display       = "block";
-    document.getElementById(type + "-team-dropdown").style.display     = "none";
-    document.getElementById(type + "-team-search-clear").style.display = "none";
-    document.getElementById(type + "-selected-team-display").style.display = "none";
-    document.getElementById(type + "-btn").disabled = true;
-    if (type === "topscorer") {
-      specialState.topscorer.selectedPlayer = "";
-      document.getElementById("player-select-group").style.display     = "none";
-      document.getElementById("selected-player-display").style.display = "none";
-    }
-  }
-
-  // ==========================================
-  // LOAD PLAYERS
-  // ==========================================
-  async function loadPlayersForTeam(team) {
-    document.getElementById("players-loading").style.display = "block";
-    document.getElementById("players-grid").style.display    = "none";
-    document.getElementById("players-empty").style.display   = "none";
-
-    try {
-      if (!playersCache[team]) {
-        const res    = await fetch(APPS_SCRIPT_URL, {
-          method: "POST", body: JSON.stringify({ action: "getPlayers", team })
-        });
-        const result = await res.json();
-        playersCache[team] = result.status === "success" ? result.players : [];
-      }
-
-      const players = playersCache[team];
-      document.getElementById("players-loading").style.display = "none";
-
-      if (players.length === 0) {
-        document.getElementById("players-empty").style.display = "block"; return;
-      }
-
-      document.getElementById("players-grid").style.display = "grid";
-      document.getElementById("players-grid").innerHTML     = players.map(p => {
-        const cardId = "player-card-" + p.name.replace(/[^a-zA-Z0-9]/g, "_");
-        return `
-          <div class="player-card" id="${cardId}"
-            onclick="selectPlayer('${p.name.replace(/'/g, "\\'")}', '${team.replace(/'/g, "\\'")}')">
-            ⚽ ${p.name}
-          </div>`;
-      }).join("");
-
-    } catch (err) {
-      document.getElementById("players-loading").style.display = "none";
-      document.getElementById("players-empty").style.display   = "block";
-      document.getElementById("players-empty").textContent     = "❌ โหลดไม่ได้: " + err.message;
-    }
-  }
-
-  // ==========================================
-  // SELECT PLAYER
-  // ==========================================
-  function selectPlayer(name, team) {
-    if (specialState.topscorer.selectedPlayer) {
-      const oldCard = document.getElementById(
-        "player-card-" + specialState.topscorer.selectedPlayer.replace(/[^a-zA-Z0-9]/g, "_")
-      );
-      if (oldCard) oldCard.classList.remove("selected");
-    }
-    specialState.topscorer.selectedPlayer = name;
-    const card = document.getElementById("player-card-" + name.replace(/[^a-zA-Z0-9]/g, "_"));
-    if (card) card.classList.add("selected");
-    document.getElementById("selected-player-display").style.display = "block";
-    document.getElementById("selected-player-name").textContent      = "⚽ " + name;
-    document.getElementById("selected-player-team").innerHTML        = getFlag(team, 18) + team;
-    document.getElementById("topscorer-btn").disabled = false;
-  }
-
-  // ==========================================
-  // SPECIAL PREDICTIONS
-  // ==========================================
-  async function loadSpecialPage() {
-    if (!currentUser) {
-      document.getElementById("special-login-warning").style.display = "block";
-      document.getElementById("special-content").style.display       = "none";
-      return;
-    }
-    document.getElementById("special-login-warning").style.display = "none";
-    document.getElementById("special-content").style.display       = "block";
-
-    ["champion", "topscorer"].forEach(type => {
-      document.getElementById(type + "-deadline-text").textContent = "⏳ กำลังโหลด...";
-      document.getElementById(type + "-open").style.display   = "none";
-      document.getElementById(type + "-closed").style.display = "none";
+// ==========================================
+// LOAD TEAMS
+// ==========================================
+async function loadTeams() {
+  if (allTeams.length > 0) return;
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST", body: JSON.stringify({ action:"getPlayers" })
     });
+    const result = await res.json();
+    if (result.status === "success") allTeams = result.teams;
+  } catch (err) { console.error("loadTeams:", err); }
+}
 
-    try {
+// ==========================================
+// TEAM SEARCH
+// ==========================================
+function showTeamDropdownFor(type) {
+  if (allTeams.length === 0) return;
+  const query = document.getElementById(type + "-team-search").value.toLowerCase();
+  renderTeamDropdownFor(type, query);
+  document.getElementById(type + "-team-dropdown").style.display = "block";
+}
+
+function filterTeamsFor(type, query) {
+  document.getElementById(type + "-team-search-clear").style.display = query ? "block" : "none";
+  renderTeamDropdownFor(type, query.toLowerCase());
+  document.getElementById(type + "-team-dropdown").style.display = "block";
+}
+
+function renderTeamDropdownFor(type, query) {
+  const filtered = allTeams.filter(t => t.toLowerCase().includes(query));
+  const dropdown = document.getElementById(type + "-team-dropdown");
+  dropdown.innerHTML = filtered.length === 0
+    ? `<div class="team-dropdown-empty">😕 ไม่พบทีม "${query}"</div>`
+    : filtered.map(team => `
+        <div class="team-dropdown-item"
+          onclick="selectTeamFor('${type}', '${team.replace(/'/g,"\\'")}')">
+          ${getFlag(team, 20)} ${team}
+        </div>`).join("");
+}
+
+async function selectTeamFor(type, team) {
+  specialState[type].selectedTeam = team;
+  document.getElementById(type + "-team-search").value               = team;
+  document.getElementById(type + "-team-search").style.display       = "none";
+  document.getElementById(type + "-team-dropdown").style.display     = "none";
+  document.getElementById(type + "-team-search-clear").style.display = "none";
+  document.getElementById(type + "-selected-team-display").style.display = "block";
+  const nameWrap = document.getElementById(type + "-selected-team-name-wrap");
+  if (nameWrap) {
+    const emoji = type === "champion" ? "🏆 " : "";
+    nameWrap.innerHTML = `${getFlag(team, 22)} ${emoji}<strong style="color:${
+      type==="champion"?"#FFD700":"#2ecc71"};">${team}</strong>`;
+  }
+  if (type === "champion") {
+    specialState.champion.selectedValue = team;
+    document.getElementById("champion-btn").disabled = false;
+  } else {
+    specialState.topscorer.selectedPlayer = "";
+    document.getElementById("selected-player-display").style.display = "none";
+    document.getElementById("selected-player-name").textContent      = "";
+    document.getElementById("selected-player-team").textContent      = "";
+    document.getElementById("player-select-group").style.display     = "block";
+    document.getElementById("topscorer-btn").disabled                = true;
+    await loadPlayersForTeam(team);
+  }
+}
+
+function clearTeamSearchFor(type) {
+  specialState[type].selectedTeam  = "";
+  specialState[type].selectedValue = "";
+  document.getElementById(type + "-team-search").value               = "";
+  document.getElementById(type + "-team-search").style.display       = "block";
+  document.getElementById(type + "-team-dropdown").style.display     = "none";
+  document.getElementById(type + "-team-search-clear").style.display = "none";
+  document.getElementById(type + "-selected-team-display").style.display = "none";
+  document.getElementById(type + "-btn").disabled = true;
+  if (type === "topscorer") {
+    specialState.topscorer.selectedPlayer = "";
+    document.getElementById("player-select-group").style.display     = "none";
+    document.getElementById("selected-player-display").style.display = "none";
+  }
+}
+
+// ==========================================
+// LOAD PLAYERS
+// ==========================================
+async function loadPlayersForTeam(team) {
+  document.getElementById("players-loading").style.display = "block";
+  document.getElementById("players-grid").style.display    = "none";
+  document.getElementById("players-empty").style.display   = "none";
+  try {
+    if (!playersCache[team]) {
       const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action:   "getSpecialStatus",
-          playerId: currentUser.playerId
-        })
+        method:"POST", body: JSON.stringify({ action:"getPlayers", team })
       });
       const result = await res.json();
-
-      if (result.status === "success") {
-        renderSpecialCard("champion",  result.data.champion);
-        renderSpecialCard("topscorer", result.data.topscorer);
-      }
-    } catch (err) { showAlert("error", "❌ โหลดข้อมูลไม่ได้: " + err.message); }
-  }
-
-  async function renderSpecialCard(type, info) {
-    const isChampion = type === "champion";
-    const emoji      = isChampion ? "🏆" : "⚽";
-    const color      = isChampion ? "#FFD700" : "#2ecc71";
-
-    document.getElementById(type + "-points-badge").textContent = `+${info.points} pts`;
-    const deadlineEl = document.getElementById(type + "-deadline-text");
-
-    if (info.isClosed) {
-      document.getElementById(type + "-open").style.display   = "none";
-      document.getElementById(type + "-closed").style.display = "block";
-      deadlineEl.textContent = "🔒 ปิดรับการทายแล้ว";
-
-      const myPredHtml = info.userPrediction
-        ? `<div class="my-pred-box">
-             <div style="color:#aaa; font-size:0.82rem; margin-bottom:6px;">📝 คุณทายไว้</div>
-             <div style="font-size:1.2rem; font-weight:bold; color:${color};">${emoji} ${info.userPrediction}</div>
-           </div>`
-        : `<div class="my-pred-box" style="color:#888;">❌ คุณไม่ได้ทายไว้</div>`;
-
-      let resultHtml = "";
-      if (info.isGraded) {
-        const isCorrect = info.userPrediction &&
-          info.userPrediction.toLowerCase().trim() === info.answer.toLowerCase().trim();
-        resultHtml = `
-          <div class="result-reveal-box ${isCorrect ? "correct" : "wrong"}">
-            <div style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">✅ เฉลยแล้ว</div>
-            <div style="font-size:1.4rem; font-weight:bold; color:${isCorrect ? color : "#fff"};">
-              ${emoji} ${info.answer}
-            </div>
-            ${isCorrect
-              ? `<div style="color:#FFD700; font-weight:bold; margin-top:10px; font-size:1.1rem;">🎉 ถูกต้อง! +${info.points} pts</div>`
-              : `<div style="color:#e74c3c; margin-top:8px;">❌ ไม่ตรง</div>`}
-          </div>`;
-      } else {
-        resultHtml = `
-          <div class="result-reveal-box pending">
-            <div style="font-size:1.5rem; margin-bottom:8px;">⏳</div>
-            <div style="color:#888;">รอ Admin เฉลย...</div>
-          </div>`;
-      }
-      document.getElementById(type + "-result-box").innerHTML = myPredHtml + resultHtml;
-
-    } else {
-      document.getElementById(type + "-open").style.display   = "block";
-      document.getElementById(type + "-closed").style.display = "none";
-
-      if (info.deadline) {
-        const dl = new Date(info.deadline);
-        deadlineEl.textContent = "⏰ ปิดรับ: " + dl.toLocaleString("th-TH");
-        if (specialCountdowns[type]) clearInterval(specialCountdowns[type]);
-        specialCountdowns[type] = setInterval(() => {
-          const diff = dl - new Date();
-          if (diff <= 0) { clearInterval(specialCountdowns[type]); loadSpecialPage(); }
-          else { deadlineEl.textContent = "⏰ ปิดรับใน " + formatTimeLeft(dl); }
-        }, 1000);
-      } else {
-        deadlineEl.textContent = "⚠️ ยังไม่ได้ตั้ง Deadline";
-      }
-
-      await loadTeams();
-
-      if (type === "champion") {
-        clearTeamSearchFor("champion");
-        if (info.userPrediction) {
-          document.getElementById("champion-current").style.display   = "block";
-          document.getElementById("champion-current-val").textContent = info.userPrediction;
-          document.getElementById("champion-btn").textContent         = "🏆 อัปเดตผลทาย";
-        } else {
-          document.getElementById("champion-current").style.display = "none";
-          document.getElementById("champion-btn").textContent       = "🏆 ส่งผลทาย";
-        }
-      } else {
-        clearTeamSearchFor("topscorer");
-        if (info.userPrediction) {
-          document.getElementById("topscorer-current").style.display   = "block";
-          document.getElementById("topscorer-current-val").textContent = info.userPrediction;
-          document.getElementById("topscorer-btn").textContent         = "⚽ อัปเดตผลทาย";
-        } else {
-          document.getElementById("topscorer-current").style.display = "none";
-          document.getElementById("topscorer-btn").textContent       = "⚽ ส่งผลทาย";
-        }
-      }
+      playersCache[team] = result.status === "success" ? result.players : [];
     }
-  }
-
-  // ==========================================
-  // SUBMIT SPECIAL
-  // ==========================================
-  async function submitSpecial(type) {
-    if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อน!"); return; }
-    const prediction = type === "champion"
-      ? specialState.champion.selectedValue
-      : specialState.topscorer.selectedPlayer;
-
-    if (!prediction) {
-      showAlert("error", type === "champion" ? "❌ กรุณาเลือกทีมก่อน!" : "❌ กรุณาเลือกผู้เล่นก่อน!");
-      return;
+    const players = playersCache[team];
+    document.getElementById("players-loading").style.display = "none";
+    if (players.length === 0) {
+      document.getElementById("players-empty").style.display = "block"; return;
     }
-
-    const emoji = type === "champion" ? "🏆" : "⚽";
-    const btn   = document.getElementById(type + "-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
-
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action:     "submitSpecialPrediction",
-          playerId:   currentUser.playerId,
-          playerName: currentUser.name,
-          type,
-          prediction
-        })
-      });
-      const result = await res.json();
-
-      if (result.status === "success" || result.status === "updated") {
-        showAlert("success", "✅ " + result.message);
-        document.getElementById(type + "-current").style.display   = "block";
-        document.getElementById(type + "-current-val").textContent = prediction;
-        btn.textContent = emoji + " อัปเดตผลทาย";
-      } else if (result.status === "closed") {
-        showAlert("error", "🔒 " + result.message); loadSpecialPage();
-      } else {
-        showAlert("error", "❌ " + result.message);
-        btn.textContent = emoji + " ส่งผลทาย";
-      }
-    } catch (err) {
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-      btn.textContent = emoji + " ส่งผลทาย";
-    } finally {
-      btn.disabled = false;
-    }
-  }
-
-  // ==========================================
-  // LEADERBOARD
-  // ==========================================
-  async function loadLeaderboard() {
-    try {
-      const [lbRows, specialRows, settingsRows] = await Promise.all([
-        fetchSheet("Leaderboard"),
-        fetchSheet("SpecialPredictions"),
-        fetchSheet("Settings")
-      ]);
-
-      const settings = {};
-      settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
-      const champDeadline = settings["champion_deadline"]
-        ? new Date(settings["champion_deadline"]) : null;
-      const champClosed = champDeadline && new Date() >= champDeadline;
-
-      const champMap = {};
-      specialRows.forEach(r => {
-        if ((r[3] || "").toString() === "champion") {
-          champMap[(r[1] || "").toString()] = (r[4] || "").toString().trim();
-        }
-      });
-
-      const medals = ["🥇", "🥈", "🥉"];
-
-      if (lbRows.length === 0) {
-        document.getElementById("leaderboard-list").innerHTML =
-          "<p style='text-align:center;color:#888;padding:40px;'>ยังไม่มีข้อมูล Leaderboard</p>";
-        return;
-      }
-
-      const sorted = [...lbRows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
-
-      const html = sorted.map((row, i) => {
-        const [playerId, name, totalScore, exactScore, resultScore] = row;
-        const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
-        const isMe = currentUser &&
-          (playerId || "").toString() === currentUser.playerId;
-
-        const userChamp = champMap[(playerId || "").toString()] || "";
-        const champTagHtml = (champClosed && userChamp)
-          ? `<span class="champion-tag">🏆 ${getFlag(userChamp, 16)}${userChamp}</span>`
-          : "";
-
-        return `
-          <div class="card"
-            style="cursor:pointer; ${isMe ? "border-color:#FFD700; box-shadow:0 0 15px rgba(255,215,0,0.2);" : ""}"
-            onclick="openUserHistoryModal(
-              '${(playerId || "").replace(/'/g, "\\'")}',
-              '${(name     || "").replace(/'/g, "\\'")}',
-              ${i + 1}, ${totalScore || 0})">
-            <div class="leaderboard-item">
-              <div class="rank rank-${i + 1}">${rankDisplay}</div>
-              <div class="player-info">
-                <div class="player-name">
-                  ${name || "-"}
-                  ${isMe ? '<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>' : ""}
-                  ${champTagHtml}
-                  <span style="color:#555; font-size:0.75rem; margin-left:6px;">👆 ดูประวัติ</span>
-                </div>
-                <div class="player-stats">🎯 ทายแม่น: ${exactScore || 0} | ✅ ทายผลถูก: ${resultScore || 0}</div>
-              </div>
-              <div class="score-display">${totalScore || 0} pts</div>
-            </div>
-          </div>`;
-      }).join("");
-
-      document.getElementById("leaderboard-list").innerHTML = html;
-
-    } catch (err) {
-      document.getElementById("leaderboard-list").innerHTML =
-        `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
-    }
-  }
-
-  // ==========================================
-  // USER HISTORY MODAL
-  // ==========================================
-  async function openUserHistoryModal(playerId, name, rank, totalPts) {
-    document.getElementById("user-history-modal").style.display = "flex";
-    document.getElementById("modal-user-name").textContent  = "👤 " + name;
-    document.getElementById("modal-user-rank").textContent  = "อันดับที่ " + rank;
-    document.getElementById("modal-stat-pts").textContent   = totalPts;
-    document.getElementById("modal-stat-exact").textContent  = "—";
-    document.getElementById("modal-stat-result").textContent = "—";
-    document.getElementById("modal-stat-total").textContent  = "—";
-    document.getElementById("modal-history-list").innerHTML  =
-      `<div class="loading"><div class="spinner"></div><p>กำลังโหลดประวัติ...</p></div>`;
-    document.getElementById("modal-special-section").style.display = "none";
-
-    document.querySelectorAll("#user-history-modal .filter-btn")
-      .forEach(b => b.classList.remove("active"));
-    document.getElementById("modal-filter-all").classList.add("active");
-
-    try {
-      const [predictions, matches, specialRows, settingsRows] = await Promise.all([
-        fetchSheet("Predictions"),
-        fetchSheet("Matches"),
-        fetchSheet("SpecialPredictions"),
-        fetchSheet("Settings")
-      ]);
-
-      const settings = {};
-      settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
-
-      const champDeadline = settings["champion_deadline"]
-        ? new Date(settings["champion_deadline"]) : null;
-      const tsDeadline    = settings["topscorer_deadline"]
-        ? new Date(settings["topscorer_deadline"]) : null;
-      const champClosed   = champDeadline && new Date() >= champDeadline;
-      const tsClosed      = tsDeadline    && new Date() >= tsDeadline;
-      const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
-      const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
-
-      let userChamp = "", userTs = "";
-      specialRows.forEach(r => {
-        const rPlayerId = (r[1] || "").toString();
-        const rType     = (r[3] || "").toString();
-        const rPred     = (r[4] || "").toString().trim();
-        if (rPlayerId === playerId) {
-          if (rType === "champion")  userChamp = rPred;
-          if (rType === "topscorer") userTs    = rPred;
-        }
-      });
-
-      if (champClosed || tsClosed) {
-        document.getElementById("modal-special-section").style.display = "block";
-
-        const champValEl    = document.getElementById("modal-champion-val");
-        const champResultEl = document.getElementById("modal-champion-result");
-        if (champClosed) {
-          champValEl.innerHTML = userChamp
-            ? `${getFlag(userChamp, 16)} ${userChamp}`
-            : `<span style="color:#555;">ไม่ได้ทาย</span>`;
-          if (champAnswer) {
-            const correct = userChamp && userChamp.toLowerCase() === champAnswer;
-            champResultEl.innerHTML = correct
-              ? `<span style="color:#FFD700; font-weight:bold;">🎉 ถูก!</span>`
-              : `<span style="color:#e74c3c;">❌ ผิด (${champAnswer})</span>`;
-          } else {
-            champResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
-          }
-        } else {
-          champValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
-          champResultEl.innerHTML = "";
-        }
-
-        const tsValEl    = document.getElementById("modal-topscorer-val");
-        const tsResultEl = document.getElementById("modal-topscorer-result");
-        if (tsClosed) {
-          tsValEl.textContent = userTs || "ไม่ได้ทาย";
-          if (!userTs) tsValEl.style.color = "#555";
-          if (tsAnswer) {
-            const correct = userTs && userTs.toLowerCase() === tsAnswer;
-            tsResultEl.innerHTML = correct
-              ? `<span style="color:#2ecc71; font-weight:bold;">🎉 ถูก!</span>`
-              : `<span style="color:#e74c3c;">❌ ผิด (${tsAnswer})</span>`;
-          } else {
-            tsResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
-          }
-        } else {
-          tsValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
-          tsResultEl.innerHTML = "";
-        }
-      }
-
-      const finishedMatches = matches.filter(r => r[8] === "Finished");
-      const matchMap = {};
-      finishedMatches.forEach(row => { matchMap[row[0]] = row; });
-
-      const myPreds = predictions.filter(row =>
-        (row[1] || "").toString() === playerId && matchMap[row[3]]
-      );
-
-      modalHistoryData = myPreds.map(pred => {
-        const matchId  = pred[3];
-        const homePred = parseInt(pred[4]);
-        const awayPred = parseInt(pred[5]);
-        const match    = matchMap[matchId] || [];
-        const homeReal = parseInt(match[5]);
-        const awayReal = parseInt(match[6]);
-        const isDouble = match[7] === "Yes";
-
-        let resultType = "wrong", points = 0;
-        if (!isNaN(homeReal) && !isNaN(awayReal)) {
-          if (homePred === homeReal && awayPred === awayReal) {
-            resultType = "exact";  points = isDouble ? 6 : 3;
-          } else if (getResultType(homePred, awayPred) === getResultType(homeReal, awayReal)) {
-            resultType = "result"; points = isDouble ? 2 : 1;
-          }
-        }
-        return {
-          matchId, homePred, awayPred,
-          homeTeam: match[2] || "?", awayTeam: match[3] || "?",
-          matchDate: match[4] || "", homeReal, awayReal, isDouble, resultType, points
-        };
-      });
-
-      modalHistoryData.sort((a, b) => new Date(b.matchDate) - new Date(a.matchDate));
-
-      const exact  = modalHistoryData.filter(h => h.resultType === "exact").length;
-      const result = modalHistoryData.filter(h => h.resultType === "result").length;
-      document.getElementById("modal-stat-exact").textContent  = exact;
-      document.getElementById("modal-stat-result").textContent = result;
-      document.getElementById("modal-stat-total").textContent  = modalHistoryData.length;
-      renderModalHistory(modalHistoryData);
-
-    } catch (err) {
-      document.getElementById("modal-history-list").innerHTML =
-        `<p style='text-align:center;color:#f44336;padding:20px;'>❌ โหลดไม่ได้: ${err.message}</p>`;
-    }
-  }
-
-  function renderModalHistory(data) {
-    if (data.length === 0) {
-      document.getElementById("modal-history-list").innerHTML = `
-        <div style="text-align:center; padding:30px; color:#888;">
-          <div style="font-size:2.5rem; margin-bottom:10px;">📭</div>ไม่มีรายการในหมวดนี้
-        </div>`;
-      return;
-    }
-    const badgeMap = {
-      exact:  `<span class="result-badge badge-exact">🎯 ทายแม่น</span>`,
-      result: `<span class="result-badge badge-result">✅ ผลถูก</span>`,
-      wrong:  `<span class="result-badge badge-wrong">❌ ผิด</span>`
-    };
-    const html = data.map(h => `
-      <div class="user-history-card ${h.resultType}">
-        <div class="user-history-teams">
-          <div class="user-history-team">${getFlag(h.homeTeam, 18)}${h.homeTeam}</div>
-          <div class="user-history-score">
-            <div class="user-history-real">${h.homeReal} - ${h.awayReal}</div>
-            <div class="user-history-pred">ทาย: ${h.homePred}-${h.awayPred}</div>
-          </div>
-          <div class="user-history-team">${getFlag(h.awayTeam, 18)}${h.awayTeam}</div>
-        </div>
-        <div class="user-history-footer">
-          <span>📅 ${h.matchDate}</span>
-          ${badgeMap[h.resultType]}
-          <span class="pts-badge">+${h.points} pts${h.isDouble ? " ⭐" : ""}</span>
-        </div>
-      </div>`).join("");
-    document.getElementById("modal-history-list").innerHTML = html;
-  }
-
-  function filterModalHistory(type, el) {
-    document.querySelectorAll("#user-history-modal .filter-btn").forEach(b => b.classList.remove("active"));
-    el.classList.add("active");
-    const filtered = type === "all" ? modalHistoryData : modalHistoryData.filter(h => h.resultType === type);
-    renderModalHistory(filtered);
-  }
-
-  function closeUserHistoryModal() {
-    document.getElementById("user-history-modal").style.display = "none";
-    modalHistoryData = [];
-  }
-
-  document.getElementById("user-history-modal").addEventListener("click", function(e) {
-    if (e.target === this) closeUserHistoryModal();
-  });
-
-  // ==========================================
-  // HISTORY
-  // ==========================================
-  async function loadHistory() {
-    if (!currentUser) {
-      document.getElementById("history-login-warning").style.display = "block";
-      document.getElementById("history-summary").style.display       = "none";
-      document.getElementById("history-list").innerHTML               = "";
-      return;
-    }
-    document.getElementById("history-login-warning").style.display = "none";
-    document.getElementById("history-list").innerHTML =
-      `<div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>`;
-
-    try {
-      const [predictions, matches] = await Promise.all([
-        fetchSheet("Predictions"),
-        fetchSheet("Matches")
-      ]);
-
-      const myPreds = predictions.filter(
-        row => (row[1] || "").toString() === currentUser.playerId
-      );
-
-      if (myPreds.length === 0) {
-        document.getElementById("history-summary").style.display = "none";
-        document.getElementById("history-list").innerHTML = `
-          <div class="card" style="text-align:center; padding:40px;">
-            <div style="font-size:3rem; margin-bottom:15px;">📭</div>
-            <p style="color:#aaa;">ยังไม่มีประวัติการทาย</p>
-          </div>`;
-        return;
-      }
-
-      const matchMap = {};
-      matches.forEach(row => { matchMap[row[0]] = row; });
-
-      historyData = myPreds.map(pred => {
-        const matchId  = pred[3];
-        const homePred = parseInt(pred[4]);
-        const awayPred = parseInt(pred[5]);
-        const match    = matchMap[matchId] || [];
-        const homeReal = parseInt(match[5]);
-        const awayReal = parseInt(match[6]);
-        const isDouble = match[7] === "Yes";
-        const status   = match[8] || "Upcoming";
-
-        let resultType = "pending", points = 0;
-        if (status === "Finished" && !isNaN(homeReal) && !isNaN(awayReal)) {
-          if (homePred === homeReal && awayPred === awayReal) {
-            resultType = "exact";  points = isDouble ? 6 : 3;
-          } else if (getResultType(homePred, awayPred) === getResultType(homeReal, awayReal)) {
-            resultType = "result"; points = isDouble ? 2 : 1;
-          } else {
-            resultType = "wrong";  points = 0;
-          }
-        }
-        return {
-          timestamp: pred[0], matchId, homePred, awayPred,
-          homeTeam: match[2] || "?", awayTeam: match[3] || "?",
-          matchDate: match[4] || "", homeReal, awayReal,
-          isDouble, status, resultType, points
-        };
-      });
-
-      historyData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-      const total    = historyData.length;
-      const exact    = historyData.filter(h => h.resultType === "exact").length;
-      const result   = historyData.filter(h => h.resultType === "result").length;
-      const totalPts = historyData.reduce((sum, h) => sum + h.points, 0);
-
-      document.getElementById("stat-total").textContent  = total;
-      document.getElementById("stat-exact").textContent  = exact;
-      document.getElementById("stat-result").textContent = result;
-      document.getElementById("stat-points").textContent = totalPts;
-      document.getElementById("history-summary").style.display = "block";
-
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      document.querySelector(".filter-btn").classList.add("active");
-      renderHistory(historyData);
-
-    } catch (err) {
-      document.getElementById("history-list").innerHTML =
-        `<p style='text-align:center;color:#f44336'>❌ โหลดไม่ได้: ${err.message}</p>`;
-    }
-  }
-
-  function getResultType(home, away) {
-    if (home > away) return "H";
-    if (home < away) return "A";
-    return "D";
-  }
-
-  function renderHistory(data) {
-    if (data.length === 0) {
-      document.getElementById("history-list").innerHTML = `
-        <div class="card" style="text-align:center; padding:30px; color:#888;">ไม่มีรายการในหมวดนี้</div>`;
-      return;
-    }
-    const badgeMap = {
-      exact:   `<span class="result-badge badge-exact">🎯 ทายแม่นสกอร์!</span>`,
-      result:  `<span class="result-badge badge-result">✅ ทายผลถูก</span>`,
-      wrong:   `<span class="result-badge badge-wrong">❌ ทายผิด</span>`,
-      pending: `<span class="result-badge badge-pending">⏳ รอผล</span>`
-    };
-    const now = new Date();
-    const html = data.map(h => {
-      const isFinished = h.status === "Finished";
-      const isEditable = !isFinished && now < new Date(h.matchDate);
-      const realScoreHtml = isFinished
-        ? `<div class="history-score-real">${h.homeReal} - ${h.awayReal}</div>
-           <div style="font-size:0.7rem; color:#666; margin-top:2px;">ผลจริง</div>`
-        : `<div style="color:#555; font-size:0.85rem; padding:4px 0;">⏳ รอผล</div>`;
-      const ptsHtml  = isFinished
-        ? `<span class="pts-badge">+${h.points} pts${h.isDouble ? " ⭐" : ""}</span>` : "";
-      const predDate = new Date(h.timestamp).toLocaleDateString("th-TH", {
-        day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
-      });
-      const editBtn = isEditable ? `
-        <button class="edit-pred-btn"
-          onclick="openEditModal(
-            '${h.matchId}',
-            '${h.homeTeam.replace(/'/g, "\\'")}',
-            '${h.awayTeam.replace(/'/g, "\\'")}',
-            '${h.matchDate}',
-            ${h.homePred}, ${h.awayPred})">✏️ แก้ไข</button>` : "";
-
+    document.getElementById("players-grid").style.display = "grid";
+    document.getElementById("players-grid").innerHTML     = players.map(p => {
+      const cardId = "player-card-" + p.name.replace(/[^a-zA-Z0-9]/g, "_");
       return `
-        <div class="history-card ${h.resultType}">
-          <div class="history-teams">
-            <div class="history-team">${getFlag(h.homeTeam, 20)}${h.homeTeam}</div>
-            <div class="history-score-box">
-              ${realScoreHtml}
-              <div style="font-size:0.8rem; color:#aaa;">ทาย: ${h.homePred} - ${h.awayPred}</div>
-            </div>
-            <div class="history-team">${getFlag(h.awayTeam, 20)}${h.awayTeam}</div>
+        <div class="player-card" id="${cardId}"
+          onclick="selectPlayer('${p.name.replace(/'/g,"\\'")}', '${team.replace(/'/g,"\\'")}')">
+          ⚽ ${p.name}
+        </div>`;
+    }).join("");
+  } catch (err) {
+    document.getElementById("players-loading").style.display = "none";
+    document.getElementById("players-empty").style.display   = "block";
+    document.getElementById("players-empty").textContent     = "❌ โหลดไม่ได้: " + err.message;
+  }
+}
+
+// ==========================================
+// SELECT PLAYER
+// ==========================================
+function selectPlayer(name, team) {
+  if (specialState.topscorer.selectedPlayer) {
+    const oldCard = document.getElementById(
+      "player-card-" + specialState.topscorer.selectedPlayer.replace(/[^a-zA-Z0-9]/g, "_")
+    );
+    if (oldCard) oldCard.classList.remove("selected");
+  }
+  specialState.topscorer.selectedPlayer = name;
+  const card = document.getElementById("player-card-" + name.replace(/[^a-zA-Z0-9]/g, "_"));
+  if (card) card.classList.add("selected");
+  document.getElementById("selected-player-display").style.display = "block";
+  document.getElementById("selected-player-name").textContent      = "⚽ " + name;
+  document.getElementById("selected-player-team").innerHTML        = getFlag(team, 18) + team;
+  document.getElementById("topscorer-btn").disabled = false;
+}
+
+// ==========================================
+// SPECIAL PREDICTIONS
+// ==========================================
+async function loadSpecialPage() {
+  if (!currentUser) {
+    document.getElementById("special-login-warning").style.display = "block";
+    document.getElementById("special-content").style.display       = "none";
+    return;
+  }
+  document.getElementById("special-login-warning").style.display = "none";
+  document.getElementById("special-content").style.display       = "block";
+  ["champion","topscorer"].forEach(type => {
+    document.getElementById(type + "-deadline-text").textContent = "⏳ กำลังโหลด...";
+    document.getElementById(type + "-open").style.display   = "none";
+    document.getElementById(type + "-closed").style.display = "none";
+  });
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({ action:"getSpecialStatus", playerId: currentUser.playerId })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      renderSpecialCard("champion",  result.data.champion);
+      renderSpecialCard("topscorer", result.data.topscorer);
+    }
+  } catch (err) { showAlert("error", "❌ โหลดข้อมูลไม่ได้: " + err.message); }
+}
+
+async function renderSpecialCard(type, info) {
+  const isChampion = type === "champion";
+  const emoji      = isChampion ? "🏆" : "⚽";
+  const color      = isChampion ? "#FFD700" : "#2ecc71";
+  document.getElementById(type + "-points-badge").textContent = `+${info.points} pts`;
+  const deadlineEl = document.getElementById(type + "-deadline-text");
+  if (info.isClosed) {
+    document.getElementById(type + "-open").style.display   = "none";
+    document.getElementById(type + "-closed").style.display = "block";
+    deadlineEl.textContent = "🔒 ปิดรับการทายแล้ว";
+    const myPredHtml = info.userPrediction
+      ? `<div class="my-pred-box">
+           <div style="color:#aaa; font-size:0.82rem; margin-bottom:6px;">📝 คุณทายไว้</div>
+           <div style="font-size:1.2rem; font-weight:bold; color:${color};">${emoji} ${info.userPrediction}</div>
+         </div>`
+      : `<div class="my-pred-box" style="color:#888;">❌ คุณไม่ได้ทายไว้</div>`;
+    let resultHtml = "";
+    if (info.isGraded) {
+      const isCorrect = info.userPrediction &&
+        info.userPrediction.toLowerCase().trim() === info.answer.toLowerCase().trim();
+      resultHtml = `
+        <div class="result-reveal-box ${isCorrect?"correct":"wrong"}">
+          <div style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">✅ เฉลยแล้ว</div>
+          <div style="font-size:1.4rem; font-weight:bold; color:${isCorrect?color:"#fff"};">
+            ${emoji} ${info.answer}
           </div>
-          <div class="history-footer">
-            <span>📅 ${h.matchDate}</span>
-            ${badgeMap[h.resultType]}
-            ${ptsHtml} ${editBtn}
-            <span>🕐 ทายเมื่อ ${predDate}</span>
+          ${isCorrect
+            ? `<div style="color:#FFD700; font-weight:bold; margin-top:10px; font-size:1.1rem;">🎉 ถูกต้อง! +${info.points} pts</div>`
+            : `<div style="color:#e74c3c; margin-top:8px;">❌ ไม่ตรง</div>`}
+        </div>`;
+    } else {
+      resultHtml = `
+        <div class="result-reveal-box pending">
+          <div style="font-size:1.5rem; margin-bottom:8px;">⏳</div>
+          <div style="color:#888;">รอ Admin เฉลย...</div>
+        </div>`;
+    }
+    document.getElementById(type + "-result-box").innerHTML = myPredHtml + resultHtml;
+  } else {
+    document.getElementById(type + "-open").style.display   = "block";
+    document.getElementById(type + "-closed").style.display = "none";
+    if (info.deadline) {
+      const dl = new Date(info.deadline);
+      deadlineEl.textContent = "⏰ ปิดรับ: " + dl.toLocaleString("th-TH");
+      if (specialCountdowns[type]) clearInterval(specialCountdowns[type]);
+      specialCountdowns[type] = setInterval(() => {
+        const diff = dl - new Date();
+        if (diff <= 0) { clearInterval(specialCountdowns[type]); loadSpecialPage(); }
+        else { deadlineEl.textContent = "⏰ ปิดรับใน " + formatTimeLeft(dl); }
+      }, 1000);
+    } else {
+      deadlineEl.textContent = "⚠️ ยังไม่ได้ตั้ง Deadline";
+    }
+    await loadTeams();
+    if (type === "champion") {
+      clearTeamSearchFor("champion");
+      if (info.userPrediction) {
+        document.getElementById("champion-current").style.display   = "block";
+        document.getElementById("champion-current-val").textContent = info.userPrediction;
+        document.getElementById("champion-btn").textContent         = "🏆 อัปเดตผลทาย";
+      } else {
+        document.getElementById("champion-current").style.display = "none";
+        document.getElementById("champion-btn").textContent       = "🏆 ส่งผลทาย";
+      }
+    } else {
+      clearTeamSearchFor("topscorer");
+      if (info.userPrediction) {
+        document.getElementById("topscorer-current").style.display   = "block";
+        document.getElementById("topscorer-current-val").textContent = info.userPrediction;
+        document.getElementById("topscorer-btn").textContent         = "⚽ อัปเดตผลทาย";
+      } else {
+        document.getElementById("topscorer-current").style.display = "none";
+        document.getElementById("topscorer-btn").textContent       = "⚽ ส่งผลทาย";
+      }
+    }
+  }
+}
+
+// ==========================================
+// SUBMIT SPECIAL
+// ==========================================
+async function submitSpecial(type) {
+  if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อน!"); return; }
+  const prediction = type === "champion"
+    ? specialState.champion.selectedValue
+    : specialState.topscorer.selectedPlayer;
+  if (!prediction) {
+    showAlert("error", type === "champion" ? "❌ กรุณาเลือกทีมก่อน!" : "❌ กรุณาเลือกผู้เล่นก่อน!");
+    return;
+  }
+  const emoji = type === "champion" ? "🏆" : "⚽";
+  const btn   = document.getElementById(type + "-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:"submitSpecialPrediction",
+        playerId:   currentUser.playerId,
+        playerName: currentUser.name,
+        type, prediction
+      })
+    });
+    const result = await res.json();
+    if (result.status === "success" || result.status === "updated") {
+      showAlert("success", "✅ " + result.message);
+      document.getElementById(type + "-current").style.display   = "block";
+      document.getElementById(type + "-current-val").textContent = prediction;
+      btn.textContent = emoji + " อัปเดตผลทาย";
+    } else if (result.status === "closed") {
+      showAlert("error", "🔒 " + result.message); loadSpecialPage();
+    } else {
+      showAlert("error", "❌ " + result.message);
+      btn.textContent = emoji + " ส่งผลทาย";
+    }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    btn.textContent = emoji + " ส่งผลทาย";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ==========================================
+// LEADERBOARD
+// ==========================================
+async function loadLeaderboard() {
+  try {
+    const [lbRows, specialRows, settingsRows] = await Promise.all([
+      fetchSheet("Leaderboard"),
+      fetchSheet("SpecialPredictions"),
+      fetchSheet("Settings")
+    ]);
+    const settings = {};
+    settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+    const champDeadline = settings["champion_deadline"]
+      ? new Date(settings["champion_deadline"]) : null;
+    const champClosed = champDeadline && new Date() >= champDeadline;
+    const champMap = {};
+    specialRows.forEach(r => {
+      if ((r[3]||"").toString() === "champion") {
+        champMap[(r[1]||"").toString()] = (r[4]||"").toString().trim();
+      }
+    });
+    const medals = ["🥇","🥈","🥉"];
+    if (lbRows.length === 0) {
+      document.getElementById("leaderboard-list").innerHTML =
+        "<p style='text-align:center;color:#888;padding:40px;'>ยังไม่มีข้อมูล Leaderboard</p>";
+      return;
+    }
+    const sorted = [...lbRows].sort((a,b) => parseInt(b[2]||0) - parseInt(a[2]||0));
+    const html = sorted.map((row, i) => {
+      const [playerId, name, totalScore, exactScore, resultScore] = row;
+      const rankDisplay = i < 3 ? medals[i] : `#${i+1}`;
+      const isMe = currentUser && (playerId||"").toString() === currentUser.playerId;
+      const userChamp = champMap[(playerId||"").toString()] || "";
+      const champTagHtml = (champClosed && userChamp)
+        ? `<span class="champion-tag">🏆 ${getFlag(userChamp,16)}${userChamp}</span>`
+        : "";
+      return `
+        <div class="card"
+          style="cursor:pointer; ${isMe?"border-color:#FFD700; box-shadow:0 0 15px rgba(255,215,0,0.2);":""}"
+          onclick="openUserHistoryModal(
+            '${(playerId||"").replace(/'/g,"\\'")}',
+            '${(name||"").replace(/'/g,"\\'")}',
+            ${i+1}, ${totalScore||0})">
+          <div class="leaderboard-item">
+            <div class="rank rank-${i+1}">${rankDisplay}</div>
+            <div class="player-info">
+              <div class="player-name">
+                ${name||"-"}
+                ${isMe?'<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>':""}
+                ${champTagHtml}
+                <span style="color:#555; font-size:0.75rem; margin-left:6px;">👆 ดูประวัติ</span>
+              </div>
+              <div class="player-stats">🎯 ทายแม่น: ${exactScore||0} | ✅ ทายผลถูก: ${resultScore||0}</div>
+            </div>
+            <div class="score-display">${totalScore||0} pts</div>
           </div>
         </div>`;
     }).join("");
-    document.getElementById("history-list").innerHTML = html;
+    document.getElementById("leaderboard-list").innerHTML = html;
+  } catch (err) {
+    document.getElementById("leaderboard-list").innerHTML =
+      `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
   }
+}
 
-  function filterHistory(type, el) {
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    el.classList.add("active");
-    const filtered = type === "all" ? historyData : historyData.filter(h => h.resultType === type);
-    renderHistory(filtered);
-  }
-
-  // ==========================================
-  // ADMIN
-  // ==========================================
-  function initAdminPage() {
-    if (adminLoggedIn) {
-      document.getElementById("admin-login-box").style.display = "none";
-      document.getElementById("admin-panel").style.display     = "block";
-      loadAdminMatches();
-    } else {
-      document.getElementById("admin-login-box").style.display = "block";
-      document.getElementById("admin-panel").style.display     = "none";
-    }
-  }
-
-  async function adminLogin() {
-    const pw = document.getElementById("admin-password").value;
-    if (!pw) { showAlert("error", "❌ กรุณากรอกรหัสผ่าน"); return; }
-
-    const btn = document.querySelector("#admin-login-box .btn");
-    btn.disabled    = true;
-    btn.textContent = "⏳ กำลังตรวจสอบ...";
-
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ action: "verifyAdmin", password: pw })
-      });
-      const result = await res.json();
-
-      if (result.status === "success") {
-        adminPassword = pw;
-        adminLoggedIn = true;
-        document.getElementById("admin-login-box").style.display = "none";
-        document.getElementById("admin-panel").style.display     = "block";
-        document.getElementById("admin-password").value          = "";
-        loadAdminMatches();
-        showAlert("success", "✅ เข้าสู่ระบบ Admin สำเร็จ!");
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
-        document.getElementById("admin-password").value = "";
-        document.getElementById("admin-password").focus();
-      } else {
-        showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
+// ==========================================
+// USER HISTORY MODAL
+// ==========================================
+async function openUserHistoryModal(playerId, name, rank, totalPts) {
+  document.getElementById("user-history-modal").style.display = "flex";
+  document.getElementById("modal-user-name").textContent  = "👤 " + name;
+  document.getElementById("modal-user-rank").textContent  = "อันดับที่ " + rank;
+  document.getElementById("modal-stat-pts").textContent   = totalPts;
+  document.getElementById("modal-stat-exact").textContent  = "—";
+  document.getElementById("modal-stat-result").textContent = "—";
+  document.getElementById("modal-stat-total").textContent  = "—";
+  document.getElementById("modal-history-list").innerHTML  =
+    `<div class="loading"><div class="spinner"></div><p>กำลังโหลดประวัติ...</p></div>`;
+  document.getElementById("modal-special-section").style.display = "none";
+  document.querySelectorAll("#user-history-modal .filter-btn")
+    .forEach(b => b.classList.remove("active"));
+  document.getElementById("modal-filter-all").classList.add("active");
+  try {
+    const [predictions, matches, specialRows, settingsRows] = await Promise.all([
+      fetchSheet("Predictions"),
+      fetchSheet("Matches"),
+      fetchSheet("SpecialPredictions"),
+      fetchSheet("Settings")
+    ]);
+    const settings = {};
+    settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+    const champDeadline = settings["champion_deadline"] ? new Date(settings["champion_deadline"]) : null;
+    const tsDeadline    = settings["topscorer_deadline"] ? new Date(settings["topscorer_deadline"]) : null;
+    const champClosed   = champDeadline && new Date() >= champDeadline;
+    const tsClosed      = tsDeadline    && new Date() >= tsDeadline;
+    const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
+    const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
+    let userChamp = "", userTs = "";
+    specialRows.forEach(r => {
+      const rPlayerId = (r[1]||"").toString();
+      const rType     = (r[3]||"").toString();
+      const rPred     = (r[4]||"").toString().trim();
+      if (rPlayerId === playerId) {
+        if (rType === "champion")  userChamp = rPred;
+        if (rType === "topscorer") userTs    = rPred;
       }
-    } catch (err) {
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    } finally {
-      btn.disabled    = false;
-      btn.textContent = "🔓 เข้าสู่ระบบ Admin";
+    });
+    if (champClosed || tsClosed) {
+      document.getElementById("modal-special-section").style.display = "block";
+      const champValEl    = document.getElementById("modal-champion-val");
+      const champResultEl = document.getElementById("modal-champion-result");
+      if (champClosed) {
+        champValEl.innerHTML = userChamp
+          ? `${getFlag(userChamp,16)} ${userChamp}`
+          : `<span style="color:#555;">ไม่ได้ทาย</span>`;
+        if (champAnswer) {
+          const correct = userChamp && userChamp.toLowerCase() === champAnswer;
+          champResultEl.innerHTML = correct
+            ? `<span style="color:#FFD700; font-weight:bold;">🎉 ถูก!</span>`
+            : `<span style="color:#e74c3c;">❌ ผิด (${champAnswer})</span>`;
+        } else {
+          champResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
+        }
+      } else {
+        champValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
+        champResultEl.innerHTML = "";
+      }
+      const tsValEl    = document.getElementById("modal-topscorer-val");
+      const tsResultEl = document.getElementById("modal-topscorer-result");
+      if (tsClosed) {
+        tsValEl.textContent = userTs || "ไม่ได้ทาย";
+        if (!userTs) tsValEl.style.color = "#555";
+        if (tsAnswer) {
+          const correct = userTs && userTs.toLowerCase() === tsAnswer;
+          tsResultEl.innerHTML = correct
+            ? `<span style="color:#2ecc71; font-weight:bold;">🎉 ถูก!</span>`
+            : `<span style="color:#e74c3c;">❌ ผิด (${tsAnswer})</span>`;
+        } else {
+          tsResultEl.innerHTML = `<span style="color:#888; font-size:0.8rem;">⏳ รอเฉลย</span>`;
+        }
+      } else {
+        tsValEl.innerHTML    = `<span class="modal-special-locked">🔒 ยังไม่ปิดรับ</span>`;
+        tsResultEl.innerHTML = "";
+      }
     }
+    const finishedMatches = matches.filter(r => r[8] === "Finished");
+    const matchMap = {};
+    finishedMatches.forEach(row => { matchMap[row[0]] = row; });
+    const myPreds = predictions.filter(row =>
+      (row[1]||"").toString() === playerId && matchMap[row[3]]
+    );
+    modalHistoryData = myPreds.map(pred => {
+      const matchId  = pred[3];
+      const homePred = parseInt(pred[4]);
+      const awayPred = parseInt(pred[5]);
+      const match    = matchMap[matchId] || [];
+      const homeReal = parseInt(match[5]);
+      const awayReal = parseInt(match[6]);
+      const isDouble = match[7] === "Yes";
+      let resultType = "wrong", points = 0;
+      if (!isNaN(homeReal) && !isNaN(awayReal)) {
+        if (homePred === homeReal && awayPred === awayReal) {
+          resultType = "exact";  points = isDouble ? 6 : 3;
+        } else if (getResultType(homePred,awayPred) === getResultType(homeReal,awayReal)) {
+          resultType = "result"; points = isDouble ? 2 : 1;
+        }
+      }
+      return {
+        matchId, homePred, awayPred,
+        homeTeam: match[2]||"?", awayTeam: match[3]||"?",
+        matchDate: match[4]||"", homeReal, awayReal, isDouble, resultType, points
+      };
+    });
+    modalHistoryData.sort((a,b) => new Date(b.matchDate) - new Date(a.matchDate));
+    const exact  = modalHistoryData.filter(h => h.resultType === "exact").length;
+    const result = modalHistoryData.filter(h => h.resultType === "result").length;
+    document.getElementById("modal-stat-exact").textContent  = exact;
+    document.getElementById("modal-stat-result").textContent = result;
+    document.getElementById("modal-stat-total").textContent  = modalHistoryData.length;
+    renderModalHistory(modalHistoryData);
+  } catch (err) {
+    document.getElementById("modal-history-list").innerHTML =
+      `<p style='text-align:center;color:#f44336;padding:20px;'>❌ โหลดไม่ได้: ${err.message}</p>`;
   }
+}
 
-  function adminLogout() {
-    adminLoggedIn = false; adminPassword = "";
-    document.getElementById("admin-password").value          = "";
+function renderModalHistory(data) {
+  if (data.length === 0) {
+    document.getElementById("modal-history-list").innerHTML = `
+      <div style="text-align:center; padding:30px; color:#888;">
+        <div style="font-size:2.5rem; margin-bottom:10px;">📭</div>ไม่มีรายการในหมวดนี้
+      </div>`;
+    return;
+  }
+  const badgeMap = {
+    exact:  `<span class="result-badge badge-exact">🎯 ทายแม่น</span>`,
+    result: `<span class="result-badge badge-result">✅ ผลถูก</span>`,
+    wrong:  `<span class="result-badge badge-wrong">❌ ผิด</span>`
+  };
+  const html = data.map(h => `
+    <div class="user-history-card ${h.resultType}">
+      <div class="user-history-teams">
+        <div class="user-history-team">${getFlag(h.homeTeam,18)}${h.homeTeam}</div>
+        <div class="user-history-score">
+          <div class="user-history-real">${h.homeReal} - ${h.awayReal}</div>
+          <div class="user-history-pred">ทาย: ${h.homePred}-${h.awayPred}</div>
+        </div>
+        <div class="user-history-team">${getFlag(h.awayTeam,18)}${h.awayTeam}</div>
+      </div>
+      <div class="user-history-footer">
+        <span>📅 ${h.matchDate}</span>
+        ${badgeMap[h.resultType]}
+        <span class="pts-badge">+${h.points} pts${h.isDouble?" ⭐":""}</span>
+      </div>
+    </div>`).join("");
+  document.getElementById("modal-history-list").innerHTML = html;
+}
+
+function filterModalHistory(type, el) {
+  document.querySelectorAll("#user-history-modal .filter-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  const filtered = type === "all" ? modalHistoryData : modalHistoryData.filter(h => h.resultType === type);
+  renderModalHistory(filtered);
+}
+
+function closeUserHistoryModal() {
+  document.getElementById("user-history-modal").style.display = "none";
+  modalHistoryData = [];
+}
+
+document.getElementById("user-history-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeUserHistoryModal();
+});
+
+// ==========================================
+// HISTORY
+// ==========================================
+async function loadHistory() {
+  if (!currentUser) {
+    document.getElementById("history-login-warning").style.display = "block";
+    document.getElementById("history-summary").style.display       = "none";
+    document.getElementById("history-list").innerHTML               = "";
+    return;
+  }
+  document.getElementById("history-login-warning").style.display = "none";
+  document.getElementById("history-list").innerHTML =
+    `<div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>`;
+  try {
+    const [predictions, matches] = await Promise.all([
+      fetchSheet("Predictions"),
+      fetchSheet("Matches")
+    ]);
+    const myPreds = predictions.filter(
+      row => (row[1]||"").toString() === currentUser.playerId
+    );
+    if (myPreds.length === 0) {
+      document.getElementById("history-summary").style.display = "none";
+      document.getElementById("history-list").innerHTML = `
+        <div class="card" style="text-align:center; padding:40px;">
+          <div style="font-size:3rem; margin-bottom:15px;">📭</div>
+          <p style="color:#aaa;">ยังไม่มีประวัติการทาย</p>
+        </div>`;
+      return;
+    }
+    const matchMap = {};
+    matches.forEach(row => { matchMap[row[0]] = row; });
+    historyData = myPreds.map(pred => {
+      const matchId  = pred[3];
+      const homePred = parseInt(pred[4]);
+      const awayPred = parseInt(pred[5]);
+      const match    = matchMap[matchId] || [];
+      const homeReal = parseInt(match[5]);
+      const awayReal = parseInt(match[6]);
+      const isDouble = match[7] === "Yes";
+      const status   = match[8] || "Upcoming";
+      let resultType = "pending", points = 0;
+      if (status === "Finished" && !isNaN(homeReal) && !isNaN(awayReal)) {
+        if (homePred === homeReal && awayPred === awayReal) {
+          resultType = "exact";  points = isDouble ? 6 : 3;
+        } else if (getResultType(homePred,awayPred) === getResultType(homeReal,awayReal)) {
+          resultType = "result"; points = isDouble ? 2 : 1;
+        } else {
+          resultType = "wrong";  points = 0;
+        }
+      }
+      return {
+        timestamp: pred[0], matchId, homePred, awayPred,
+        homeTeam: match[2]||"?", awayTeam: match[3]||"?",
+        matchDate: match[4]||"", homeReal, awayReal,
+        isDouble, status, resultType, points
+      };
+    });
+    historyData.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const total    = historyData.length;
+    const exact    = historyData.filter(h => h.resultType === "exact").length;
+    const result   = historyData.filter(h => h.resultType === "result").length;
+    const totalPts = historyData.reduce((sum,h) => sum + h.points, 0);
+    document.getElementById("stat-total").textContent  = total;
+    document.getElementById("stat-exact").textContent  = exact;
+    document.getElementById("stat-result").textContent = result;
+    document.getElementById("stat-points").textContent = totalPts;
+    document.getElementById("history-summary").style.display = "block";
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector(".filter-btn").classList.add("active");
+    renderHistory(historyData);
+  } catch (err) {
+    document.getElementById("history-list").innerHTML =
+      `<p style='text-align:center;color:#f44336'>❌ โหลดไม่ได้: ${err.message}</p>`;
+  }
+}
+
+function getResultType(home, away) {
+  if (home > away) return "H";
+  if (home < away) return "A";
+  return "D";
+}
+
+function renderHistory(data) {
+  if (data.length === 0) {
+    document.getElementById("history-list").innerHTML = `
+      <div class="card" style="text-align:center; padding:30px; color:#888;">ไม่มีรายการในหมวดนี้</div>`;
+    return;
+  }
+  const badgeMap = {
+    exact:   `<span class="result-badge badge-exact">🎯 ทายแม่นสกอร์!</span>`,
+    result:  `<span class="result-badge badge-result">✅ ทายผลถูก</span>`,
+    wrong:   `<span class="result-badge badge-wrong">❌ ทายผิด</span>`,
+    pending: `<span class="result-badge badge-pending">⏳ รอผล</span>`
+  };
+  const now = new Date();
+  const html = data.map(h => {
+    const isFinished = h.status === "Finished";
+    const isEditable = !isFinished && now < new Date(h.matchDate);
+    const realScoreHtml = isFinished
+      ? `<div class="history-score-real">${h.homeReal} - ${h.awayReal}</div>
+         <div style="font-size:0.7rem; color:#666; margin-top:2px;">ผลจริง</div>`
+      : `<div style="color:#555; font-size:0.85rem; padding:4px 0;">⏳ รอผล</div>`;
+    const ptsHtml = isFinished
+      ? `<span class="pts-badge">+${h.points} pts${h.isDouble?" ⭐":""}</span>` : "";
+    const predDate = new Date(h.timestamp).toLocaleDateString("th-TH", {
+      day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"
+    });
+    const editBtn = isEditable ? `
+      <button class="edit-pred-btn"
+        onclick="openEditModal(
+          '${h.matchId}',
+          '${h.homeTeam.replace(/'/g,"\\'")}',
+          '${h.awayTeam.replace(/'/g,"\\'")}',
+          '${h.matchDate}',
+          ${h.homePred}, ${h.awayPred})">✏️ แก้ไข</button>` : "";
+    return `
+      <div class="history-card ${h.resultType}">
+        <div class="history-teams">
+          <div class="history-team">${getFlag(h.homeTeam,20)}${h.homeTeam}</div>
+          <div class="history-score-box">
+            ${realScoreHtml}
+            <div style="font-size:0.8rem; color:#aaa;">ทาย: ${h.homePred} - ${h.awayPred}</div>
+          </div>
+          <div class="history-team">${getFlag(h.awayTeam,20)}${h.awayTeam}</div>
+        </div>
+        <div class="history-footer">
+          <span>📅 ${h.matchDate}</span>
+          ${badgeMap[h.resultType]}
+          ${ptsHtml} ${editBtn}
+          <span>🕐 ทายเมื่อ ${predDate}</span>
+        </div>
+      </div>`;
+  }).join("");
+  document.getElementById("history-list").innerHTML = html;
+}
+
+function filterHistory(type, el) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  const filtered = type === "all" ? historyData : historyData.filter(h => h.resultType === type);
+  renderHistory(filtered);
+}
+
+// ==========================================
+// ADMIN
+// ==========================================
+function initAdminPage() {
+  if (adminLoggedIn) {
+    document.getElementById("admin-login-box").style.display = "none";
+    document.getElementById("admin-panel").style.display     = "block";
+    loadAdminMatches();
+  } else {
     document.getElementById("admin-login-box").style.display = "block";
     document.getElementById("admin-panel").style.display     = "none";
-    showAlert("success", "🚪 ออกจากระบบ Admin แล้ว");
   }
+}
 
-  async function loadAdminMatches() {
-    try {
-      const rows  = await fetchSheet("Matches");
-      matchesData = rows;
-
-      const select   = document.getElementById("admin-match-select");
-      select.innerHTML = '<option value="">-- เลือกนัด --</option>';
-      const upcoming = rows.filter(r => r[8] !== "Finished");
-
-      upcoming.forEach(row => {
-        const [id, , home, away, date, , , dp] = row;
-        const opt = document.createElement("option");
-        opt.value       = id;
-        opt.textContent = `${home} vs ${away} (${date})${dp === "Yes" ? " ⭐" : ""}`;
-        select.appendChild(opt);
-      });
-      if (upcoming.length === 0) {
-        select.innerHTML = '<option value="">— ไม่มีแมตช์ที่รอผล —</option>';
-      }
-
-      const finished = rows.filter(r => r[8] === "Finished");
-      document.getElementById("finished-matches-list").innerHTML = finished.length
-        ? finished.map(row => {
-            const [, , home, away, , hScore, aScore, dp] = row;
-            return `
-              <div class="finished-row">
-                <span>${getFlag(home, 18)}${home} vs ${getFlag(away, 18)}${away}</span>
-                <span class="finished-score">${hScore} - ${aScore}</span>
-                <div style="display:flex; gap:8px; align-items:center;">
-                  ${dp === "Yes" ? '<span class="double-badge">⭐ Double</span>' : ""}
-                  <span class="status-badge status-finished">✅ จบแล้ว</span>
-                </div>
-              </div>`;
-          }).join("")
-        : "<p style='color:#888; text-align:center; padding:20px;'>ยังไม่มีแมตช์ที่จบ</p>";
-
-    } catch (err) { showAlert("error", "❌ โหลดข้อมูลไม่ได้: " + err.message); }
-  }
-
-  function updateAdminMatchInfo() {
-    const matchId = document.getElementById("admin-match-select").value;
-    const match   = matchesData.find(r => r[0] === matchId);
-    const btn     = document.getElementById("admin-submit-btn");
-    btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
-
-    if (match) {
-      document.getElementById("admin-home-name").innerHTML    = getFlag(match[2]) + match[2];
-      document.getElementById("admin-away-name").innerHTML    = getFlag(match[3]) + match[3];
-      document.getElementById("admin-home-label").textContent = match[2];
-      document.getElementById("admin-away-label").textContent = match[3];
-      document.getElementById("admin-match-preview").style.display = "block";
-      const isDouble = match[7] === "Yes";
-      document.getElementById("admin-double-badge").innerHTML = isDouble
-        ? '<span class="double-badge">⭐ Double Point Match!</span>' : "";
-      document.getElementById("score-preview").style.display = "block";
-      document.getElementById("score-preview-text").innerHTML = isDouble
-        ? `⭐ <strong style="color:#FFD700;">Double Point!</strong> — 🎯 ทายแม่น = <strong>6 pts</strong> | ✅ ทายผลถูก = <strong>2 pts</strong>`
-        : `🎯 ทายแม่น = <strong>3 pts</strong> | ✅ ทายผลถูก = <strong>1 pt</strong>`;
+async function adminLogin() {
+  const pw = document.getElementById("admin-password").value;
+  if (!pw) { showAlert("error", "❌ กรุณากรอกรหัสผ่าน"); return; }
+  const btn = document.querySelector("#admin-login-box .btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังตรวจสอบ...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({ action:"verifyAdmin", password: pw })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      adminPassword = pw; adminLoggedIn = true;
+      document.getElementById("admin-login-box").style.display = "none";
+      document.getElementById("admin-panel").style.display     = "block";
+      document.getElementById("admin-password").value          = "";
+      loadAdminMatches();
+      showAlert("success", "✅ เข้าสู่ระบบ Admin สำเร็จ!");
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
+      document.getElementById("admin-password").value = "";
+      document.getElementById("admin-password").focus();
     } else {
-      document.getElementById("admin-match-preview").style.display = "none";
-      document.getElementById("score-preview").style.display       = "none";
+      showAlert("error", "❌ เกิดข้อผิดพลาด: " + result.message);
     }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = "🔓 เข้าสู่ระบบ Admin";
   }
+}
 
-  async function submitAdminScore() {
-    const matchId   = document.getElementById("admin-match-select").value;
-    const homeScore = document.getElementById("admin-home-score").value;
-    const awayScore = document.getElementById("admin-away-score").value;
+function adminLogout() {
+  adminLoggedIn = false; adminPassword = "";
+  allUsersData  = [];
+  document.getElementById("admin-password").value          = "";
+  document.getElementById("admin-login-box").style.display = "block";
+  document.getElementById("admin-panel").style.display     = "none";
+  document.getElementById("user-list-container").style.display = "none";
+  document.getElementById("user-list-search").style.display    = "none";
+  showAlert("success", "🚪 ออกจากระบบ Admin แล้ว");
+}
 
-    if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
+async function loadAdminMatches() {
+  try {
+    const rows  = await fetchSheet("Matches");
+    matchesData = rows;
+    const select = document.getElementById("admin-match-select");
+    select.innerHTML = '<option value="">-- เลือกนัด --</option>';
+    const upcoming = rows.filter(r => r[8] !== "Finished");
+    upcoming.forEach(row => {
+      const [id,,home,away,date,,,dp] = row;
+      const opt = document.createElement("option");
+      opt.value       = id;
+      opt.textContent = `${home} vs ${away} (${date})${dp==="Yes"?" ⭐":""}`;
+      select.appendChild(opt);
+    });
+    if (upcoming.length === 0) {
+      select.innerHTML = '<option value="">— ไม่มีแมตช์ที่รอผล —</option>';
+    }
+    const finished = rows.filter(r => r[8] === "Finished");
+    document.getElementById("finished-matches-list").innerHTML = finished.length
+      ? finished.map(row => {
+          const [,,home,away,,hScore,aScore,dp] = row;
+          return `
+            <div class="finished-row">
+              <span>${getFlag(home,18)}${home} vs ${getFlag(away,18)}${away}</span>
+              <span class="finished-score">${hScore} - ${aScore}</span>
+              <div style="display:flex; gap:8px; align-items:center;">
+                ${dp==="Yes"?'<span class="double-badge">⭐ Double</span>':""}
+                <span class="status-badge status-finished">✅ จบแล้ว</span>
+              </div>
+            </div>`;
+        }).join("")
+      : "<p style='color:#888; text-align:center; padding:20px;'>ยังไม่มีแมตช์ที่จบ</p>";
+  } catch (err) { showAlert("error", "❌ โหลดข้อมูลไม่ได้: " + err.message); }
+}
 
-    const match = matchesData.find(r => r[0] === matchId);
-    if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
+function updateAdminMatchInfo() {
+  const matchId = document.getElementById("admin-match-select").value;
+  const match   = matchesData.find(r => r[0] === matchId);
+  const btn     = document.getElementById("admin-submit-btn");
+  btn.disabled = false; btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+  btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)"; btn.style.color = "#000";
+  if (match) {
+    document.getElementById("admin-home-name").innerHTML    = getFlag(match[2]) + match[2];
+    document.getElementById("admin-away-name").innerHTML    = getFlag(match[3]) + match[3];
+    document.getElementById("admin-home-label").textContent = match[2];
+    document.getElementById("admin-away-label").textContent = match[3];
+    document.getElementById("admin-match-preview").style.display = "block";
+    const isDouble = match[7] === "Yes";
+    document.getElementById("admin-double-badge").innerHTML = isDouble
+      ? '<span class="double-badge">⭐ Double Point Match!</span>' : "";
+    document.getElementById("score-preview").style.display = "block";
+    document.getElementById("score-preview-text").innerHTML = isDouble
+      ? `⭐ <strong style="color:#FFD700;">Double Point!</strong> — 🎯 ทายแม่น = <strong>6 pts</strong> | ✅ ทายผลถูก = <strong>2 pts</strong>`
+      : `🎯 ทายแม่น = <strong>3 pts</strong> | ✅ ทายผลถูก = <strong>1 pt</strong>`;
+  } else {
+    document.getElementById("admin-match-preview").style.display = "none";
+    document.getElementById("score-preview").style.display       = "none";
+  }
+}
 
-    const btn = document.getElementById("admin-submit-btn");
-    btn.disabled = true; btn.textContent = "⏳ กำลังคำนวณ...";
-    btn.style.background = "#555"; btn.style.color = "#fff";
-
-    try {
-      const res     = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action:    "updateScore",
-          password:  adminPassword,
-          matchId:   String(matchId),
-          homeScore: String(homeScore),
-          awayScore: String(awayScore)
-        })
-      });
-      const rawText = await res.text();
-      let result;
-      try { result = JSON.parse(rawText); }
-      catch (e) {
-        showAlert("error", "❌ Response ไม่ใช่ JSON: " + rawText.substring(0, 200));
-        btn.disabled = false;
-        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-        btn.style.color = "#000";
-        return;
-      }
-
-      if (result.status === "success") {
-        showAlert("success", "✅ " + result.message);
-        btn.textContent = "✅ อัปเดตสำเร็จ!";
-        btn.style.background = "#2ecc71"; btn.style.color = "#fff";
-        setTimeout(() => loadAdminMatches(), 1500);
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
-        btn.disabled = false;
-        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-        btn.style.color = "#000";
-      } else {
-        showAlert("error", "❌ " + (result.message || "Unknown error"));
-        btn.disabled = false;
-        btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
-        btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
-        btn.style.color = "#000";
-      }
-    } catch (err) {
-      showAlert("error", "❌ Network Error: " + err.message);
+async function submitAdminScore() {
+  const matchId   = document.getElementById("admin-match-select").value;
+  const homeScore = document.getElementById("admin-home-score").value;
+  const awayScore = document.getElementById("admin-away-score").value;
+  if (!matchId) { showAlert("error", "❌ กรุณาเลือกนัด"); return; }
+  const match = matchesData.find(r => r[0] === matchId);
+  if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
+  const btn = document.getElementById("admin-submit-btn");
+  btn.disabled = true; btn.textContent = "⏳ กำลังคำนวณ...";
+  btn.style.background = "#555"; btn.style.color = "#fff";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:"updateScore", password: adminPassword,
+        matchId: String(matchId), homeScore: String(homeScore), awayScore: String(awayScore)
+      })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      showAlert("success", "✅ " + result.message);
+      btn.textContent = "✅ อัปเดตสำเร็จ!";
+      btn.style.background = "#2ecc71"; btn.style.color = "#fff";
+      setTimeout(() => loadAdminMatches(), 1500);
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+      btn.disabled = false;
+      btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+      btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+      btn.style.color = "#000";
+    } else {
+      showAlert("error", "❌ " + (result.message||"Unknown error"));
       btn.disabled = false;
       btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
       btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
       btn.style.color = "#000";
     }
+  } catch (err) {
+    showAlert("error", "❌ Network Error: " + err.message);
+    btn.disabled = false;
+    btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
+    btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
+    btn.style.color = "#000";
   }
+}
 
-  async function syncLeaderboard() {
-    if (!confirm("Sync ผู้เล่นทั้งหมดจาก Users → Leaderboard ใช่ไหมครับ?")) return;
-    const resultBox = document.getElementById("tool-result-box");
-    resultBox.style.display = "block"; resultBox.style.color = "#aaa";
-    resultBox.textContent   = "⏳ กำลัง Sync...";
-
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "syncLeaderboard", password: adminPassword })
-      });
-      const result = await res.json();
-      if (result.status === "success") {
-        resultBox.style.color = "#2ecc71"; resultBox.textContent = "✅ " + result.message;
-        showAlert("success", "✅ " + result.message);
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
-      } else {
-        resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ " + result.message;
-        showAlert("error", "❌ " + result.message);
-      }
-    } catch (err) {
-      resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    }
-  }
-
-  async function recalculateAll() {
-    if (!confirm("⚠️ คำนวณคะแนนใหม่ทั้งหมด?\n\nระบบจะ Reset คะแนนทุกคนเป็น 0\nแล้วคำนวณใหม่จากทุกแมตช์ที่ Finished\n\nดำเนินการต่อใช่ไหม?")) return;
-    const resultBox = document.getElementById("tool-result-box");
-    resultBox.style.display = "block"; resultBox.style.color = "#aaa";
-    resultBox.textContent   = "⏳ กำลังคำนวณใหม่ทั้งหมด...";
-
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "recalculateAll", password: adminPassword })
-      });
-      const result = await res.json();
-      if (result.status === "success") {
-        resultBox.style.color = "#2ecc71"; resultBox.textContent = "✅ " + result.message;
-        showAlert("success", "✅ " + result.message);
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
-      } else {
-        resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ " + result.message;
-        showAlert("error", "❌ " + result.message);
-      }
-    } catch (err) {
-      resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
-      showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    }
-  }
-
-  async function gradeSpecial(type) {
-    const answer = document.getElementById("admin-" + type + "-answer").value.trim();
-    if (!answer) { showAlert("error", "❌ กรุณากรอกคำตอบ"); return; }
-    const typeName = type === "champion" ? "ทีมแชมป์" : "Top Scorer";
-    if (!confirm(`ยืนยันเฉลย ${typeName}: "${answer}" ?\n\nระบบจะแจกคะแนนทันที!`)) return;
-
-    try {
-      const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body:   JSON.stringify({
-          action: "gradeSpecialPredictions", password: adminPassword, type, answer
-        })
-      });
-      const result = await res.json();
-      if (result.status === "success") {
-        showAlert("success", "✅ " + result.message);
-        document.getElementById("admin-" + type + "-answer").value = "";
-      } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
-      } else {
-        showAlert("error", "❌ " + result.message);
-      }
-    } catch (err) { showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message); }
-  }
-
-  // ==========================================
-  // SHOW ALERT
-  // ==========================================
-  function showAlert(type, message) {
-    const colors = { success: "#2ecc71", warning: "#f39c12", error: "#e74c3c" };
-    const el     = document.createElement("div");
-    el.style.cssText = `
-      position:fixed; top:20px; left:50%; transform:translateX(-50%);
-      background:${colors[type] || "#333"}; color:white;
-      padding:14px 28px; border-radius:12px; font-size:16px;
-      font-weight:bold; z-index:9999;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:opacity 0.5s;
-      max-width:90vw; text-align:center;
-    `;
-    el.textContent = message;
-    document.body.appendChild(el);
-    setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 500); }, 3000);
-  }
-
-  // ==========================================
-  // CLOSE DROPDOWN ON OUTSIDE CLICK
-  // ==========================================
-  document.addEventListener("click", function(e) {
-    ["champion", "topscorer"].forEach(type => {
-      const search   = document.getElementById(type + "-team-search");
-      const dropdown = document.getElementById(type + "-team-dropdown");
-      if (!search || !dropdown) return;
-      if (!search.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.style.display = "none";
-      }
+async function syncLeaderboard() {
+  if (!confirm("Sync ผู้เล่นทั้งหมดจาก Users → Leaderboard ใช่ไหมครับ?")) return;
+  const resultBox = document.getElementById("tool-result-box");
+  resultBox.style.display = "block"; resultBox.style.color = "#aaa";
+  resultBox.textContent   = "⏳ กำลัง Sync...";
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST", body: JSON.stringify({ action:"syncLeaderboard", password: adminPassword })
     });
-  });
+    const result = await res.json();
+    if (result.status === "success") {
+      resultBox.style.color = "#2ecc71"; resultBox.textContent = "✅ " + result.message;
+      showAlert("success", "✅ " + result.message);
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+    } else {
+      resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ " + result.message;
+    }
+  } catch (err) {
+    resultBox.style.color = "#e74c3c";
+    resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
+  }
+}
 
-  // ==========================================
-  // INIT
-  // ==========================================
-  updateLoginUI();
-  loadMatches();
+async function recalculateAll() {
+  if (!confirm("⚠️ คำนวณคะแนนใหม่ทั้งหมด?\n\nระบบจะ Reset คะแนนทุกคนเป็น 0\nแล้วคำนวณใหม่จากทุกแมตช์ที่ Finished\n\nดำเนินการต่อใช่ไหม?")) return;
+  const resultBox = document.getElementById("tool-result-box");
+  resultBox.style.display = "block"; resultBox.style.color = "#aaa";
+  resultBox.textContent   = "⏳ กำลังคำนวณใหม่ทั้งหมด...";
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST", body: JSON.stringify({ action:"recalculateAll", password: adminPassword })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      resultBox.style.color = "#2ecc71"; resultBox.textContent = "✅ " + result.message;
+      showAlert("success", "✅ " + result.message);
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+    } else {
+      resultBox.style.color = "#e74c3c"; resultBox.textContent = "❌ " + result.message;
+    }
+  } catch (err) {
+    resultBox.style.color = "#e74c3c";
+    resultBox.textContent = "❌ เชื่อมต่อไม่ได้: " + err.message;
+  }
+}
+
+// ==========================================
+// LOAD USER LIST (ADMIN)
+// ==========================================
+async function loadUserList() {
+  const btn       = document.getElementById("load-user-list-btn");
+  const loading   = document.getElementById("user-list-loading");
+  const container = document.getElementById("user-list-container");
+  const search    = document.getElementById("user-list-search");
+  btn.disabled    = true; btn.textContent = "⏳ กำลังโหลด...";
+  loading.style.display   = "block";
+  container.style.display = "none";
+  search.style.display    = "none";
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({ action:"getUserList", password: adminPassword })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      allUsersData = result.users;
+      renderUserList(allUsersData);
+      loading.style.display   = "none";
+      container.style.display = "block";
+      search.style.display    = "block";
+      search.value            = "";
+      showAlert("success", `✅ โหลดรายชื่อสำเร็จ! พบ ${allUsersData.length} คน`);
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+      loading.style.display = "none";
+    } else {
+      showAlert("error", "❌ " + result.message);
+      loading.style.display = "none";
+    }
+  } catch (err) {
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+    loading.style.display = "none";
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = "🔄 โหลดรายชื่อ";
+  }
+}
+
+function renderUserList(users) {
+  const tbody = document.getElementById("user-list-tbody");
+  const count = document.getElementById("user-list-count");
+  if (users.length === 0) {
+    tbody.innerHTML = `
+      <tr><td colspan="7" style="text-align:center; color:#888; padding:20px;">😕 ไม่พบผู้เล่น</td></tr>`;
+    count.textContent = ""; return;
+  }
+  tbody.innerHTML = users.map((u, i) => {
+    const regDate = u.registeredAt
+      ? new Date(u.registeredAt).toLocaleDateString("th-TH", {
+          day:"numeric", month:"short", year:"numeric"
+        })
+      : "—";
+    const pendingBadge = u.hasPendingReset
+      ? `<span class="pending-reset-badge">🔑 ขอ Reset</span>` : "";
+    return `
+      <tr ${u.hasPendingReset ? 'style="background:rgba(231,76,60,0.05);"' : ""}>
+        <td style="color:#888;">${i + 1}</td>
+        <td>
+          <strong style="color:#fff;">${u.username}</strong>
+          ${pendingBadge}
+        </td>
+        <td style="text-align:center; color:#FFD700; font-weight:bold;">${u.totalScore}</td>
+        <td style="text-align:center; color:#FFD700;">${u.exactScore}</td>
+        <td style="text-align:center; color:#2ecc71;">${u.resultScore}</td>
+        <td style="text-align:center; color:#888; font-size:0.82rem;">${regDate}</td>
+        <td style="text-align:center;">
+          <button class="select-user-btn"
+            onclick="selectUserForReset('${u.username.replace(/'/g,"\\'")}')">
+            ✏️ เลือก
+          </button>
+        </td>
+      </tr>`;
+  }).join("");
+  count.textContent = `แสดง ${users.length} คน`;
+}
+
+function filterUserList(query) {
+  const filtered = query
+    ? allUsersData.filter(u => u.username.toLowerCase().includes(query.toLowerCase()))
+    : allUsersData;
+  renderUserList(filtered);
+}
+
+function selectUserForReset(username) {
+  document.getElementById("reset-target-username").value = username;
+  document.getElementById("reset-target-username").focus();
+  setHint("reset-username-hint", "success",
+    `✅ เลือก "${username}" แล้ว — กรอก Password ใหม่ได้เลย`);
+  document.getElementById("reset-target-username")
+    .scrollIntoView({ behavior:"smooth", block:"center" });
+}
+
+// ==========================================
+// ADMIN RESET PASSWORD
+// ==========================================
+async function adminResetPassword() {
+  const targetUsername = document.getElementById("reset-target-username").value.trim();
+  const newPassword    = document.getElementById("reset-new-password").value;
+  const resultBox      = document.getElementById("reset-result-box");
+  const btn            = document.getElementById("reset-pw-btn");
+
+  if (!targetUsername) {
+    setHint("reset-username-hint", "error", "❌ กรุณากรอก Username"); return;
+  }
+  if (!newPassword || newPassword.length < 8) {
+    setHint("reset-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return;
+  }
+  if (!confirm(
+    `⚠️ ยืนยัน Reset Password?\n\nUsername: ${targetUsername}\nPassword ใหม่: ${newPassword}\n\nระบบจะส่ง Email แจ้ง User อัตโนมัติ (ถ้ามีคำขอ Reset)`
+  )) return;
+
+  btn.disabled    = true;
+  btn.textContent = "⏳ กำลัง Reset...";
+  resultBox.style.display = "none";
+  setHint("reset-username-hint", "", "");
+  setHint("reset-pw-hint",       "", "");
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:         "resetUserPassword",
+        password:       adminPassword,
+        targetUsername: targetUsername,
+        newPassword:    newPassword
+      })
+    });
+    const result = await res.json();
+
+    if (result.status === "success") {
+      // สร้าง email info message
+      let emailInfo = "";
+      if (result.emailSent) {
+        emailInfo = `<br><span style="color:#3498db;">📧 ส่ง Email แจ้ง User ไปที่ ${result.userEmail} แล้ว ✅</span>`;
+      } else if (result.userEmail) {
+        emailInfo = `<br><span style="color:#f39c12;">⚠️ ส่ง Email ไม่สำเร็จ กรุณาแจ้ง User เอง</span>`;
+      } else {
+        emailInfo = `<br><span style="color:#888; font-size:0.82rem;">ℹ️ ไม่พบคำขอ Reset — กรุณาแจ้ง Password ใหม่ให้ User เอง</span>`;
+      }
+
+      resultBox.style.display    = "block";
+      resultBox.style.background = "#0a2a0a";
+      resultBox.style.border     = "1px solid #2ecc71";
+      resultBox.style.color      = "#2ecc71";
+      resultBox.innerHTML        = "✅ " + result.message + emailInfo;
+
+      document.getElementById("reset-target-username").value = "";
+      document.getElementById("reset-new-password").value    = "";
+      showAlert("success", "✅ Reset Password สำเร็จ!");
+
+      // Refresh user list ถ้าเปิดอยู่
+      if (allUsersData.length > 0) loadUserList();
+
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่าน Admin ไม่ถูกต้อง!"); adminLogout();
+    } else {
+      resultBox.style.display    = "block";
+      resultBox.style.background = "#2a0a0a";
+      resultBox.style.border     = "1px solid #e74c3c";
+      resultBox.style.color      = "#e74c3c";
+      resultBox.textContent      = "❌ " + result.message;
+      setHint("reset-username-hint", "error", "❌ " + result.message);
+    }
+  } catch (err) {
+    resultBox.style.display    = "block";
+    resultBox.style.background = "#2a0a0a";
+    resultBox.style.border     = "1px solid #e74c3c";
+    resultBox.style.color      = "#e74c3c";
+    resultBox.textContent      = "❌ เชื่อมต่อไม่ได้: " + err.message;
+    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = "🔑 Reset Password";
+  }
+}
+
+async function gradeSpecial(type) {
+  const answer = document.getElementById("admin-" + type + "-answer").value.trim();
+  if (!answer) { showAlert("error", "❌ กรุณากรอกคำตอบ"); return; }
+  const typeName = type === "champion" ? "ทีมแชมป์" : "Top Scorer";
+  if (!confirm(`ยืนยันเฉลย ${typeName}: "${answer}" ?\n\nระบบจะแจกคะแนนทันที!`)) return;
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({
+        action:"gradeSpecialPredictions", password: adminPassword, type, answer
+      })
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      showAlert("success", "✅ " + result.message);
+      document.getElementById("admin-" + type + "-answer").value = "";
+    } else if (result.status === "unauthorized") {
+      showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
+    } else {
+      showAlert("error", "❌ " + result.message);
+    }
+  } catch (err) { showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message); }
+}
+
+// ==========================================
+// SHOW ALERT
+// ==========================================
+function showAlert(type, message) {
+  const colors = { success:"#2ecc71", warning:"#f39c12", error:"#e74c3c" };
+  const el     = document.createElement("div");
+  el.style.cssText = `
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background:${colors[type]||"#333"}; color:white;
+    padding:14px 28px; border-radius:12px; font-size:16px;
+    font-weight:bold; z-index:9999;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:opacity 0.5s;
+    max-width:90vw; text-align:center;
+  `;
+  el.textContent = message;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 500); }, 3000);
+}
+
+// ==========================================
+// CLOSE DROPDOWN ON OUTSIDE CLICK
+// ==========================================
+document.addEventListener("click", function(e) {
+  ["champion","topscorer"].forEach(type => {
+    const search   = document.getElementById(type + "-team-search");
+    const dropdown = document.getElementById(type + "-team-dropdown");
+    if (!search || !dropdown) return;
+    if (!search.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+});
+
+// ==========================================
+// INIT
+// ==========================================
+updateLoginUI();
+loadMatches();
 </script>
 </body>
 </html>
