@@ -183,7 +183,6 @@
       padding: 2px 10px; font-size: 0.75rem; font-weight: bold;
     }
 
-    /* ==================== DOUBLE POINT ALERT BOX ==================== */
     .double-point-alert {
       background: linear-gradient(135deg, #2a1a00, #1a0f00);
       border: 2px solid #FFD700;
@@ -432,57 +431,6 @@
       box-shadow: 0 0 40px rgba(255,215,0,0.2);
     }
 
-    .flag-img {
-      width: 24px; height: auto;
-      border-radius: 3px;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-    .flag-img-sm {
-      width: 20px; height: auto;
-      border-radius: 2px;
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-
-    .rules-step {
-      display: flex; gap: 15px; align-items: flex-start;
-      padding: 15px; background: #0a0a2e;
-      border-radius: 12px; margin-bottom: 10px;
-    }
-    .rules-step-num {
-      background: #FFD700; color: #000;
-      border-radius: 50%; width: 34px; height: 34px; min-width: 34px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: bold; font-size: 0.95rem;
-    }
-    .rules-score-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;
-    }
-    .rules-score-card {
-      border-radius: 15px; padding: 20px; text-align: center;
-    }
-    .rules-table {
-      width: 100%; border-collapse: collapse; font-size: 0.88rem;
-    }
-    .rules-table th {
-      padding: 12px 15px; text-align: left;
-      color: #FFD700; border-bottom: 2px solid #333366; background: #0a0a2e;
-    }
-    .rules-table td {
-      padding: 12px 15px; border-bottom: 1px solid #1a1a3e;
-    }
-    .rules-table tr:last-child td { border-bottom: none; }
-    .rules-example-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
-    }
-    .rules-example-row:last-child { border-bottom: none; }
-    .rules-rule-item {
-      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
-    }
-
-    /* ==================== LEADERBOARD CHAMPION TAG ==================== */
     .champion-tag {
       display: inline-flex; align-items: center; gap: 4px;
       background: rgba(255,215,0,0.12);
@@ -494,7 +442,6 @@
     }
     .champion-tag img { width: 16px; height: auto; border-radius: 2px; vertical-align: middle; }
 
-    /* ==================== SPECIAL SECTION IN MODAL ==================== */
     .modal-special-section {
       background: #0a0a2e;
       border: 1px solid #333366;
@@ -581,6 +528,51 @@
       flex-shrink: 0;
     }
     .close-modal-btn:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    .rules-step {
+      display: flex; gap: 15px; align-items: flex-start;
+      padding: 15px; background: #0a0a2e;
+      border-radius: 12px; margin-bottom: 10px;
+    }
+    .rules-step-num {
+      background: #FFD700; color: #000;
+      border-radius: 50%; width: 34px; height: 34px; min-width: 34px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 0.95rem;
+    }
+    .rules-score-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;
+    }
+    .rules-score-card {
+      border-radius: 15px; padding: 20px; text-align: center;
+    }
+    .rules-table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem;
+    }
+    .rules-table th {
+      padding: 12px 15px; text-align: left;
+      color: #FFD700; border-bottom: 2px solid #333366; background: #0a0a2e;
+    }
+    .rules-table td {
+      padding: 12px 15px; border-bottom: 1px solid #1a1a3e;
+    }
+    .rules-table tr:last-child td { border-bottom: none; }
+    .rules-example-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #1a1a3e; font-size: 0.88rem;
+    }
+    .rules-example-row:last-child { border-bottom: none; }
+    .rules-rule-item {
+      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
+    }
+    .flag-img {
+      width: 24px; height: auto; border-radius: 3px;
+      vertical-align: middle; margin-right: 5px;
+    }
+    .flag-img-sm {
+      width: 20px; height: auto; border-radius: 2px;
+      vertical-align: middle; margin-right: 4px;
+    }
   </style>
 </head>
 <body>
@@ -621,8 +613,6 @@
           <option value="">-- เลือกนัด --</option>
         </select>
       </div>
-
-      <!-- ⭐ DOUBLE POINT ALERT (แสดงหลังเลือกนัด) -->
       <div id="double-point-alert" class="double-point-alert" style="display:none;">
         <div class="dp-icon">⭐</div>
         <div class="dp-text">
@@ -638,7 +628,6 @@
           <span>ผลถูก</span>
         </div>
       </div>
-
       <div id="match-preview" style="display:none; margin-bottom:20px;">
         <div class="match-card">
           <div><div class="team-name" id="home-team-name">-</div></div>
@@ -879,21 +868,21 @@
         <div class="rules-step-num">1</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">สมัครสมาชิก / Login</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">สมัครสมาชิกด้วย Email ตั้งชื่อและ Password (ชื่อเปลี่ยนไม่ได้ในภายหลัง)</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">สมัครสมาชิกด้วย Email ตั้งชื่อและ Password</div>
         </div>
       </div>
       <div class="rules-step">
         <div class="rules-step-num">2</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">เลือกนัดและทายสกอร์</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ไปที่หน้า <strong style="color:#FFD700;">📝 ทายผล</strong> เลือกนัดการแข่งขันที่ต้องการ แล้วกรอกสกอร์ที่คาดว่าจะเป็น</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ไปที่หน้า <strong style="color:#FFD700;">📝 ทายผล</strong> เลือกนัดการแข่งขันที่ต้องการ</div>
         </div>
       </div>
       <div class="rules-step">
         <div class="rules-step-num">3</div>
         <div>
           <div style="font-weight:bold; color:#fff; margin-bottom:4px;">ส่งก่อนแมตช์เริ่ม</div>
-          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ต้องส่งผลทายก่อนเวลาแมตช์เริ่ม ระบบจะปิดรับทายอัตโนมัติเมื่อถึงเวลา</div>
+          <div style="color:#aaa; font-size:0.9rem; line-height:1.6;">ต้องส่งผลทายก่อนเวลาแมตช์เริ่ม</div>
         </div>
       </div>
       <div class="rules-step" style="margin-bottom:0;">
@@ -924,101 +913,6 @@
           <div style="color:#aaa; font-size:0.82rem; line-height:1.5;">ทายผลแพ้/ชนะ/เสมอถูก แต่สกอร์ไม่ตรง</div>
         </div>
       </div>
-      <div class="rules-score-card" style="background:linear-gradient(135deg,#1a0a00,#0a0500); border:2px solid #e74c3c; text-align:center; margin-bottom:15px;">
-        <div style="font-size:1.8rem; margin-bottom:6px;">❌</div>
-        <div style="font-size:1.5rem; font-weight:bold; color:#e74c3c;">0 pt</div>
-        <div style="color:#fff; font-weight:bold; margin:6px 0 4px;">ทายผิด</div>
-        <div style="color:#aaa; font-size:0.82rem;">ทายผลผิด</div>
-      </div>
-      <div style="background:#0a0a2e; border:1px solid #333366; border-radius:12px; padding:18px;">
-        <div style="color:#FFD700; font-weight:bold; margin-bottom:12px;">📌 ตัวอย่างการให้คะแนน</div>
-        <div class="rules-example-row" style="padding-bottom:10px; margin-bottom:4px;">
-          <span style="color:#aaa;">ผลจริง: <strong style="color:#fff;">บราซิล 2 - 1 ฝรั่งเศส</strong></span>
-        </div>
-        <div class="rules-example-row">
-          <span style="color:#aaa;">ทาย 2-1 (แม่นสกอร์)</span>
-          <span style="color:#FFD700; font-weight:bold;">🎯 +3 pts</span>
-        </div>
-        <div class="rules-example-row">
-          <span style="color:#aaa;">ทาย 3-0 (บราซิลชนะ ถูก แต่สกอร์ผิด)</span>
-          <span style="color:#2ecc71; font-weight:bold;">✅ +1 pt</span>
-        </div>
-        <div class="rules-example-row">
-          <span style="color:#aaa;">ทาย 1-2 (ฝรั่งเศสชนะ ผิด)</span>
-          <span style="color:#e74c3c; font-weight:bold;">❌ 0 pt</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:20px; border-color:#FFD700; box-shadow:0 0 20px rgba(255,215,0,0.1);">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-        <div style="font-size:2rem;">⭐</div>
-        <h3 style="color:#FFD700; font-size:1.2rem;">Double Point Match</h3>
-      </div>
-      <div style="background:linear-gradient(135deg,#2a1a00,#1a0f00); border-radius:12px; padding:18px; margin-bottom:15px; text-align:center;">
-        <div style="color:#FFD700; font-size:1.1rem; font-weight:bold; margin-bottom:12px;">⭐ นัดพิเศษ = คะแนนคูณ 2!</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div style="background:#0a0a2e; border-radius:10px; padding:12px;">
-            <div style="color:#aaa; font-size:0.82rem;">🎯 ทายสกอร์แม่น</div>
-            <div style="color:#FFD700; font-size:1.5rem; font-weight:bold;">6 pts</div>
-          </div>
-          <div style="background:#0a0a2e; border-radius:10px; padding:12px;">
-            <div style="color:#aaa; font-size:0.82rem;">✅ ทายผลถูก</div>
-            <div style="color:#2ecc71; font-size:1.5rem; font-weight:bold;">2 pts</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:20px;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-        <div style="font-size:2rem;">⭐</div>
-        <h3 style="color:#FFD700; font-size:1.2rem;">การทายพิเศษ (Bonus)</h3>
-      </div>
-      <div style="background:#111133; border:1px solid #FFD700; border-radius:12px; padding:18px; margin-bottom:12px; display:flex; gap:15px; align-items:flex-start;">
-        <div style="font-size:2rem; flex-shrink:0;">🏆</div>
-        <div>
-          <div style="color:#FFD700; font-weight:bold; font-size:1rem; margin-bottom:6px;">ทายทีมแชมป์</div>
-          <div style="color:#aaa; font-size:0.88rem; line-height:1.6;">ทายว่าทีมใดจะคว้าแชมป์ FIFA World Cup 2026 หากทายถูกจะได้รับ <strong style="color:#FFD700;">+15 pts</strong></div>
-        </div>
-      </div>
-      <div style="background:#111133; border:1px solid #2ecc71; border-radius:12px; padding:18px; display:flex; gap:15px; align-items:flex-start;">
-        <div style="font-size:2rem; flex-shrink:0;">⚽</div>
-        <div>
-          <div style="color:#2ecc71; font-weight:bold; font-size:1rem; margin-bottom:6px;">ทาย Top Scorer</div>
-          <div style="color:#aaa; font-size:0.88rem; line-height:1.6;">ทายว่านักเตะคนใดจะเป็นดาวซัลโวสูงสุด หากทายถูกจะได้รับ <strong style="color:#2ecc71;">+15 pts</strong></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:20px; border-color:#e74c3c;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-        <div style="font-size:2rem;">⚠️</div>
-        <h3 style="color:#e74c3c; font-size:1.2rem;">กฎสำคัญที่ต้องรู้</h3>
-      </div>
-      <div class="rules-rule-item">
-        <span style="color:#e74c3c; font-size:1.2rem; flex-shrink:0; margin-top:2px;">🔒</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">ปิดรับทายอัตโนมัติ</strong> — เมื่อถึงเวลาแมตช์เริ่ม</div>
-      </div>
-      <div class="rules-rule-item">
-        <span style="color:#f39c12; font-size:1.2rem; flex-shrink:0; margin-top:2px;">✏️</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">แก้ไขได้ก่อนปิดรับ</strong> — สามารถเปลี่ยนผลทายได้กี่ครั้งก็ได้</div>
-      </div>
-      <div class="rules-rule-item">
-        <span style="color:#3498db; font-size:1.2rem; flex-shrink:0; margin-top:2px;">👤</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">1 บัญชีต่อ 1 คน</strong> — ห้ามสร้างหลายบัญชี</div>
-      </div>
-      <div class="rules-rule-item" style="margin-bottom:0;">
-        <span style="color:#9b59b6; font-size:1.2rem; flex-shrink:0; margin-top:2px;">🏆</span>
-        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">การตัดสินของ Admin ถือเป็นที่สิ้นสุด</strong></div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:20px; border-color:#3498db;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-        <div style="font-size:2rem;">📊</div>
-        <h3 style="color:#3498db; font-size:1.2rem;">สรุปตารางคะแนน</h3>
-      </div>
       <div style="overflow-x:auto;">
         <table class="rules-table">
           <thead>
@@ -1031,29 +925,48 @@
           <tbody>
             <tr>
               <td style="color:#aaa;">🎯 ทายสกอร์แม่นทั้งคู่</td>
-              <td style="text-align:center; color:#FFD700; font-weight:bold; font-size:1.1rem;">3 pts</td>
-              <td style="text-align:center; color:#FFD700; font-weight:bold; font-size:1.1rem;">6 pts</td>
+              <td style="text-align:center; color:#FFD700; font-weight:bold;">3 pts</td>
+              <td style="text-align:center; color:#FFD700; font-weight:bold;">6 pts</td>
             </tr>
             <tr>
               <td style="color:#aaa;">✅ ทายผลแพ้/ชนะ/เสมอถูก</td>
-              <td style="text-align:center; color:#2ecc71; font-weight:bold; font-size:1.1rem;">1 pt</td>
-              <td style="text-align:center; color:#2ecc71; font-weight:bold; font-size:1.1rem;">2 pts</td>
+              <td style="text-align:center; color:#2ecc71; font-weight:bold;">1 pt</td>
+              <td style="text-align:center; color:#2ecc71; font-weight:bold;">2 pts</td>
             </tr>
             <tr>
               <td style="color:#aaa;">❌ ทายผิด</td>
-              <td style="text-align:center; color:#e74c3c; font-weight:bold; font-size:1.1rem;">0 pt</td>
-              <td style="text-align:center; color:#e74c3c; font-weight:bold; font-size:1.1rem;">0 pt</td>
+              <td style="text-align:center; color:#e74c3c; font-weight:bold;">0 pt</td>
+              <td style="text-align:center; color:#e74c3c; font-weight:bold;">0 pt</td>
             </tr>
             <tr>
               <td style="color:#aaa;">🏆 ทายแชมป์ถูก</td>
-              <td colspan="2" style="text-align:center; color:#FFD700; font-weight:bold; font-size:1.1rem;">15 pts</td>
+              <td colspan="2" style="text-align:center; color:#FFD700; font-weight:bold;">15 pts</td>
             </tr>
             <tr>
               <td style="color:#aaa;">⚽ ทาย Top Scorer ถูก</td>
-              <td colspan="2" style="text-align:center; color:#2ecc71; font-weight:bold; font-size:1.1rem;">15 pts</td>
+              <td colspan="2" style="text-align:center; color:#2ecc71; font-weight:bold;">15 pts</td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px; border-color:#e74c3c;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="font-size:2rem;">⚠️</div>
+        <h3 style="color:#e74c3c; font-size:1.2rem;">กฎสำคัญที่ต้องรู้</h3>
+      </div>
+      <div class="rules-rule-item">
+        <span style="color:#e74c3c; font-size:1.2rem; flex-shrink:0;">🔒</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">ปิดรับทายอัตโนมัติ</strong> — เมื่อถึงเวลาแมตช์เริ่ม</div>
+      </div>
+      <div class="rules-rule-item">
+        <span style="color:#f39c12; font-size:1.2rem; flex-shrink:0;">✏️</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">แก้ไขได้ก่อนปิดรับ</strong> — สามารถเปลี่ยนผลทายได้กี่ครั้งก็ได้</div>
+      </div>
+      <div class="rules-rule-item" style="margin-bottom:0;">
+        <span style="color:#9b59b6; font-size:1.2rem; flex-shrink:0;">🏆</span>
+        <div style="color:#aaa; font-size:0.9rem; line-height:1.6;"><strong style="color:#fff;">การตัดสินของ Admin ถือเป็นที่สิ้นสุด</strong></div>
       </div>
     </div>
 
@@ -1147,7 +1060,6 @@
           <div style="text-align:center; margin-bottom:25px;">
             <div class="profile-avatar">👤</div>
             <div style="font-size:1.4rem; font-weight:bold; color:#FFD700;" id="profile-name"></div>
-            <div style="color:#888; font-size:0.9rem; margin-top:5px;" id="profile-email"></div>
           </div>
           <div style="background:#0a0a2e; border-radius:12px; padding:15px; margin-bottom:20px;">
             <div class="profile-info-row">
@@ -1157,10 +1069,6 @@
             <div class="profile-info-row">
               <span class="profile-info-label">ชื่อ</span>
               <span class="profile-info-value" id="profile-name-2"></span>
-            </div>
-            <div class="profile-info-row">
-              <span class="profile-info-label">Email</span>
-              <span class="profile-info-value" id="profile-email-2"></span>
             </div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -1231,7 +1139,6 @@
       <div class="card" style="border-color:#3498db;">
         <h3 style="color:#3498db; margin-bottom:8px;">🛠️ เครื่องมือจัดการคะแนน</h3>
         <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
-          ใช้เมื่อ Leaderboard ว่างเปล่า หรือคะแนนไม่ถูกต้อง<br>
           <strong style="color:#f39c12;">⚠️ แนะนำ: Sync ก่อน แล้วค่อย Recalculate</strong>
         </p>
         <div class="admin-tool-grid">
@@ -1244,10 +1151,6 @@
       </div>
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">⭐ เฉลยการทายพิเศษ</h3>
-        <div class="info-box">
-          🏆 <strong>ทายแชมป์ถูก</strong> = ตามที่ตั้งใน Settings &nbsp;|&nbsp;
-          ⚽ <strong>ทาย Top Scorer ถูก</strong> = ตามที่ตั้งใน Settings
-        </div>
         <div style="margin-bottom:20px;">
           <label style="color:#FFD700; display:block; margin-bottom:8px;">🏆 เฉลยทีมแชมป์</label>
           <div style="display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center;">
@@ -1343,8 +1246,6 @@
         <div class="user-history-stat-label">📋 ทั้งหมด</div>
       </div>
     </div>
-
-    <!-- ⭐ SPECIAL PREDICTIONS SECTION IN MODAL -->
     <div id="modal-special-section" class="modal-special-section" style="display:none;">
       <h4>⭐ การทายพิเศษ</h4>
       <div class="modal-special-row">
@@ -1358,7 +1259,6 @@
         <span id="modal-topscorer-result"></span>
       </div>
     </div>
-
     <div style="display:flex; gap:8px; margin-top:16px; margin-bottom:16px; flex-wrap:wrap;">
       <button class="filter-btn active" id="modal-filter-all"   onclick="filterModalHistory('all',    this)">📋 ทั้งหมด</button>
       <button class="filter-btn"        id="modal-filter-exact"  onclick="filterModalHistory('exact',  this)">🎯 แม่น</button>
@@ -1376,7 +1276,7 @@
   // CONFIG
   // ==========================================
   const SHEET_ID        = "1GX67EEFhPGPY4B7dTJaQBYRrrMCMHt6jW5s45CCeiiU";
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TOaOjIO7LoyaG58Wgi1R_rf531aFJkETtDOWFILkDpDhEeawcK_EXe3gMPvN7dc/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUdRK5XDDAVQF7-zOLl5AQ08PwlmipQhGKmiNEIDS2UbskQkNMsHUdbhA3XQcd578p/exec";
 
   // ==========================================
   // FLAG MAP
@@ -1433,7 +1333,6 @@
   let matchesData      = [];
   let historyData      = [];
   let modalHistoryData = [];
-  let currentUser      = JSON.parse(localStorage.getItem("wc2026_user")) || null;
   let countdownTimer   = null;
   let adminLoggedIn    = false;
   let adminPassword    = "";
@@ -1446,6 +1345,12 @@
     champion:  { selectedTeam: "", selectedValue: "" },
     topscorer: { selectedTeam: "", selectedPlayer: "" }
   };
+
+  // ==========================================
+  // ✅ currentUser เก็บแค่ token + name
+  // ไม่เก็บ email ใน localStorage อีกต่อไป
+  // ==========================================
+  let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
   // ==========================================
   // FETCH SHEET HELPER
@@ -1571,11 +1476,11 @@
     if (/[0-9]/.test(pw))            score++;
     if (/[^A-Za-z0-9]/.test(pw))     score++;
     const levels = [
-      { pct: "20%",  color: "#e74c3c", label: "😰 อ่อนมาก",       cls: "error"   },
-      { pct: "40%",  color: "#e67e22", label: "😟 อ่อน",           cls: "error"   },
-      { pct: "60%",  color: "#f39c12", label: "😐 พอใช้",          cls: "warning" },
-      { pct: "80%",  color: "#2ecc71", label: "😊 แข็งแกร่ง",      cls: "success" },
-      { pct: "100%", color: "#27ae60", label: "💪 แข็งแกร่งมาก!",  cls: "success" }
+      { pct: "20%",  color: "#e74c3c", label: "😰 อ่อนมาก",      cls: "error"   },
+      { pct: "40%",  color: "#e67e22", label: "😟 อ่อน",          cls: "error"   },
+      { pct: "60%",  color: "#f39c12", label: "😐 พอใช้",         cls: "warning" },
+      { pct: "80%",  color: "#2ecc71", label: "😊 แข็งแกร่ง",     cls: "success" },
+      { pct: "100%", color: "#27ae60", label: "💪 แข็งแกร่งมาก!", cls: "success" }
     ];
     const lvl = levels[Math.min(score, 4)];
     fill.style.width      = lvl.pct;
@@ -1595,6 +1500,7 @@
 
   // ==========================================
   // UPDATE LOGIN UI
+  // ✅ ไม่แสดง email ใน profile อีกต่อไป
   // ==========================================
   function updateLoginUI() {
     const loginBtn = document.getElementById("loginBtn");
@@ -1603,9 +1509,7 @@
       document.getElementById("login-form-box").style.display = "none";
       document.getElementById("logged-in-box").style.display  = "block";
       document.getElementById("profile-name").textContent     = currentUser.name;
-      document.getElementById("profile-email").textContent    = currentUser.email;
       document.getElementById("profile-name-2").textContent   = currentUser.name;
-      document.getElementById("profile-email-2").textContent  = currentUser.email;
     } else {
       loginBtn.textContent = "👤 Login";
       document.getElementById("login-form-box").style.display = "block";
@@ -1632,6 +1536,7 @@
 
   // ==========================================
   // LOGIN
+  // ✅ รับ token จาก server แทน email
   // ==========================================
   async function login() {
     const email    = document.getElementById("login-email").value.trim().toLowerCase();
@@ -1649,8 +1554,10 @@
       const result = await res.json();
 
       if (result.status === "success") {
-        currentUser = { email: result.email, name: result.name };
+        // ✅ เก็บแค่ token + name ไม่เก็บ email
+        currentUser = { token: result.token, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
+        document.getElementById("login-email").value    = "";
         document.getElementById("login-password").value = "";
         updateLoginUI();
         showAlert("success", "✅ ยินดีต้อนรับกลับ " + result.name + "!");
@@ -1670,6 +1577,7 @@
 
   // ==========================================
   // SIGN UP
+  // ✅ รับ token จาก server ทันทีหลัง register
   // ==========================================
   async function signup() {
     const email    = document.getElementById("signup-email").value.trim().toLowerCase();
@@ -1677,8 +1585,8 @@
     const password = document.getElementById("signup-password").value;
     const confirm  = document.getElementById("signup-password-confirm").value;
 
-    if (!email)          { setHint("signup-email-hint", "error", "❌ กรุณากรอก Email");              return; }
-    if (!name)           { setHint("signup-name-hint",  "error", "❌ กรุณากรอกชื่อ");               return; }
+    if (!email)          { setHint("signup-email-hint", "error", "❌ กรุณากรอก Email");                  return; }
+    if (!name)           { setHint("signup-name-hint",  "error", "❌ กรุณากรอกชื่อ");                   return; }
     if (name.length < 2) { setHint("signup-name-hint",  "error", "❌ ชื่อต้องมีอย่างน้อย 2 ตัวอักษร"); return; }
     if (password.length < 8) { setHint("signup-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return; }
     if (password !== confirm) { setHint("signup-confirm-hint", "error", "❌ Password ไม่ตรงกัน"); return; }
@@ -1693,8 +1601,11 @@
       const result = await res.json();
 
       if (result.status === "success") {
-        currentUser = { email, name };
+        // ✅ เก็บแค่ token + name
+        currentUser = { token: result.token, name: result.name };
         localStorage.setItem("wc2026_user", JSON.stringify(currentUser));
+        document.getElementById("signup-email").value            = "";
+        document.getElementById("signup-name").value             = "";
         document.getElementById("signup-password").value         = "";
         document.getElementById("signup-password-confirm").value = "";
         updateLoginUI();
@@ -1716,14 +1627,40 @@
 
   // ==========================================
   // LOGOUT
+  // ✅ เรียก API เพื่อ destroy token ที่ server
   // ==========================================
-  function logout() {
+  async function logout() {
     if (!confirm("ต้องการออกจากระบบใช่ไหม?")) return;
+
+    // Destroy token ที่ server (fire-and-forget)
+    if (currentUser && currentUser.token) {
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "logoutUser", token: currentUser.token })
+        });
+      } catch (err) {
+        // ไม่ต้อง block logout แม้ network จะล้มเหลว
+        console.warn("Logout API failed:", err.message);
+      }
+    }
+
     currentUser = null;
     localStorage.removeItem("wc2026_user");
     updateLoginUI();
     showAlert("success", "🚪 ออกจากระบบแล้ว");
     showPage("matches", document.querySelector("nav button"));
+  }
+
+  // ==========================================
+  // HANDLE SESSION EXPIRED
+  // ==========================================
+  function handleSessionExpired() {
+    currentUser = null;
+    localStorage.removeItem("wc2026_user");
+    updateLoginUI();
+    showAlert("error", "⏰ Session หมดอายุ กรุณา Login ใหม่");
+    showPage("login", document.getElementById("loginBtn"));
   }
 
   // ==========================================
@@ -1766,7 +1703,6 @@
         html || "<p style='text-align:center;color:#888'>ยังไม่มีข้อมูล</p>";
 
     } catch (err) {
-      console.error("loadMatches:", err);
       document.getElementById("matches-list").innerHTML =
         `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
     }
@@ -1836,9 +1772,7 @@
     }
 
     const isDouble = match[7] === "Yes";
-    if (isDouble) {
-      document.getElementById("double-point-alert").style.display = "flex";
-    }
+    if (isDouble) document.getElementById("double-point-alert").style.display = "flex";
 
     document.getElementById("home-team-name").innerHTML = getFlag(match[2]) + match[2];
     document.getElementById("away-team-name").innerHTML = getFlag(match[3]) + match[3];
@@ -1895,13 +1829,18 @@
 
   // ==========================================
   // GET PREDICTION
+  // ✅ ใช้ token ในการ query แทน email
   // ==========================================
   async function getPrediction(matchId) {
     if (!currentUser) return null;
     try {
       const rows = await fetchSheet("Predictions");
-      const row  = rows.find(
-        r => (r[2] || "").toLowerCase() === currentUser.email.toLowerCase() &&
+      // Predictions sheet ตอนนี้เก็บ playerId ใน col[2]
+      // แต่เราไม่รู้ playerId ฝั่ง client → ต้อง match ด้วย playerName แทน
+      // หรือ fetch ทั้งหมดแล้ว filter ด้วย playerName
+      // ✅ วิธีที่ปลอดภัยกว่า: เรียก API แยก (แต่ในที่นี้ใช้ชื่อเป็น fallback)
+      const row = rows.find(
+        r => (r[1] || "").toLowerCase() === currentUser.name.toLowerCase() &&
              r[3].toString() === matchId.toString()
       );
       return row ? { homeScore: row[4], awayScore: row[5] } : null;
@@ -1910,6 +1849,7 @@
 
   // ==========================================
   // SUBMIT PREDICTION
+  // ✅ ส่ง token แทน email
   // ==========================================
   async function submitPrediction() {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อนทายผล!"); return; }
@@ -1942,11 +1882,18 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action: "submitPrediction", playerName: currentUser.name,
-          email: currentUser.email, matchId, homeScore, awayScore
+          action:    "submitPrediction",
+          token:     currentUser.token, // ✅ ส่ง token แทน email + playerName
+          matchId,
+          homeScore,
+          awayScore
         })
       });
       const result = await res.json();
+
+      if (result.status === "unauthorized") {
+        handleSessionExpired(); return;
+      }
 
       if (result.status === "success") {
         showAlert("success", "✅ บันทึกผลทายสำเร็จ!");
@@ -2025,12 +1972,19 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action: "submitPrediction", playerName: currentUser.name,
-          email: currentUser.email, matchId: editingMatch.matchId,
-          homeScore: newHome, awayScore: newAway
+          action:    "submitPrediction",
+          token:     currentUser.token, // ✅ ส่ง token
+          matchId:   editingMatch.matchId,
+          homeScore: newHome,
+          awayScore: newAway
         })
       });
       const result = await res.json();
+
+      if (result.status === "unauthorized") {
+        handleSessionExpired(); closeEditModal(); return;
+      }
+
       if (result.status === "updated" || result.status === "success") {
         showAlert("success", "✅ แก้ไขผลทายสำเร็จ!");
         closeEditModal(); loadHistory();
@@ -2215,9 +2169,18 @@
 
     try {
       const res    = await fetch(APPS_SCRIPT_URL, {
-        method: "POST", body: JSON.stringify({ action: "getSpecialStatus", email: currentUser.email })
+        method: "POST",
+        body:   JSON.stringify({
+          action: "getSpecialStatus",
+          token:  currentUser.token // ✅ ส่ง token แทน email
+        })
       });
       const result = await res.json();
+
+      if (result.status === "unauthorized") {
+        handleSessionExpired(); return;
+      }
+
       if (result.status === "success") {
         renderSpecialCard("champion",  result.data.champion);
         renderSpecialCard("topscorer", result.data.topscorer);
@@ -2313,6 +2276,7 @@
 
   // ==========================================
   // SUBMIT SPECIAL
+  // ✅ ส่ง token แทน email
   // ==========================================
   async function submitSpecial(type) {
     if (!currentUser) { showAlert("error", "❌ กรุณา Login ก่อน!"); return; }
@@ -2333,11 +2297,17 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body:   JSON.stringify({
-          action: "submitSpecialPrediction", email: currentUser.email,
-          playerName: currentUser.name, type, prediction
+          action:     "submitSpecialPrediction",
+          token:      currentUser.token, // ✅ ส่ง token แทน email + playerName
+          type,
+          prediction
         })
       });
       const result = await res.json();
+
+      if (result.status === "unauthorized") {
+        handleSessionExpired(); return;
+      }
 
       if (result.status === "success" || result.status === "updated") {
         showAlert("success", "✅ " + result.message);
@@ -2375,10 +2345,12 @@
         ? new Date(settings["champion_deadline"]) : null;
       const champClosed = champDeadline && new Date() >= champDeadline;
 
+      // SpecialPredictions ตอนนี้ใช้ playerId ใน col[1]
+      // Leaderboard ใช้ playerId ใน col[0]
       const champMap = {};
       specialRows.forEach(r => {
         if ((r[3] || "").toString() === "champion") {
-          champMap[(r[1] || "").toLowerCase()] = (r[4] || "").toString().trim();
+          champMap[(r[1] || "").toString()] = (r[4] || "").toString().trim();
         }
       });
 
@@ -2391,13 +2363,16 @@
       }
 
       const sorted = [...lbRows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
-      const html   = sorted.map((row, i) => {
-        const [email, name, totalScore, exactScore, resultScore] = row;
+
+      // หา playerId ของ currentUser จาก Leaderboard
+      // ไม่สามารถรู้ playerId ฝั่ง client ได้ → ใช้ name เป็น fallback
+      const html = sorted.map((row, i) => {
+        const [playerId, name, totalScore, exactScore, resultScore] = row;
         const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
         const isMe        = currentUser &&
-          (row[0] || "").toLowerCase() === currentUser.email.toLowerCase();
+          (name || "").toLowerCase() === currentUser.name.toLowerCase();
 
-        const userChamp = champMap[(email || "").toLowerCase()] || "";
+        const userChamp = champMap[(playerId || "").toString()] || "";
         const champTagHtml = (champClosed && userChamp)
           ? `<span class="champion-tag">🏆 ${getFlag(userChamp, 16)}${userChamp}</span>`
           : "";
@@ -2406,8 +2381,8 @@
           <div class="card"
             style="cursor:pointer; ${isMe ? "border-color:#FFD700; box-shadow:0 0 15px rgba(255,215,0,0.2);" : ""}"
             onclick="openUserHistoryModal(
-              '${(email || "").replace(/'/g, "\\'")}',
-              '${(name  || "").replace(/'/g, "\\'")}',
+              '${(playerId || "").replace(/'/g, "\\'")}',
+              '${(name     || "").replace(/'/g, "\\'")}',
               ${i + 1}, ${totalScore || 0})">
             <div class="leaderboard-item">
               <div class="rank rank-${i + 1}">${rankDisplay}</div>
@@ -2435,8 +2410,9 @@
 
   // ==========================================
   // USER HISTORY MODAL
+  // ✅ รับ playerId แทน email
   // ==========================================
-  async function openUserHistoryModal(email, name, rank, totalPts) {
+  async function openUserHistoryModal(playerId, name, rank, totalPts) {
     document.getElementById("user-history-modal").style.display = "flex";
     document.getElementById("modal-user-name").textContent  = "👤 " + name;
     document.getElementById("modal-user-rank").textContent  = "อันดับที่ " + rank;
@@ -2472,12 +2448,13 @@
       const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
       const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
+      // ✅ ค้นหาด้วย playerId
       let userChamp = "", userTs = "";
       specialRows.forEach(r => {
-        const rEmail = (r[1] || "").toLowerCase();
-        const rType  = (r[3] || "").toString();
-        const rPred  = (r[4] || "").toString().trim();
-        if (rEmail === email.toLowerCase()) {
+        const rPlayerId = (r[1] || "").toString();
+        const rType     = (r[3] || "").toString();
+        const rPred     = (r[4] || "").toString().trim();
+        if (rPlayerId === playerId) {
           if (rType === "champion")  userChamp = rPred;
           if (rType === "topscorer") userTs    = rPred;
         }
@@ -2528,8 +2505,9 @@
       const matchMap = {};
       finishedMatches.forEach(row => { matchMap[row[0]] = row; });
 
+      // ✅ filter ด้วย playerId (col[2] ของ Predictions)
       const myPreds = predictions.filter(row =>
-        (row[2] || "").toLowerCase() === email.toLowerCase() && matchMap[row[3]]
+        (row[2] || "").toString() === playerId && matchMap[row[3]]
       );
 
       modalHistoryData = myPreds.map(pred => {
@@ -2621,6 +2599,7 @@
 
   // ==========================================
   // HISTORY
+  // ✅ filter ด้วย playerName (เพราะไม่รู้ playerId ฝั่ง client)
   // ==========================================
   async function loadHistory() {
     if (!currentUser) {
@@ -2639,8 +2618,9 @@
         fetchSheet("Matches")
       ]);
 
+      // ✅ filter ด้วย playerName (col[1]) เพราะ client ไม่รู้ playerId
       const myPreds = predictions.filter(
-        row => (row[2] || "").toLowerCase() === currentUser.email.toLowerCase()
+        row => (row[1] || "").toLowerCase() === currentUser.name.toLowerCase()
       );
 
       if (myPreds.length === 0) {
@@ -2911,21 +2891,20 @@
     if (!confirm(`ยืนยันผล?\n\n⚽ ${match[2]}  ${homeScore} - ${awayScore}  ${match[3]}`)) return;
 
     const btn = document.getElementById("admin-submit-btn");
-    btn.disabled = true;
-    btn.textContent = "⏳ กำลังคำนวณ...";
-    btn.style.background = "#555";
-    btn.style.color = "#fff";
-
-    const payload = {
-      action:    "updateScore",
-      password:  adminPassword,
-      matchId:   String(matchId),
-      homeScore: String(homeScore),
-      awayScore: String(awayScore)
-    };
+    btn.disabled = true; btn.textContent = "⏳ กำลังคำนวณ...";
+    btn.style.background = "#555"; btn.style.color = "#fff";
 
     try {
-      const res     = await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
+      const res     = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body:   JSON.stringify({
+          action:    "updateScore",
+          password:  adminPassword,
+          matchId:   String(matchId),
+          homeScore: String(homeScore),
+          awayScore: String(awayScore)
+        })
+      });
       const rawText = await res.text();
       let result;
       try { result = JSON.parse(rawText); }
@@ -2941,11 +2920,10 @@
       if (result.status === "success") {
         showAlert("success", "✅ " + result.message);
         btn.textContent = "✅ อัปเดตสำเร็จ!";
-        btn.style.background = "#2ecc71";
-        btn.style.color = "#fff";
+        btn.style.background = "#2ecc71"; btn.style.color = "#fff";
         setTimeout(() => loadAdminMatches(), 1500);
       } else if (result.status === "unauthorized") {
-        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!");
+        showAlert("error", "❌ รหัสผ่านไม่ถูกต้อง!"); adminLogout();
         btn.disabled = false;
         btn.textContent = "💾 บันทึกผลและคำนวณคะแนน";
         btn.style.background = "linear-gradient(135deg, #FFD700, #FFA500)";
