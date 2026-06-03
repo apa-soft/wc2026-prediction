@@ -8,34 +8,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #0a0a2e; color: #fff; min-height: 100vh; }
 
-    /* ==================== BETA BANNER ==================== */
-    .beta-banner {
-      background: linear-gradient(135deg, #7b2d00, #c0392b);
-      border-bottom: 2px solid #e74c3c;
-      padding: 10px 20px;
-      text-align: center;
-      font-size: 0.88rem;
-      color: #fff;
-      position: relative;
-      z-index: 100;
-    }
-    .beta-banner strong { color: #FFD700; }
-    .beta-banner .beta-badge {
-      display: inline-block;
-      background: #FFD700; color: #000;
-      border-radius: 20px; padding: 2px 10px;
-      font-size: 0.78rem; font-weight: bold;
-      margin-right: 8px; vertical-align: middle;
-    }
-    .beta-countdown {
-      display: inline-block;
-      background: rgba(0,0,0,0.3);
-      border-radius: 8px; padding: 2px 10px;
-      margin-left: 8px; font-weight: bold;
-      color: #FFD700; font-size: 0.88rem;
-      vertical-align: middle;
-    }
-
     header {
       background: linear-gradient(135deg, #1a1a4e, #2d2d7e);
       padding: 20px; text-align: center;
@@ -612,15 +584,6 @@
   </style>
 </head>
 <body>
-
-<!-- ==================== BETA BANNER ==================== -->
-<div class="beta-banner" id="beta-banner">
-  <span class="beta-badge">🧪 BETA</span>
-  เว็บนี้อยู่ในช่วง<strong>ทดลองใช้งาน</strong> —
-  จะเปิดให้ใช้งานจริงวันที่ <strong>3 มิถุนายน 2026</strong>
-  <span class="beta-countdown" id="beta-countdown">⏳ กำลังนับ...</span>
-  <span style="color:#aaa; font-size:0.8rem; margin-left:8px;">ข้อมูลอาจมีการเปลี่ยนแปลง</span>
-</div>
 
 <header>
   <h1>⚽ FIFA World Cup 2026</h1>
@@ -1416,38 +1379,6 @@
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9TOaOjIO7LoyaG58Wgi1R_rf531aFJkETtDOWFILkDpDhEeawcK_EXe3gMPvN7dc/exec";
 
   // ==========================================
-  // BETA COUNTDOWN  ← ใหม่ (ข้อ 3)
-  // ==========================================
-  const LAUNCH_DATE = new Date("2026-06-03T00:00:00+07:00"); // 3 มิ.ย. 2026 เที่ยงคืน (ICT)
-
-  function updateBetaCountdown() {
-    const now  = new Date();
-    const diff = LAUNCH_DATE - now;
-    const el   = document.getElementById("beta-countdown");
-    if (!el) return;
-
-    if (diff <= 0) {
-      el.textContent = "🚀 เปิดให้ใช้งานแล้ว!";
-      el.style.color = "#2ecc71";
-      return;
-    }
-    const days    = Math.floor(diff / 86400000);
-    const hours   = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-
-    if (days > 0) {
-      el.textContent = `⏳ อีก ${days} วัน ${hours} ชม. ${minutes} นาที`;
-    } else if (hours > 0) {
-      el.textContent = `⏳ อีก ${hours} ชม. ${minutes} นาที ${seconds} วิ`;
-    } else {
-      el.textContent = `⏳ อีก ${minutes} นาที ${seconds} วิ`;
-    }
-  }
-  updateBetaCountdown();
-  setInterval(updateBetaCountdown, 1000);
-
-  // ==========================================
   // FLAG MAP
   // ==========================================
   const FLAG_MAP = {
@@ -1842,7 +1773,7 @@
   }
 
   // ==========================================
-  // LOAD MATCHES FOR FORM  ← ข้อ 1: เพิ่ม ⭐ ใน dropdown
+  // LOAD MATCHES FOR FORM
   // ==========================================
   async function loadMatchesForForm() {
     try {
@@ -1889,14 +1820,13 @@
   }
 
   // ==========================================
-  // UPDATE MATCH INFO  ← ข้อ 1: แสดง double point alert
+  // UPDATE MATCH INFO
   // ==========================================
   async function updateMatchInfo() {
     const matchId = document.getElementById("match-select").value;
     const match   = matchesData.find(r => r[0] === matchId);
     if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
 
-    // ซ่อน double point alert ก่อน
     document.getElementById("double-point-alert").style.display = "none";
 
     if (!match) {
@@ -1905,7 +1835,6 @@
       return;
     }
 
-    // ⭐ แสดง double point alert ถ้าเป็น double match
     const isDouble = match[7] === "Yes";
     if (isDouble) {
       document.getElementById("double-point-alert").style.display = "flex";
@@ -2430,7 +2359,7 @@
   }
 
   // ==========================================
-  // LEADERBOARD  ← ข้อ 2: เพิ่มธงแชมป์หลังชื่อ
+  // LEADERBOARD
   // ==========================================
   async function loadLeaderboard() {
     try {
@@ -2440,14 +2369,12 @@
         fetchSheet("Settings")
       ]);
 
-      // อ่าน settings เพื่อดูว่า champion deadline ปิดแล้วหรือยัง
       const settings = {};
       settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
       const champDeadline = settings["champion_deadline"]
         ? new Date(settings["champion_deadline"]) : null;
       const champClosed = champDeadline && new Date() >= champDeadline;
 
-      // สร้าง map: email → champion prediction
       const champMap = {};
       specialRows.forEach(r => {
         if ((r[3] || "").toString() === "champion") {
@@ -2470,7 +2397,6 @@
         const isMe        = currentUser &&
           (row[0] || "").toLowerCase() === currentUser.email.toLowerCase();
 
-        // ⭐ แสดงธงแชมป์หลังชื่อ (เฉพาะเมื่อปิดรับแล้ว)
         const userChamp = champMap[(email || "").toLowerCase()] || "";
         const champTagHtml = (champClosed && userChamp)
           ? `<span class="champion-tag">🏆 ${getFlag(userChamp, 16)}${userChamp}</span>`
@@ -2508,7 +2434,7 @@
   }
 
   // ==========================================
-  // USER HISTORY MODAL  ← ข้อ 2: เพิ่ม special section
+  // USER HISTORY MODAL
   // ==========================================
   async function openUserHistoryModal(email, name, rank, totalPts) {
     document.getElementById("user-history-modal").style.display = "flex";
@@ -2534,8 +2460,6 @@
         fetchSheet("Settings")
       ]);
 
-      // ==================== Special Predictions ====================
-      // อ่าน settings
       const settings = {};
       settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
 
@@ -2548,7 +2472,6 @@
       const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
       const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
-      // หา special prediction ของ user นี้
       let userChamp = "", userTs = "";
       specialRows.forEach(r => {
         const rEmail = (r[1] || "").toLowerCase();
@@ -2560,11 +2483,9 @@
         }
       });
 
-      // แสดง special section เฉพาะเมื่อปิดรับแล้ว
       if (champClosed || tsClosed) {
         document.getElementById("modal-special-section").style.display = "block";
 
-        // Champion
         const champValEl    = document.getElementById("modal-champion-val");
         const champResultEl = document.getElementById("modal-champion-result");
         if (champClosed) {
@@ -2584,7 +2505,6 @@
           champResultEl.innerHTML = "";
         }
 
-        // Top Scorer
         const tsValEl    = document.getElementById("modal-topscorer-val");
         const tsResultEl = document.getElementById("modal-topscorer-result");
         if (tsClosed) {
@@ -2604,7 +2524,6 @@
         }
       }
 
-      // ==================== Match History ====================
       const finishedMatches = matches.filter(r => r[8] === "Finished");
       const matchMap = {};
       finishedMatches.forEach(row => { matchMap[row[0]] = row; });
