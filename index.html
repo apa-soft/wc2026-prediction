@@ -2480,31 +2480,47 @@ async function loadLeaderboard() {
       fetchSheet("Settings")
     ]);
 
+    // ── Debug: ดูข้อมูลใน Console ──────────────────────
+    console.log("=== LEADERBOARD DEBUG ===");
+    console.log("Settings rows:", settingsRows);
+    console.log("Special rows (first 5):", specialRows.slice(0, 5));
+    console.log("LB rows:", lbRows);
+
     // ── Settings ──────────────────────────────────────────
     const settings = {};
     settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+    console.log("Settings map:", settings);
 
     const champDeadline = settings["champion_deadline"]
       ? new Date(settings["champion_deadline"]) : null;
     const tsDeadline    = settings["topscorer_deadline"]
       ? new Date(settings["topscorer_deadline"]) : null;
 
-    const champClosed = champDeadline && new Date() >= champDeadline;
-    const tsClosed    = tsDeadline    && new Date() >= tsDeadline;
+    const now = new Date();
+    const champClosed = champDeadline ? now >= champDeadline : false;
+    const tsClosed    = tsDeadline    ? now >= tsDeadline    : false;
+
+    console.log("Champion deadline:", champDeadline, "| Closed:", champClosed);
+    console.log("TopScorer deadline:", tsDeadline,   "| Closed:", tsClosed);
 
     const champAnswer = (settings["champion_answer"]  || "").trim().toLowerCase();
     const tsAnswer    = (settings["topscorer_answer"] || "").trim().toLowerCase();
+    console.log("Champion answer:", champAnswer, "| TS answer:", tsAnswer);
 
     // ── Build Maps: playerId → prediction ────────────────
     const champMap = {};
     const tsMap    = {};
     specialRows.forEach(r => {
-      const pid  = (r[1] || "").toString();
-      const type = (r[3] || "").toString();
+      // Debug แต่ละ row
+      console.log("Special row:", r);
+      const pid  = (r[1] || "").toString().trim();
+      const type = (r[3] || "").toString().trim();
       const pred = (r[4] || "").toString().trim();
       if (type === "champion")  champMap[pid] = pred;
       if (type === "topscorer") tsMap[pid]    = pred;
     });
+    console.log("Champion map:", champMap);
+    console.log("TopScorer map:", tsMap);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -2518,13 +2534,15 @@ async function loadLeaderboard() {
 
     const html = sorted.map((row, i) => {
       const [playerId, name, totalScore, exactScore, resultScore] = row;
-      const pid         = (playerId || "").toString();
+      const pid         = (playerId || "").toString().trim();
       const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
       const isMe        = currentUser && pid === currentUser.playerId;
 
       // ── Champion Tag ──────────────────────────────────
       const userChamp = champMap[pid] || "";
       let champTagHtml = "";
+
+      // แสดง Tag เมื่อ: ปิดรับแล้ว AND มีการทาย
       if (champClosed && userChamp) {
         const isCorrect = champAnswer && userChamp.toLowerCase() === champAnswer;
         const correctMark = isCorrect
@@ -2538,6 +2556,7 @@ async function loadLeaderboard() {
       // ── Top Scorer Tag ────────────────────────────────
       const userTs = tsMap[pid] || "";
       let tsTagHtml = "";
+
       if (tsClosed && userTs) {
         const isCorrect = tsAnswer && userTs.toLowerCase() === tsAnswer;
         const correctMark = isCorrect
@@ -2561,11 +2580,7 @@ async function loadLeaderboard() {
             '${(name || "").replace(/'/g, "\\'")}',
             ${i + 1}, ${totalScore || 0})">
           <div class="leaderboard-item">
-
-            <!-- Rank -->
             <div class="rank rank-${i + 1}">${rankDisplay}</div>
-
-            <!-- Player Info -->
             <div class="player-info">
               <div class="player-name" style="display:flex; flex-wrap:wrap; align-items:center; gap:5px;">
                 <span>${name || "-"}</span>
@@ -2577,8 +2592,6 @@ async function loadLeaderboard() {
               </div>
               ${specialRowHtml}
             </div>
-
-            <!-- Score -->
             <div class="score-display">${totalScore || 0} pts</div>
           </div>
         </div>`;
@@ -2587,6 +2600,7 @@ async function loadLeaderboard() {
     document.getElementById("leaderboard-list").innerHTML = html;
 
   } catch (err) {
+    console.error("loadLeaderboard error:", err);
     document.getElementById("leaderboard-list").innerHTML =
       `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
   }
