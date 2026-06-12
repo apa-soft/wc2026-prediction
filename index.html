@@ -145,7 +145,6 @@
       content: ""; flex: 1; height: 1px; background: #333366;
     }
 
-    /* ===== FORGOT PASSWORD ===== */
     .forgot-link-btn {
       background: none; border: none; color: #888;
       font-size: 0.88rem; cursor: pointer;
@@ -173,7 +172,6 @@
     .forgot-success-title { color: #2ecc71; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; }
     .forgot-success-desc  { color: #aaa; font-size: 0.88rem; line-height: 1.8; }
 
-    /* ===== LEADERBOARD ===== */
     .leaderboard-item {
       display: flex; align-items: center; gap: 15px; padding: 15px 20px;
     }
@@ -433,7 +431,6 @@
       font-size: 0.88rem; color: #aaa;
     }
 
-    /* ===== MODALS ===== */
     #edit-modal, #user-history-modal {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.75); z-index: 1000;
@@ -500,7 +497,6 @@
     }
     .close-modal-btn:hover { border-color: #e74c3c; color: #e74c3c; }
 
-    /* ===== PENDING RESET BADGE ===== */
     .pending-reset-badge {
       display: inline-flex; align-items: center; gap: 4px;
       background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.5);
@@ -514,7 +510,6 @@
       50%       { opacity: 0.6; }
     }
 
-    /* ===== USER LIST TABLE ===== */
     .user-list-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
     .user-list-table th {
       padding: 10px 12px; text-align: left; color: #FFD700;
@@ -538,7 +533,6 @@
     .select-user-btn:hover { background: #e67e22; color: #fff; }
     .user-list-wrap { max-height: 320px; overflow-y: auto; border: 1px solid #333366; border-radius: 10px; }
 
-    /* ===== RULES ===== */
     .rules-step {
       display: flex; gap: 15px; align-items: flex-start;
       padding: 15px; background: #0a0a2e; border-radius: 12px; margin-bottom: 10px;
@@ -560,7 +554,6 @@
     .rules-table tr:last-child td { border-bottom: none; }
     .rules-rule-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
 
-    /* ===== SPECIAL MODAL ===== */
     .modal-special-section {
       background: #0a0a2e; border: 1px solid #333366;
       border-radius: 12px; padding: 16px; margin-top: 16px;
@@ -578,7 +571,6 @@
     .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
     .modal-special-locked { color: #555; font-style: italic; font-size: 0.82rem; }
 
-    /* ===== CHAMPION TAG ===== */
     .champion-tag {
       display: inline-flex; align-items: center; gap: 4px;
       background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35);
@@ -587,7 +579,6 @@
       vertical-align: middle; white-space: nowrap;
     }
 
-    /* ===== TOP SCORER TAG ===== */
     .topscorer-tag {
       display: inline-flex; align-items: center; gap: 4px;
       background: rgba(46,204,113,0.12); border: 1px solid rgba(46,204,113,0.35);
@@ -599,7 +590,6 @@
     .flag-img    { width: 24px; height: auto; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
     .flag-img-sm { width: 20px; height: auto; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
 
-    /* ===== LEADERBOARD SPECIAL ROW ===== */
     .lb-special-row {
       display: flex; flex-wrap: wrap; gap: 6px;
       align-items: center; margin-top: 6px;
@@ -703,7 +693,6 @@
       </div>
     </div>
     <div id="special-content" style="display:none;">
-      <!-- Champion Card -->
       <div class="special-card champion-card">
         <div class="special-header">
           <div class="special-icon">🏆</div>
@@ -750,7 +739,6 @@
         </div>
       </div>
 
-      <!-- Top Scorer Card -->
       <div class="special-card topscorer-card">
         <div class="special-header">
           <div class="special-icon">⚽</div>
@@ -1027,7 +1015,6 @@
             <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">✨ Sign Up</button>
           </div>
 
-          <!-- ===== LOGIN FORM ===== -->
           <div class="auth-form active" id="form-login">
             <div class="form-group">
               <label>Username</label>
@@ -1055,7 +1042,6 @@
               </button>
             </div>
 
-            <!-- ===== FORGOT PASSWORD SECTION ===== -->
             <div id="forgot-section" class="forgot-section" style="display:none;">
               <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
                 <button type="button" class="forgot-back-btn" onclick="hideForgotForm()">←</button>
@@ -1113,7 +1099,6 @@
             </button>
           </div>
 
-          <!-- ===== SIGNUP FORM ===== -->
           <div class="auth-form" id="form-signup">
             <div class="form-group">
               <label>Username</label>
@@ -1158,7 +1143,6 @@
         </div>
       </div>
 
-      <!-- Logged In Box -->
       <div id="logged-in-box" style="display:none;">
         <h2>👤 บัญชีของฉัน</h2>
         <div class="card" style="padding:30px;">
@@ -1371,7 +1355,7 @@
     </div>
   </div>
 
-</div><!-- end .container -->
+</div>
 
 <!-- ==================== EDIT MODAL ==================== -->
 <div id="edit-modal">
@@ -1547,27 +1531,70 @@ const specialState = {
 let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
 // ==========================================
-// FETCH SHEET HELPER
+// ✅ FETCH SHEET HELPER — แก้ไข Date parsing
 // ==========================================
 async function fetchSheet(sheetName) {
-  const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-  const res  = await fetch(url);
-  const text = await res.text();
+  const url   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  const res   = await fetch(url);
+  const text  = await res.text();
   const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
   if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
-  const json = JSON.parse(match[1]);
+  const json  = JSON.parse(match[1]);
   if (!json.table || !json.table.rows) return [];
+
   return json.table.rows.map(row =>
     (row.c || []).map(cell => {
       if (!cell || cell.v === null || cell.v === undefined) return "";
+
+      // ── แปลง Date(year,month,day,h,m,s) → Local ISO string ──
       if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-        const parts = cell.v.replace("Date(","").replace(")","").split(",").map(Number);
-        const d = new Date(Date.UTC(parts[0], parts[1], parts[2], parts[3]||0, parts[4]||0, parts[5]||0));
-        return d.toISOString().replace("T"," ").substring(0,16);
+        const parts = cell.v
+          .replace("Date(", "")
+          .replace(")", "")
+          .split(",")
+          .map(Number);
+        // parts[1] คือ month แบบ 0-based (Google ส่งมาแบบนี้)
+        const year  = parts[0];
+        const month = parts[1]; // 0-based อยู่แล้ว
+        const day   = parts[2] || 1;
+        const hour  = parts[3] || 0;
+        const min   = parts[4] || 0;
+        const sec   = parts[5] || 0;
+
+        // ใช้ Local time ให้ตรงกับ timezone ของ Sheet
+        const pad = n => String(n).padStart(2, "0");
+        // Return เป็น ISO-like string: "2026-06-12T01:59:00"
+        return `${year}-${pad(month + 1)}-${pad(day)}T${pad(hour)}:${pad(min)}:${pad(sec)}`;
       }
+
       return String(cell.v).trim();
     })
   );
+}
+
+// ==========================================
+// ✅ PARSE DEADLINE — รองรับหลาย format
+// ==========================================
+function parseDeadline(str) {
+  if (!str) return null;
+
+  // รองรับ ISO: "2026-06-12T01:59:00" หรือ "2026-06-12T01:59:00.000Z"
+  let d = new Date(str);
+  if (!isNaN(d.getTime())) return d;
+
+  // รองรับ: "2026-06-12 1:59" หรือ "2026-06-12 01:59"
+  const m1 = str.match(/(\d{4})-(\d{1,2})-(\d{1,2})[T\s](\d{1,2}):(\d{2})/);
+  if (m1) return new Date(+m1[1], +m1[2] - 1, +m1[3], +m1[4], +m1[5]);
+
+  // รองรับ: "12/06/2026 01:59"
+  const m2 = str.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*(\d{1,2}):(\d{2})/);
+  if (m2) return new Date(+m2[3], +m2[2] - 1, +m2[1], +m2[4], +m2[5]);
+
+  // รองรับ: "12/06/2026"
+  const m3 = str.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m3) return new Date(+m3[3], +m3[2] - 1, +m3[1]);
+
+  return null;
 }
 
 // ==========================================
@@ -2470,7 +2497,7 @@ async function submitSpecial(type) {
 }
 
 // ==========================================
-// LEADERBOARD — อัปเดตใหม่ (แสดง Champion + Top Scorer)
+// ✅ LEADERBOARD — แก้ไข parseDeadline + champMap
 // ==========================================
 async function loadLeaderboard() {
   try {
@@ -2480,47 +2507,36 @@ async function loadLeaderboard() {
       fetchSheet("Settings")
     ]);
 
-    // ── Debug: ดูข้อมูลใน Console ──────────────────────
-    console.log("=== LEADERBOARD DEBUG ===");
-    console.log("Settings rows:", settingsRows);
-    console.log("Special rows (first 5):", specialRows.slice(0, 5));
-    console.log("LB rows:", lbRows);
-
     // ── Settings ──────────────────────────────────────────
     const settings = {};
-    settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
-    console.log("Settings map:", settings);
+    settingsRows.forEach(r => {
+      if (r[0]) settings[r[0].toString().trim()] = (r[1] || "").toString().trim();
+    });
 
-    const champDeadline = settings["champion_deadline"]
-      ? new Date(settings["champion_deadline"]) : null;
-    const tsDeadline    = settings["topscorer_deadline"]
-      ? new Date(settings["topscorer_deadline"]) : null;
+    // ✅ ใช้ parseDeadline() แทน new Date() ตรงๆ
+    const champDeadline = parseDeadline(settings["champion_deadline"]);
+    const tsDeadline    = parseDeadline(settings["topscorer_deadline"]);
 
-    const now = new Date();
+    const now         = new Date();
     const champClosed = champDeadline ? now >= champDeadline : false;
     const tsClosed    = tsDeadline    ? now >= tsDeadline    : false;
 
-    console.log("Champion deadline:", champDeadline, "| Closed:", champClosed);
-    console.log("TopScorer deadline:", tsDeadline,   "| Closed:", tsClosed);
-
     const champAnswer = (settings["champion_answer"]  || "").trim().toLowerCase();
     const tsAnswer    = (settings["topscorer_answer"] || "").trim().toLowerCase();
-    console.log("Champion answer:", champAnswer, "| TS answer:", tsAnswer);
 
     // ── Build Maps: playerId → prediction ────────────────
+    // ✅ ใช้ column index ที่ถูกต้อง: [0]=Timestamp [1]=playerId [2]=PlayerName [3]=Type [4]=Prediction
     const champMap = {};
     const tsMap    = {};
     specialRows.forEach(r => {
-      // Debug แต่ละ row
-      console.log("Special row:", r);
       const pid  = (r[1] || "").toString().trim();
-      const type = (r[3] || "").toString().trim();
+      const type = (r[3] || "").toString().trim().toLowerCase();
       const pred = (r[4] || "").toString().trim();
-      if (type === "champion")  champMap[pid] = pred;
-      if (type === "topscorer") tsMap[pid]    = pred;
+      if (pid && pred) {
+        if (type === "champion")  champMap[pid] = pred;
+        if (type === "topscorer") tsMap[pid]    = pred;
+      }
     });
-    console.log("Champion map:", champMap);
-    console.log("TopScorer map:", tsMap);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -2541,10 +2557,8 @@ async function loadLeaderboard() {
       // ── Champion Tag ──────────────────────────────────
       const userChamp = champMap[pid] || "";
       let champTagHtml = "";
-
-      // แสดง Tag เมื่อ: ปิดรับแล้ว AND มีการทาย
       if (champClosed && userChamp) {
-        const isCorrect = champAnswer && userChamp.toLowerCase() === champAnswer;
+        const isCorrect   = champAnswer && userChamp.toLowerCase() === champAnswer;
         const correctMark = isCorrect
           ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
         champTagHtml = `
@@ -2556,9 +2570,8 @@ async function loadLeaderboard() {
       // ── Top Scorer Tag ────────────────────────────────
       const userTs = tsMap[pid] || "";
       let tsTagHtml = "";
-
       if (tsClosed && userTs) {
-        const isCorrect = tsAnswer && userTs.toLowerCase() === tsAnswer;
+        const isCorrect   = tsAnswer && userTs.toLowerCase() === tsAnswer;
         const correctMark = isCorrect
           ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
         tsTagHtml = `
@@ -2631,23 +2644,27 @@ async function openUserHistoryModal(playerId, name, rank, totalPts) {
       fetchSheet("Settings")
     ]);
     const settings = {};
-    settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
-    const champDeadline = settings["champion_deadline"] ? new Date(settings["champion_deadline"]) : null;
-    const tsDeadline    = settings["topscorer_deadline"] ? new Date(settings["topscorer_deadline"]) : null;
+    settingsRows.forEach(r => { if (r[0]) settings[r[0].toString().trim()] = (r[1] || "").toString().trim(); });
+
+    // ✅ ใช้ parseDeadline() ที่นี่ด้วย
+    const champDeadline = parseDeadline(settings["champion_deadline"]);
+    const tsDeadline    = parseDeadline(settings["topscorer_deadline"]);
     const champClosed   = champDeadline && new Date() >= champDeadline;
     const tsClosed      = tsDeadline    && new Date() >= tsDeadline;
     const champAnswer   = (settings["champion_answer"]  || "").trim().toLowerCase();
     const tsAnswer      = (settings["topscorer_answer"] || "").trim().toLowerCase();
+
     let userChamp = "", userTs = "";
     specialRows.forEach(r => {
-      const rPlayerId = (r[1]||"").toString();
-      const rType     = (r[3]||"").toString();
-      const rPred     = (r[4]||"").toString().trim();
+      const rPlayerId = (r[1] || "").toString().trim();
+      const rType     = (r[3] || "").toString().trim().toLowerCase();
+      const rPred     = (r[4] || "").toString().trim();
       if (rPlayerId === playerId) {
         if (rType === "champion")  userChamp = rPred;
         if (rType === "topscorer") userTs    = rPred;
       }
     });
+
     if (champClosed || tsClosed) {
       document.getElementById("modal-special-section").style.display = "block";
       const champValEl    = document.getElementById("modal-champion-val");
@@ -2686,6 +2703,7 @@ async function openUserHistoryModal(playerId, name, rank, totalPts) {
         tsResultEl.innerHTML = "";
       }
     }
+
     const finishedMatches = matches.filter(r => r[8] === "Finished");
     const matchMap = {};
     finishedMatches.forEach(row => { matchMap[row[0]] = row; });
