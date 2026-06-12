@@ -351,8 +351,7 @@
     .result-reveal-box.pending { background: #111133; border: 1px solid #333366; }
     .my-pred-box {
       background: #0a0a2e; border-radius: 10px;
-      padding: 15px; margin-bottom: 15px; text```html
--align: center;
+      padding: 15px; margin-bottom: 15px; text-align: center;
     }
 
     .team-search-wrapper { position: relative; }
@@ -594,19 +593,6 @@
     .lb-special-row {
       display: flex; flex-wrap: wrap; gap: 6px;
       align-items: center; margin-top: 6px;
-    }
-
-    /* ✅ NEW: Auto-refresh indicator */
-    .lb-refresh-indicator {
-      display: flex; align-items: center; gap: 8px;
-      background: #0a1a0a; border: 1px solid #2a4a2a;
-      border-radius: 10px; padding: 8px 14px;
-      font-size: 0.82rem; color: #2ecc71; margin-bottom: 15px;
-      animation: refreshPulse 2s ease-in-out infinite;
-    }
-    @keyframes refreshPulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.7; }
     }
   </style>
 </head>
@@ -867,11 +853,6 @@
   <div id="page-leaderboard" class="page">
     <h2 class="section-title">🏆 Leaderboard</h2>
     <p style="color:#888; font-size:0.85rem; margin-bottom:15px;">👆 คลิกที่ชื่อผู้เล่นเพื่อดูประวัติการทาย</p>
-    <!-- ✅ NEW: Auto-refresh indicator จะแสดงตรงนี้ -->
-    <div id="lb-refresh-indicator" style="display:none;" class="lb-refresh-indicator">
-      <span>🔄</span>
-      <span id="lb-refresh-text">ระบบจะ refresh อัตโนมัติใน <strong id="lb-refresh-countdown"></strong></span>
-    </div>
     <div id="leaderboard-list">
       <div class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
     </div>
@@ -1542,10 +1523,6 @@ let allTeams         = [];
 let playersCache     = {};
 let allUsersData     = [];
 
-// ✅ NEW: Leaderboard auto-refresh timers
-let lbAutoRefreshTimer    = null;  // setTimeout สำหรับ refresh เมื่อ deadline ผ่าน
-let lbCountdownInterval   = null;  // setInterval สำหรับ countdown display
-
 const specialState = {
   champion:  { selectedTeam: "", selectedValue: "" },
   topscorer: { selectedTeam: "", selectedPlayer: "" }
@@ -1554,13 +1531,13 @@ const specialState = {
 let currentUser = JSON.parse(localStorage.getItem("wc2026_user")) || null;
 
 // ==========================================
-// FETCH SHEET HELPER
+// ✅ FETCH SHEET HELPER — แก้ไข Date parsing
 // ==========================================
 async function fetchSheet(sheetName) {
   const url   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
   const res   = await fetch(url);
   const text  = await res.text();
-  const match = text.match(/google\.visualization\.Query\.setResponse$([\s\S]*)$;?\s*$/);
+  const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
   if (!match) throw new Error("ไม่สามารถ parse ข้อมูลจาก Google Sheet ได้");
   const json  = JSON.parse(match[1]);
   if (!json.table || !json.table.rows) return [];
@@ -1568,99 +1545,56 @@ async function fetchSheet(sheetName) {
   return json.table.rows.map(row =>
     (row.c || []).map(cell => {
       if (!cell || cell.v === null || cell.v === undefined) return "";
+
+      // ── แปลง Date(year,month,day,h,m,s) → Local ISO string ──
       if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-        const parts = cell.v.replace("Date(", "").replace(")", "").split(",").map(Number);
+        const parts = cell.v
+          .replace("Date(", "")
+          .replace(")", "")
+          .split(",")
+          .map(Number);
+        // parts[1] คือ month แบบ 0-based (Google ส่งมาแบบนี้)
         const year  = parts[0];
-        const month = parts[1];
+        const month = parts[1]; // 0-based อยู่แล้ว
         const day   = parts[2] || 1;
         const hour  = parts[3] || 0;
         const min   = parts[4] || 0;
         const sec   = parts[5] || 0;
-        const pad   = n => String(n).padStart(2, "0");
+
+        // ใช้ Local time ให้ตรงกับ timezone ของ Sheet
+        const pad = n => String(n).padStart(2, "0");
+        // Return เป็น ISO-like string: "2026-06-12T01:59:00"
         return `${year}-${pad(month + 1)}-${pad(day)}T${pad(hour)}:${pad(min)}:${pad(sec)}`;
       }
+
       return String(cell.v).trim();
     })
   );
 }
 
 // ==========================================
-// PARSE DEADLINE
+// ✅ PARSE DEADLINE — รองรับหลาย format
 // ==========================================
 function parseDeadline(str) {
   if (!str) return null;
+
+  // รองรับ ISO: "2026-06-12T01:59:00" หรือ "2026-06-12T01:59:00.000Z"
   let d = new Date(str);
   if (!isNaN(d.getTime())) return d;
+
+  // รองรับ: "2026-06-12 1:59" หรือ "2026-06-12 01:59"
   const m1 = str.match(/(\d{4})-(\d{1,2})-(\d{1,2})[T\s](\d{1,2}):(\d{2})/);
   if (m1) return new Date(+m1[1], +m1[2] - 1, +m1[3], +m1[4], +m1[5]);
+
+  // รองรับ: "12/06/2026 01:59"
   const m2 = str.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*(\d{1,2}):(\d{2})/);
   if (m2) return new Date(+m2[3], +m2[2] - 1, +m2[1], +m2[4], +m2[5]);
+
+  // รองรับ: "12/06/2026"
   const m3 = str.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   if (m3) return new Date(+m3[3], +m3[2] - 1, +m3[1]);
+
   return null;
-}
-
-// ==========================================
-// ✅ NEW: CLEAR LEADERBOARD TIMERS
-// ==========================================
-function clearLbTimers() {
-  if (lbAutoRefreshTimer)  { clearTimeout(lbAutoRefreshTimer);   lbAutoRefreshTimer  = null; }
-  if (lbCountdownInterval) { clearInterval(lbCountdownInterval); lbCountdownInterval = null; }
-  document.getElementById("lb-refresh-indicator").style.display = "none";
-}
-
-// ==========================================
-// ✅ NEW: SCHEDULE LEADERBOARD AUTO-REFRESH
-// ==========================================
-function scheduleLbAutoRefresh(deadlines) {
-  clearLbTimers();
-
-  const now = new Date();
-
-  // หา deadline ที่ใกล้ที่สุดที่ยังไม่ผ่าน (ภายใน 24 ชั่วโมง)
-  const upcoming = deadlines
-    .map(dl => ({ dl, ms: dl - now }))
-    .filter(x => x.ms > 0 && x.ms <= 86400000) // ไม่เกิน 24 ชม.
-    .sort((a, b) => a.ms - b.ms);
-
-  if (upcoming.length === 0) return; // ไม่มี deadline ที่ต้องรอ
-
-  const { dl, ms } = upcoming[0];
-
-  // แสดง countdown indicator
-  const indicator = document.getElementById("lb-refresh-indicator");
-  const countdown = document.getElementById("lb-refresh-countdown");
-  indicator.style.display = "flex";
-
-  // อัปเดต countdown ทุกวินาที
-  function updateCountdown() {
-    const diff = dl - new Date();
-    if (diff <= 0) {
-      clearInterval(lbCountdownInterval);
-      lbCountdownInterval = null;
-      indicator.style.display = "none";
-      return;
-    }
-    const mins = Math.floor(diff / 60000);
-    const secs = Math.floor((diff % 60000) / 1000);
-    if (mins > 0) {
-      countdown.textContent = `${mins} นาที ${secs} วิ`;
-    } else {
-      countdown.textContent = `${secs} วิ`;
-    }
-  }
-  updateCountdown();
-  lbCountdownInterval = setInterval(updateCountdown, 1000);
-
-  // ตั้ง auto-refresh เมื่อ deadline ผ่าน (+ 2 วิ buffer)
-  lbAutoRefreshTimer = setTimeout(() => {
-    console.log("⏰ Leaderboard auto-refreshing after deadline...");
-    clearLbTimers();
-    loadLeaderboard(); // reload leaderboard ใหม่
-    showAlert("success", "🔄 Leaderboard อัปเดตอัตโนมัติแล้ว!");
-  }, ms + 2000);
-
-  console.log(`⏰ Leaderboard จะ auto-refresh ใน ${Math.round(ms / 1000)} วิ`);
 }
 
 // ==========================================
@@ -1678,9 +1612,6 @@ function showPage(page, el) {
   if (page === "history")     loadHistory();
   if (page === "leaderboard") loadLeaderboard();
   if (page === "admin")       initAdminPage();
-
-  // ✅ Clear LB timers เมื่อออกจากหน้า leaderboard
-  if (page !== "leaderboard") clearLbTimers();
 
   if (page !== "predict" && countdownTimer) {
     clearInterval(countdownTimer); countdownTimer = null;
@@ -1844,7 +1775,8 @@ async function login() {
       showAlert("success", "✅ ยินดีต้อนรับกลับ " + result.name + "!");
       showPage("matches", document.querySelector("nav button"));
     } else if (result.status === "no_password") {
-      setHint("login-username-hint", "warning", "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
+      setHint("login-username-hint", "warning",
+        "⚠️ บัญชีนี้ยังไม่มี Password กรุณาติดต่อ Admin");
     } else {
       setHint("login-username-hint", "error", "❌ " + result.message);
       document.getElementById("login-password").value = "";
@@ -1923,7 +1855,9 @@ function showForgotForm() {
     if (el) { el.className = "input-hint"; el.textContent = ""; }
   });
   const existingUsername = document.getElementById("login-username").value.trim();
-  if (existingUsername) document.getElementById("forgot-username").value = existingUsername;
+  if (existingUsername) {
+    document.getElementById("forgot-username").value = existingUsername;
+  }
   section.scrollIntoView({ behavior:"smooth", block:"center" });
 }
 
@@ -1943,16 +1877,17 @@ function hideForgotForm() {
 async function submitForgotPassword() {
   const username  = document.getElementById("forgot-username").value.trim();
   const userEmail = document.getElementById("forgot-email").value.trim();
-  if (!username)  { setHint("forgot-username-hint", "error", "❌ กรุณากรอก Username"); return; }
-  if (!userEmail) { setHint("forgot-email-hint",    "error", "❌ กรุณากรอก Email");    return; }
+  if (!username) { setHint("forgot-username-hint", "error", "❌ กรุณากรอก Username"); return; }
+  if (!userEmail) { setHint("forgot-email-hint", "error", "❌ กรุณากรอก Email"); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
     setHint("forgot-email-hint", "error", "❌ รูปแบบ Email ไม่ถูกต้อง"); return;
   }
   const btn = document.getElementById("forgot-btn");
   btn.disabled = true; btn.textContent = "⏳ กำลังส่งคำขอ...";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
-      method:"POST", body: JSON.stringify({ action:"forgotPassword", username, userEmail })
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({ action:"forgotPassword", username, userEmail })
     });
     const result = await res.json();
     if (result.status === "success") {
@@ -2128,7 +2063,7 @@ async function getPrediction(matchId) {
   if (!currentUser) return null;
   try {
     const rows = await fetchSheet("Predictions");
-    const row  = rows.find(
+    const row = rows.find(
       r => (r[1]||"").toString() === currentUser.playerId &&
            (r[3]||"").toString() === matchId.toString()
     );
@@ -2161,7 +2096,7 @@ async function submitPrediction() {
   const btn = document.getElementById("submit-btn");
   btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
         action:"submitPrediction",
@@ -2240,7 +2175,7 @@ async function confirmEdit() {
   const btn = document.getElementById("edit-confirm-btn");
   btn.disabled = true; btn.textContent = "⏳ กำลังบันทึก...";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
         action:"submitPrediction",
@@ -2532,7 +2467,7 @@ async function submitSpecial(type) {
   const btn   = document.getElementById(type + "-btn");
   btn.disabled = true; btn.textContent = "⏳ กำลังส่ง...";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
         action:"submitSpecialPrediction",
@@ -2562,12 +2497,9 @@ async function submitSpecial(type) {
 }
 
 // ==========================================
-// ✅ LEADERBOARD — พร้อม Auto-Refresh
+// ✅ LEADERBOARD — แก้ไข parseDeadline + champMap
 // ==========================================
 async function loadLeaderboard() {
-  // Clear timers เก่าก่อนโหลดใหม่
-  clearLbTimers();
-
   try {
     const [lbRows, specialRows, settingsRows] = await Promise.all([
       fetchSheet("Leaderboard"),
@@ -2581,50 +2513,66 @@ async function loadLeaderboard() {
       if (r[0]) settings[r[0].toString().trim()] = (r[1] || "").toString().trim();
     });
 
+    // ✅ DEBUG: ดูว่า Settings มีอะไรบ้าง (ลบออกหลัง debug)
+    console.log("Settings:", settings);
+    console.log("SpecialRows sample:", specialRows.slice(0, 3));
+
+    // ✅ แก้ไข: ใช้ parseDeadline() และ fallback เป็น true ถ้าไม่มี deadline
     const champDeadline = parseDeadline(settings["champion_deadline"]);
     const tsDeadline    = parseDeadline(settings["topscorer_deadline"]);
     const now           = new Date();
 
+    // ✅ ถ้าไม่มี deadline ให้ถือว่า "ปิดแล้ว" เพื่อแสดง tag เสมอ
     const champClosed = champDeadline ? now >= champDeadline : true;
     const tsClosed    = tsDeadline    ? now >= tsDeadline    : true;
 
     const champAnswer = (settings["champion_answer"]  || "").trim().toLowerCase();
     const tsAnswer    = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
-    // ✅ ตั้ง auto-refresh สำหรับ deadline ที่ยังไม่ผ่าน
-    const pendingDeadlines = [champDeadline, tsDeadline].filter(
-      dl => dl && now < dl
-    );
-    if (pendingDeadlines.length > 0) {
-      scheduleLbAutoRefresh(pendingDeadlines);
-    }
-
-    // ── Build Maps ────────────────────────────────────────
+    // ── Build Maps: playerId → prediction ────────────────
+    // ✅ แก้ไข: ตรวจสอบ column จริงจาก log ก่อน แล้วปรับ index
     const champMap = {};
     const tsMap    = {};
 
-    specialRows.forEach(r => {
+    specialRows.forEach((r, idx) => {
+      // ✅ Log row แรกๆ เพื่อดู structure จริง
+      if (idx < 3) console.log(`SpecialRow[${idx}]:`, r);
+
+      // พยายาม detect column อัตโนมัติ
+      // หา index ของ type และ prediction จาก content
       let pid = "", type = "", pred = "";
+
+      // วิธีที่ 1: ถ้า column ตรงตาม spec
+      // [0]=Timestamp [1]=playerId [2]=PlayerName [3]=Type [4]=Prediction
       if (r.length >= 5) {
         pid  = (r[1] || "").toString().trim();
         type = (r[3] || "").toString().trim().toLowerCase();
         pred = (r[4] || "").toString().trim();
       }
+
+      // ✅ Fallback: scan หา column ที่มีค่า "champion" หรือ "topscorer"
       if (!type) {
         r.forEach((cell, i) => {
           const val = (cell || "").toString().toLowerCase().trim();
           if (val === "champion" || val === "topscorer") {
             type = val;
+            // playerId น่าจะอยู่ก่อนหน้า type
             pid  = (r[i - 1] || r[1] || "").toString().trim();
+            // prediction น่าจะอยู่หลัง type
             pred = (r[i + 1] || "").toString().trim();
           }
         });
       }
+
       if (pid && pred && type) {
         if (type === "champion")  champMap[pid] = pred;
         if (type === "topscorer") tsMap[pid]    = pred;
       }
     });
+
+    console.log("champMap:", champMap);
+    console.log("tsMap:", tsMap);
+    console.log("champClosed:", champClosed, "| tsClosed:", tsClosed);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -2645,6 +2593,8 @@ async function loadLeaderboard() {
       // ── Champion Tag ──────────────────────────────────
       const userChamp = champMap[pid] || "";
       let champTagHtml = "";
+
+      // ✅ แสดง tag เสมอถ้ามีข้อมูล (ไม่ต้องรอ champClosed)
       if (userChamp) {
         if (champClosed) {
           const isCorrect   = champAnswer && userChamp.toLowerCase() === champAnswer;
@@ -2655,6 +2605,7 @@ async function loadLeaderboard() {
               🏆 ${getFlag(userChamp, 14)}${userChamp}${correctMark}
             </span>`;
         } else {
+          // ยังไม่ปิด — แสดง tag แต่ไม่บอกว่าถูกผิด
           champTagHtml = `
             <span class="champion-tag" title="ทีมแชมป์ที่ทาย: ${userChamp}">
               🏆 ${getFlag(userChamp, 14)}${userChamp}
@@ -2665,6 +2616,7 @@ async function loadLeaderboard() {
       // ── Top Scorer Tag ────────────────────────────────
       const userTs = tsMap[pid] || "";
       let tsTagHtml = "";
+
       if (userTs) {
         if (tsClosed) {
           const isCorrect   = tsAnswer && userTs.toLowerCase() === tsAnswer;
@@ -2748,6 +2700,7 @@ async function openUserHistoryModal(playerId, name, rank, totalPts) {
     const settings = {};
     settingsRows.forEach(r => { if (r[0]) settings[r[0].toString().trim()] = (r[1] || "").toString().trim(); });
 
+    // ✅ ใช้ parseDeadline() ที่นี่ด้วย
     const champDeadline = parseDeadline(settings["champion_deadline"]);
     const tsDeadline    = parseDeadline(settings["topscorer_deadline"]);
     const champClosed   = champDeadline && new Date() >= champDeadline;
@@ -3058,8 +3011,9 @@ async function adminLogin() {
   const btn = document.querySelector("#admin-login-box .btn");
   btn.disabled = true; btn.textContent = "⏳ กำลังตรวจสอบ...";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
-      method:"POST", body: JSON.stringify({ action:"verifyAdmin", password: pw })
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({ action:"verifyAdmin", password: pw })
     });
     const result = await res.json();
     if (result.status === "success") {
@@ -3165,7 +3119,7 @@ async function submitAdminScore() {
   btn.disabled = true; btn.textContent = "⏳ กำลังคำนวณ...";
   btn.style.background = "#555"; btn.style.color = "#fff";
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
         action:"updateScore", password: adminPassword,
@@ -3364,7 +3318,7 @@ async function adminResetPassword() {
   setHint("reset-username-hint", "", "");
   setHint("reset-pw-hint",       "", "");
   try {
-    const res    = await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
         action:"resetUserPassword", password: adminPassword,
