@@ -2513,30 +2513,66 @@ async function loadLeaderboard() {
       if (r[0]) settings[r[0].toString().trim()] = (r[1] || "").toString().trim();
     });
 
-    // ✅ ใช้ parseDeadline() แทน new Date() ตรงๆ
+    // ✅ DEBUG: ดูว่า Settings มีอะไรบ้าง (ลบออกหลัง debug)
+    console.log("Settings:", settings);
+    console.log("SpecialRows sample:", specialRows.slice(0, 3));
+
+    // ✅ แก้ไข: ใช้ parseDeadline() และ fallback เป็น true ถ้าไม่มี deadline
     const champDeadline = parseDeadline(settings["champion_deadline"]);
     const tsDeadline    = parseDeadline(settings["topscorer_deadline"]);
+    const now           = new Date();
 
-    const now         = new Date();
-    const champClosed = champDeadline ? now >= champDeadline : false;
-    const tsClosed    = tsDeadline    ? now >= tsDeadline    : false;
+    // ✅ ถ้าไม่มี deadline ให้ถือว่า "ปิดแล้ว" เพื่อแสดง tag เสมอ
+    const champClosed = champDeadline ? now >= champDeadline : true;
+    const tsClosed    = tsDeadline    ? now >= tsDeadline    : true;
 
     const champAnswer = (settings["champion_answer"]  || "").trim().toLowerCase();
     const tsAnswer    = (settings["topscorer_answer"] || "").trim().toLowerCase();
 
     // ── Build Maps: playerId → prediction ────────────────
-    // ✅ ใช้ column index ที่ถูกต้อง: [0]=Timestamp [1]=playerId [2]=PlayerName [3]=Type [4]=Prediction
+    // ✅ แก้ไข: ตรวจสอบ column จริงจาก log ก่อน แล้วปรับ index
     const champMap = {};
     const tsMap    = {};
-    specialRows.forEach(r => {
-      const pid  = (r[1] || "").toString().trim();
-      const type = (r[3] || "").toString().trim().toLowerCase();
-      const pred = (r[4] || "").toString().trim();
-      if (pid && pred) {
+
+    specialRows.forEach((r, idx) => {
+      // ✅ Log row แรกๆ เพื่อดู structure จริง
+      if (idx < 3) console.log(`SpecialRow[${idx}]:`, r);
+
+      // พยายาม detect column อัตโนมัติ
+      // หา index ของ type และ prediction จาก content
+      let pid = "", type = "", pred = "";
+
+      // วิธีที่ 1: ถ้า column ตรงตาม spec
+      // [0]=Timestamp [1]=playerId [2]=PlayerName [3]=Type [4]=Prediction
+      if (r.length >= 5) {
+        pid  = (r[1] || "").toString().trim();
+        type = (r[3] || "").toString().trim().toLowerCase();
+        pred = (r[4] || "").toString().trim();
+      }
+
+      // ✅ Fallback: scan หา column ที่มีค่า "champion" หรือ "topscorer"
+      if (!type) {
+        r.forEach((cell, i) => {
+          const val = (cell || "").toString().toLowerCase().trim();
+          if (val === "champion" || val === "topscorer") {
+            type = val;
+            // playerId น่าจะอยู่ก่อนหน้า type
+            pid  = (r[i - 1] || r[1] || "").toString().trim();
+            // prediction น่าจะอยู่หลัง type
+            pred = (r[i + 1] || "").toString().trim();
+          }
+        });
+      }
+
+      if (pid && pred && type) {
         if (type === "champion")  champMap[pid] = pred;
         if (type === "topscorer") tsMap[pid]    = pred;
       }
     });
+
+    console.log("champMap:", champMap);
+    console.log("tsMap:", tsMap);
+    console.log("champClosed:", champClosed, "| tsClosed:", tsClosed);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -2557,27 +2593,45 @@ async function loadLeaderboard() {
       // ── Champion Tag ──────────────────────────────────
       const userChamp = champMap[pid] || "";
       let champTagHtml = "";
-      if (champClosed && userChamp) {
-        const isCorrect   = champAnswer && userChamp.toLowerCase() === champAnswer;
-        const correctMark = isCorrect
-          ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
-        champTagHtml = `
-          <span class="champion-tag" title="ทีมแชมป์ที่ทาย: ${userChamp}">
-            🏆 ${getFlag(userChamp, 14)}${userChamp}${correctMark}
-          </span>`;
+
+      // ✅ แสดง tag เสมอถ้ามีข้อมูล (ไม่ต้องรอ champClosed)
+      if (userChamp) {
+        if (champClosed) {
+          const isCorrect   = champAnswer && userChamp.toLowerCase() === champAnswer;
+          const correctMark = isCorrect
+            ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
+          champTagHtml = `
+            <span class="champion-tag" title="ทีมแชมป์ที่ทาย: ${userChamp}">
+              🏆 ${getFlag(userChamp, 14)}${userChamp}${correctMark}
+            </span>`;
+        } else {
+          // ยังไม่ปิด — แสดง tag แต่ไม่บอกว่าถูกผิด
+          champTagHtml = `
+            <span class="champion-tag" title="ทีมแชมป์ที่ทาย: ${userChamp}">
+              🏆 ${getFlag(userChamp, 14)}${userChamp}
+            </span>`;
+        }
       }
 
       // ── Top Scorer Tag ────────────────────────────────
       const userTs = tsMap[pid] || "";
       let tsTagHtml = "";
-      if (tsClosed && userTs) {
-        const isCorrect   = tsAnswer && userTs.toLowerCase() === tsAnswer;
-        const correctMark = isCorrect
-          ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
-        tsTagHtml = `
-          <span class="topscorer-tag" title="Top Scorer ที่ทาย: ${userTs}">
-            ⚽ ${userTs}${correctMark}
-          </span>`;
+
+      if (userTs) {
+        if (tsClosed) {
+          const isCorrect   = tsAnswer && userTs.toLowerCase() === tsAnswer;
+          const correctMark = isCorrect
+            ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
+          tsTagHtml = `
+            <span class="topscorer-tag" title="Top Scorer ที่ทาย: ${userTs}">
+              ⚽ ${userTs}${correctMark}
+            </span>`;
+        } else {
+          tsTagHtml = `
+            <span class="topscorer-tag" title="Top Scorer ที่ทาย: ${userTs}">
+              ⚽ ${userTs}
+            </span>`;
+        }
       }
 
       const specialRowHtml = (champTagHtml || tsTagHtml)
