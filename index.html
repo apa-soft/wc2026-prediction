@@ -578,16 +578,32 @@
     .modal-special-value { color: #fff; font-weight: bold; flex: 1; }
     .modal-special-locked { color: #555; font-style: italic; font-size: 0.82rem; }
 
+    /* ===== CHAMPION TAG ===== */
     .champion-tag {
       display: inline-flex; align-items: center; gap: 4px;
       background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35);
       border-radius: 20px; padding: 2px 8px;
       font-size: 0.75rem; color: #FFD700;
-      margin-left: 6px; vertical-align: middle; white-space: nowrap;
+      vertical-align: middle; white-space: nowrap;
+    }
+
+    /* ===== TOP SCORER TAG ===== */
+    .topscorer-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(46,204,113,0.12); border: 1px solid rgba(46,204,113,0.35);
+      border-radius: 20px; padding: 2px 8px;
+      font-size: 0.75rem; color: #2ecc71;
+      vertical-align: middle; white-space: nowrap;
     }
 
     .flag-img    { width: 24px; height: auto; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
     .flag-img-sm { width: 20px; height: auto; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+
+    /* ===== LEADERBOARD SPECIAL ROW ===== */
+    .lb-special-row {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      align-items: center; margin-top: 6px;
+    }
   </style>
 </head>
 <body>
@@ -1033,7 +1049,6 @@
             </div>
             <button class="btn" id="login-btn" onclick="login()">🔑 เข้าสู่ระบบ</button>
 
-            <!-- Forgot Password Link -->
             <div style="text-align:center; margin-top:14px;">
               <button type="button" class="forgot-link-btn" onclick="showForgotForm()">
                 🔑 ลืม Password?
@@ -1050,7 +1065,6 @@
                 กรอก Username และ Email ของคุณ<br>
                 ระบบจะแจ้ง Admin เพื่อ Reset Password ให้
               </p>
-
               <div id="forgot-fields">
                 <div class="form-group">
                   <label style="color:#3498db;">Username</label>
@@ -1075,8 +1089,6 @@
                   📧 ส่งคำขอ Reset Password
                 </button>
               </div>
-
-              <!-- Forgot Success State -->
               <div id="forgot-success" style="display:none;">
                 <div class="forgot-success-box">
                   <div class="forgot-success-icon">📧</div>
@@ -1094,7 +1106,6 @@
                 </div>
               </div>
             </div>
-            <!-- END FORGOT PASSWORD SECTION -->
 
             <div class="divider">หรือ</div>
             <button class="btn btn-secondary" onclick="switchTab('signup')" style="font-size:0.95rem;">
@@ -1183,7 +1194,6 @@
   <div id="page-admin" class="page">
     <h2 class="section-title">🔐 Admin Panel</h2>
 
-    <!-- Admin Login -->
     <div id="admin-login-box" class="admin-lock">
       <div class="card">
         <h3>🔑 Admin Login</h3>
@@ -1196,7 +1206,6 @@
       </div>
     </div>
 
-    <!-- Admin Panel -->
     <div id="admin-panel" style="display:none;">
       <div class="info-box">
         🎯 <strong>ทายสกอร์แม่นทั้งคู่</strong> = 3 pts &nbsp;|&nbsp;
@@ -1204,7 +1213,6 @@
         ⭐ <strong>Double Point</strong> = คะแนน x2
       </div>
 
-      <!-- อัปเดตผลการแข่งขัน -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:20px;">📝 อัปเดตผลการแข่งขัน</h3>
         <div class="form-group">
@@ -1243,7 +1251,6 @@
         </button>
       </div>
 
-      <!-- เครื่องมือจัดการคะแนน -->
       <div class="card" style="border-color:#3498db;">
         <h3 style="color:#3498db; margin-bottom:8px;">🛠️ เครื่องมือจัดการคะแนน</h3>
         <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
@@ -1258,15 +1265,12 @@
           padding:12px 15px; font-size:0.88rem; color:#2ecc71; text-align:center;"></div>
       </div>
 
-      <!-- Reset Password -->
       <div class="card" style="border-color:#e67e22;">
         <h3 style="color:#e67e22; margin-bottom:6px;">🔑 Reset Password ผู้เล่น</h3>
         <p style="color:#888; font-size:0.85rem; margin-bottom:18px; line-height:1.6;">
           ใช้เมื่อผู้เล่นลืม Password — Admin ตั้ง Password ใหม่ให้<br>
           <span style="color:#3498db;">📧 ระบบจะส่ง Email แจ้ง User อัตโนมัติ (ถ้ามีคำขอ Reset)</span>
         </p>
-
-        <!-- User List -->
         <div style="margin-bottom:18px;">
           <div style="display:flex; align-items:center; justify-content:space-between;
             margin-bottom:10px; flex-wrap:wrap; gap:8px;">
@@ -1304,8 +1308,6 @@
             กำลังโหลดรายชื่อผู้เล่น...
           </div>
         </div>
-
-        <!-- Reset Form -->
         <div style="border-top:1px solid #333366; padding-top:18px;">
           <div class="form-group">
             <label style="color:#e67e22;">Username ของผู้เล่น</label>
@@ -1334,7 +1336,6 @@
         </div>
       </div>
 
-      <!-- เฉลยการทายพิเศษ -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">⭐ เฉลยการทายพิเศษ</h3>
         <div style="margin-bottom:20px;">
@@ -1357,7 +1358,6 @@
         </div>
       </div>
 
-      <!-- แมตช์ที่อัปเดตแล้ว -->
       <div class="card">
         <h3 style="color:#FFD700; margin-bottom:15px;">✅ แมตช์ที่อัปเดตแล้ว</h3>
         <div id="finished-matches-list">
@@ -1827,7 +1827,6 @@ function showForgotForm() {
     const el = document.getElementById(id);
     if (el) { el.className = "input-hint"; el.textContent = ""; }
   });
-  // Pre-fill username ถ้ากรอกไว้แล้ว
   const existingUsername = document.getElementById("login-username").value.trim();
   if (existingUsername) {
     document.getElementById("forgot-username").value = existingUsername;
@@ -1851,46 +1850,30 @@ function hideForgotForm() {
 async function submitForgotPassword() {
   const username  = document.getElementById("forgot-username").value.trim();
   const userEmail = document.getElementById("forgot-email").value.trim();
-
-  if (!username) {
-    setHint("forgot-username-hint", "error", "❌ กรุณากรอก Username"); return;
-  }
-  if (!userEmail) {
-    setHint("forgot-email-hint", "error", "❌ กรุณากรอก Email"); return;
-  }
+  if (!username) { setHint("forgot-username-hint", "error", "❌ กรุณากรอก Username"); return; }
+  if (!userEmail) { setHint("forgot-email-hint", "error", "❌ กรุณากรอก Email"); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
     setHint("forgot-email-hint", "error", "❌ รูปแบบ Email ไม่ถูกต้อง"); return;
   }
-
   const btn = document.getElementById("forgot-btn");
-  btn.disabled    = true;
-  btn.textContent = "⏳ กำลังส่งคำขอ...";
-
+  btn.disabled = true; btn.textContent = "⏳ กำลังส่งคำขอ...";
   try {
     const res = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      body:   JSON.stringify({
-        action:    "forgotPassword",
-        username:  username,
-        userEmail: userEmail
-      })
+      method:"POST",
+      body: JSON.stringify({ action:"forgotPassword", username, userEmail })
     });
     const result = await res.json();
-
     if (result.status === "success") {
-      // แสดง Success State
       document.getElementById("forgot-fields").style.display  = "none";
       document.getElementById("forgot-btn").style.display     = "none";
       document.getElementById("forgot-success").style.display = "block";
     } else {
       setHint("forgot-email-hint", "error", "❌ " + result.message);
-      btn.disabled    = false;
-      btn.textContent = "📧 ส่งคำขอ Reset Password";
+      btn.disabled = false; btn.textContent = "📧 ส่งคำขอ Reset Password";
     }
   } catch (err) {
     setHint("forgot-email-hint", "error", "❌ เชื่อมต่อไม่ได้: " + err.message);
-    btn.disabled    = false;
-    btn.textContent = "📧 ส่งคำขอ Reset Password";
+    btn.disabled = false; btn.textContent = "📧 ส่งคำขอ Reset Password";
   }
 }
 
@@ -2487,7 +2470,7 @@ async function submitSpecial(type) {
 }
 
 // ==========================================
-// LEADERBOARD
+// LEADERBOARD — อัปเดตใหม่ (แสดง Champion + Top Scorer)
 // ==========================================
 async function loadLeaderboard() {
   try {
@@ -2496,55 +2479,113 @@ async function loadLeaderboard() {
       fetchSheet("SpecialPredictions"),
       fetchSheet("Settings")
     ]);
+
+    // ── Settings ──────────────────────────────────────────
     const settings = {};
     settingsRows.forEach(r => { if (r[0]) settings[r[0]] = r[1]; });
+
     const champDeadline = settings["champion_deadline"]
       ? new Date(settings["champion_deadline"]) : null;
+    const tsDeadline    = settings["topscorer_deadline"]
+      ? new Date(settings["topscorer_deadline"]) : null;
+
     const champClosed = champDeadline && new Date() >= champDeadline;
+    const tsClosed    = tsDeadline    && new Date() >= tsDeadline;
+
+    const champAnswer = (settings["champion_answer"]  || "").trim().toLowerCase();
+    const tsAnswer    = (settings["topscorer_answer"] || "").trim().toLowerCase();
+
+    // ── Build Maps: playerId → prediction ────────────────
     const champMap = {};
+    const tsMap    = {};
     specialRows.forEach(r => {
-      if ((r[3]||"").toString() === "champion") {
-        champMap[(r[1]||"").toString()] = (r[4]||"").toString().trim();
-      }
+      const pid  = (r[1] || "").toString();
+      const type = (r[3] || "").toString();
+      const pred = (r[4] || "").toString().trim();
+      if (type === "champion")  champMap[pid] = pred;
+      if (type === "topscorer") tsMap[pid]    = pred;
     });
-    const medals = ["🥇","🥈","🥉"];
+
+    const medals = ["🥇", "🥈", "🥉"];
+
     if (lbRows.length === 0) {
       document.getElementById("leaderboard-list").innerHTML =
         "<p style='text-align:center;color:#888;padding:40px;'>ยังไม่มีข้อมูล Leaderboard</p>";
       return;
     }
-    const sorted = [...lbRows].sort((a,b) => parseInt(b[2]||0) - parseInt(a[2]||0));
+
+    const sorted = [...lbRows].sort((a, b) => parseInt(b[2] || 0) - parseInt(a[2] || 0));
+
     const html = sorted.map((row, i) => {
       const [playerId, name, totalScore, exactScore, resultScore] = row;
-      const rankDisplay = i < 3 ? medals[i] : `#${i+1}`;
-      const isMe = currentUser && (playerId||"").toString() === currentUser.playerId;
-      const userChamp = champMap[(playerId||"").toString()] || "";
-      const champTagHtml = (champClosed && userChamp)
-        ? `<span class="champion-tag">🏆 ${getFlag(userChamp,16)}${userChamp}</span>`
+      const pid         = (playerId || "").toString();
+      const rankDisplay = i < 3 ? medals[i] : `#${i + 1}`;
+      const isMe        = currentUser && pid === currentUser.playerId;
+
+      // ── Champion Tag ──────────────────────────────────
+      const userChamp = champMap[pid] || "";
+      let champTagHtml = "";
+      if (champClosed && userChamp) {
+        const isCorrect = champAnswer && userChamp.toLowerCase() === champAnswer;
+        const correctMark = isCorrect
+          ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
+        champTagHtml = `
+          <span class="champion-tag" title="ทีมแชมป์ที่ทาย: ${userChamp}">
+            🏆 ${getFlag(userChamp, 14)}${userChamp}${correctMark}
+          </span>`;
+      }
+
+      // ── Top Scorer Tag ────────────────────────────────
+      const userTs = tsMap[pid] || "";
+      let tsTagHtml = "";
+      if (tsClosed && userTs) {
+        const isCorrect = tsAnswer && userTs.toLowerCase() === tsAnswer;
+        const correctMark = isCorrect
+          ? `<span style="color:#2ecc71; font-size:0.7rem; margin-left:2px;">✅</span>` : "";
+        tsTagHtml = `
+          <span class="topscorer-tag" title="Top Scorer ที่ทาย: ${userTs}">
+            ⚽ ${userTs}${correctMark}
+          </span>`;
+      }
+
+      const specialRowHtml = (champTagHtml || tsTagHtml)
+        ? `<div class="lb-special-row">${champTagHtml}${tsTagHtml}</div>`
         : "";
+
       return `
         <div class="card"
-          style="cursor:pointer; ${isMe?"border-color:#FFD700; box-shadow:0 0 15px rgba(255,215,0,0.2);":""}"
+          style="cursor:pointer;
+            ${isMe ? "border-color:#FFD700; box-shadow:0 0 15px rgba(255,215,0,0.2);" : ""}"
           onclick="openUserHistoryModal(
-            '${(playerId||"").replace(/'/g,"\\'")}',
-            '${(name||"").replace(/'/g,"\\'")}',
-            ${i+1}, ${totalScore||0})">
+            '${pid.replace(/'/g, "\\'")}',
+            '${(name || "").replace(/'/g, "\\'")}',
+            ${i + 1}, ${totalScore || 0})">
           <div class="leaderboard-item">
-            <div class="rank rank-${i+1}">${rankDisplay}</div>
+
+            <!-- Rank -->
+            <div class="rank rank-${i + 1}">${rankDisplay}</div>
+
+            <!-- Player Info -->
             <div class="player-info">
-              <div class="player-name">
-                ${name||"-"}
-                ${isMe?'<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>':""}
-                ${champTagHtml}
-                <span style="color:#555; font-size:0.75rem; margin-left:6px;">👆 ดูประวัติ</span>
+              <div class="player-name" style="display:flex; flex-wrap:wrap; align-items:center; gap:5px;">
+                <span>${name || "-"}</span>
+                ${isMe ? '<span style="color:#FFD700; font-size:0.8rem;">(คุณ)</span>' : ""}
+                <span style="color:#555; font-size:0.72rem;">👆 ดูประวัติ</span>
               </div>
-              <div class="player-stats">🎯 ทายแม่น: ${exactScore||0} | ✅ ทายผลถูก: ${resultScore||0}</div>
+              <div class="player-stats" style="margin-top:3px;">
+                🎯 ทายแม่น: ${exactScore || 0} &nbsp;|&nbsp; ✅ ทายผลถูก: ${resultScore || 0}
+              </div>
+              ${specialRowHtml}
             </div>
-            <div class="score-display">${totalScore||0} pts</div>
+
+            <!-- Score -->
+            <div class="score-display">${totalScore || 0} pts</div>
           </div>
         </div>`;
     }).join("");
+
     document.getElementById("leaderboard-list").innerHTML = html;
+
   } catch (err) {
     document.getElementById("leaderboard-list").innerHTML =
       `<p style='text-align:center;color:#f44336'>❌ โหลดข้อมูลไม่ได้: ${err.message}</p>`;
@@ -3179,37 +3220,27 @@ async function adminResetPassword() {
   const newPassword    = document.getElementById("reset-new-password").value;
   const resultBox      = document.getElementById("reset-result-box");
   const btn            = document.getElementById("reset-pw-btn");
-
-  if (!targetUsername) {
-    setHint("reset-username-hint", "error", "❌ กรุณากรอก Username"); return;
-  }
+  if (!targetUsername) { setHint("reset-username-hint", "error", "❌ กรุณากรอก Username"); return; }
   if (!newPassword || newPassword.length < 8) {
     setHint("reset-pw-hint", "error", "❌ Password ต้องมีอย่างน้อย 8 ตัวอักษร"); return;
   }
   if (!confirm(
-    `⚠️ ยืนยัน Reset Password?\n\nUsername: ${targetUsername}\nPassword ใหม่: ${newPassword}\n\nระบบจะส่ง Email แจ้ง User อัตโนมัติ (ถ้ามีคำขอ Reset)`
+    `⚠️ ยืนยัน Reset Password?\n\nUsername: ${targetUsername}\nPassword ใหม่: ${newPassword}`
   )) return;
-
-  btn.disabled    = true;
-  btn.textContent = "⏳ กำลัง Reset...";
+  btn.disabled = true; btn.textContent = "⏳ กำลัง Reset...";
   resultBox.style.display = "none";
   setHint("reset-username-hint", "", "");
   setHint("reset-pw-hint",       "", "");
-
   try {
     const res = await fetch(APPS_SCRIPT_URL, {
       method:"POST",
       body: JSON.stringify({
-        action:         "resetUserPassword",
-        password:       adminPassword,
-        targetUsername: targetUsername,
-        newPassword:    newPassword
+        action:"resetUserPassword", password: adminPassword,
+        targetUsername, newPassword
       })
     });
     const result = await res.json();
-
     if (result.status === "success") {
-      // สร้าง email info message
       let emailInfo = "";
       if (result.emailSent) {
         emailInfo = `<br><span style="color:#3498db;">📧 ส่ง Email แจ้ง User ไปที่ ${result.userEmail} แล้ว ✅</span>`;
@@ -3218,20 +3249,15 @@ async function adminResetPassword() {
       } else {
         emailInfo = `<br><span style="color:#888; font-size:0.82rem;">ℹ️ ไม่พบคำขอ Reset — กรุณาแจ้ง Password ใหม่ให้ User เอง</span>`;
       }
-
       resultBox.style.display    = "block";
       resultBox.style.background = "#0a2a0a";
       resultBox.style.border     = "1px solid #2ecc71";
       resultBox.style.color      = "#2ecc71";
       resultBox.innerHTML        = "✅ " + result.message + emailInfo;
-
       document.getElementById("reset-target-username").value = "";
       document.getElementById("reset-new-password").value    = "";
       showAlert("success", "✅ Reset Password สำเร็จ!");
-
-      // Refresh user list ถ้าเปิดอยู่
       if (allUsersData.length > 0) loadUserList();
-
     } else if (result.status === "unauthorized") {
       showAlert("error", "❌ รหัสผ่าน Admin ไม่ถูกต้อง!"); adminLogout();
     } else {
@@ -3248,10 +3274,8 @@ async function adminResetPassword() {
     resultBox.style.border     = "1px solid #e74c3c";
     resultBox.style.color      = "#e74c3c";
     resultBox.textContent      = "❌ เชื่อมต่อไม่ได้: " + err.message;
-    showAlert("error", "❌ เชื่อมต่อไม่ได้: " + err.message);
   } finally {
-    btn.disabled    = false;
-    btn.textContent = "🔑 Reset Password";
+    btn.disabled = false; btn.textContent = "🔑 Reset Password";
   }
 }
 
